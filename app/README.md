@@ -17,3 +17,7 @@ Use `SceneRouter.change_to("res://path/to/scene.tscn")` instead of calling a
 scene change from a menu or game node. `foundation_preview.tscn` remains as a
 second scene for testing that route before game scenes exist. See
 [`docs/APP_SHELL.md`](../docs/APP_SHELL.md) for the public API and review steps.
+
+`progression_lab.tscn` hosts the feature-owned progression interface for this
+milestone. It lets the team review wallet persistence, purchasing, prerequisites,
+effects, shop cards, and the skill tree before a home scene exists.

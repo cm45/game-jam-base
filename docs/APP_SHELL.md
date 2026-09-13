@@ -37,6 +37,8 @@ managers.
    confirm the values remain.
 5. Choose **Reset Save and Settings**, confirm it, then check sliders return to
    the defaults. Restart the project to check persistence.
+6. Open the Progression Lab after a reset to confirm currencies and upgrade
+   levels are also cleared.
 
 Headless validation catches parsing and loading faults. A person must perform
 the route above to verify focus, menu presentation, audio audibility, and quit

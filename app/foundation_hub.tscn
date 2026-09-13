@@ -38,17 +38,17 @@ layout_mode = 2
 [node name="Margin" type="MarginContainer" parent="Center/Panel"]
 layout_mode = 2
 theme_override_constants/margin_left = 10
-theme_override_constants/margin_top = 8
+theme_override_constants/margin_top = 4
 theme_override_constants/margin_right = 10
-theme_override_constants/margin_bottom = 8
+theme_override_constants/margin_bottom = 4
 
 [node name="Layout" type="VBoxContainer" parent="Center/Panel/Margin"]
 layout_mode = 2
-theme_override_constants/separation = 10
+theme_override_constants/separation = 4
 
 [node name="Title" type="Label" parent="Center/Panel/Margin/Layout"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 28
+theme_override_font_sizes/font_size = 24
 text = "GAME JAM FOUNDATION"
 horizontal_alignment = 1
 
@@ -62,27 +62,32 @@ layout_mode = 2
 
 [node name="Description" type="Label" parent="Center/Panel/Margin/Layout"]
 layout_mode = 2
-text = "The startup menu, scene router, pause menu,\naudio settings, keybind reference, and save layer are ready."
+text = "The startup menu, scene router, pause menu,\naudio settings, keybind reference, save layer, and progression lab are ready."
 horizontal_alignment = 1
 
 [node name="PreviewButton" type="Button" parent="Center/Panel/Margin/Layout"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(0, 34)
+custom_minimum_size = Vector2(0, 28)
 layout_mode = 2
 text = "OPEN FOUNDATION PREVIEW"
 
+[node name="ProgressionButton" type="Button" parent="Center/Panel/Margin/Layout"]
+custom_minimum_size = Vector2(0, 28)
+layout_mode = 2
+text = "OPEN PROGRESSION LAB"
+
 [node name="SettingsButton" type="Button" parent="Center/Panel/Margin/Layout"]
-custom_minimum_size = Vector2(0, 34)
+custom_minimum_size = Vector2(0, 28)
 layout_mode = 2
 text = "SETTINGS"
 
 [node name="ControlsButton" type="Button" parent="Center/Panel/Margin/Layout"]
-custom_minimum_size = Vector2(0, 34)
+custom_minimum_size = Vector2(0, 28)
 layout_mode = 2
 text = "KEYBINDS"
 
 [node name="QuitButton" type="Button" parent="Center/Panel/Margin/Layout"]
-custom_minimum_size = Vector2(0, 34)
+custom_minimum_size = Vector2(0, 28)
 layout_mode = 2
 text = "QUIT"
 
@@ -92,6 +97,7 @@ text = "Escape opens the pause menu from every scene."
 horizontal_alignment = 1
 
 [connection signal="pressed" from="Center/Panel/Margin/Layout/PreviewButton" to="." method="_on_preview_button_pressed"]
+[connection signal="pressed" from="Center/Panel/Margin/Layout/ProgressionButton" to="." method="_on_progression_button_pressed"]
 [connection signal="pressed" from="Center/Panel/Margin/Layout/SettingsButton" to="." method="_on_settings_button_pressed"]
 [connection signal="pressed" from="Center/Panel/Margin/Layout/ControlsButton" to="." method="_on_controls_button_pressed"]
 [connection signal="pressed" from="Center/Panel/Margin/Layout/QuitButton" to="." method="_on_quit_button_pressed"]

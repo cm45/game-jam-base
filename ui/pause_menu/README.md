@@ -9,7 +9,8 @@ Use `AppShell.open_menu()` to show the pause page, or pass `settings` or
 intent through the shared services:
 
 - `AudioSettings` applies and saves Master, Music, and SFX values.
-- `SaveStore.reset_all()` clears persisted settings and future progression data.
+- `SaveStore.reset_all()` clears persisted settings and the current progression
+  wallet and upgrade levels.
 - `SceneRouter.return_to_foundation_hub()` returns from a run without the menu
   knowing anything about that run's implementation.
 

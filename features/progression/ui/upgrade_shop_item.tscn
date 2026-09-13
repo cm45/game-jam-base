@@ -1,0 +1,51 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://features/progression/ui/upgrade_shop_item.gd" id="1_script"]
+
+[node name="UpgradeShopItem" type="PanelContainer"]
+custom_minimum_size = Vector2(0, 80)
+layout_mode = 2
+script = ExtResource("1_script")
+
+[node name="Margin" type="MarginContainer" parent="."]
+layout_mode = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 5
+
+[node name="Layout" type="HBoxContainer" parent="Margin"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="Text" type="VBoxContainer" parent="Margin/Layout"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Title" type="Label" parent="Margin/Layout/Text"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "Upgrade"
+
+[node name="Level" type="Label" parent="Margin/Layout/Text"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "LEVEL 0 / 1"
+
+[node name="Description" type="Label" parent="Margin/Layout/Text"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Description"
+autowrap_mode = 2
+
+[node name="Cost" type="Label" parent="Margin/Layout/Text"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Cost"
+
+[node name="ViewButton" type="Button" parent="Margin/Layout"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(86, 34)
+layout_mode = 2
+text = "VIEW"

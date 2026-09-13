@@ -17,10 +17,12 @@ when more than one feature needs them.
 
 ## Scene ownership
 
-Each scene should have a clear owner. A home scene owns home presentation and
-asks a service for progress. A run scene owns the moment-to-moment game and
-returns a result when it ends. A menu owns its controls and emits an intent; it
-does not change a game system behind the caller's back.
+Each scene should have a clear owner. A home scene owns a walkable 2D map, its
+player spawn, NPCs, stations, and the start-of-run exit; it asks a service for
+progress when one of those world interactions opens a panel. A run scene owns
+the moment-to-moment game and returns a result when it ends. A menu owns its
+controls and emits an intent; it does not change a game system behind the
+caller's back.
 
 The current shell introduces only services with active consumers: the pause
 menu uses input, audio, and save services, while the Foundation Hub uses the
@@ -34,12 +36,22 @@ second competing manager.
 | `InputActions` | `features/input/` | Registers shared action names and supplies readable binding text. |
 | `AudioSettings` | `features/audio/` | Applies and persists Master, Music, and SFX volumes. |
 | `SaveStore` | `features/save/` | Stores versioned settings now and a reserved progress section later. |
+| `Progression` | `features/progression/` | Owns permanent currencies, upgrades, purchases, requirements, and calculated effects. |
 | `SceneRouter` | `app/` | Changes scenes and provides the return-to-hub route. |
 | `AppShell` | `app/` | Keeps the pause menu available across scene changes. |
 
 Services communicate through their public methods and signals. A menu never
 reaches into a game scene to change its state; a game scene never edits a UI
 control to save data.
+
+## Progression ownership
+
+`features/progression/content/progression_catalog.tres` holds editable resource
+definitions. The `Progression` autoload loads that catalog and serializes only
+the wallet and upgrade levels; UI and game scenes ask it questions through
+methods rather than writing the save directly. Its shop and tree UI live beside
+the feature. `app/progression_lab.tscn` is only a host for reviewing the feature
+until a later home scene instances the same panel.
 
 ## Choosing a location
 

@@ -4,10 +4,14 @@ An approachable, pixel-art Godot 4.7.2 starting point for a weekend game jam.
 Every participant starts from this repository, works in their own copy, and can
 extend a common home → run → reward → upgrade loop in their own direction.
 
-Milestone 2 is ready. It includes the full Ninja Adventure asset pack,
+The future home is a walkable top-down 2D hub. The player moves through it to
+reach NPCs, shops, upgrade points, and the entrance to a run; menus are overlays
+opened by those world interactions rather than the home scene itself.
+
+Milestone 3 is ready. It includes the full Ninja Adventure asset pack,
 pixel-rendering defaults, a reusable UI theme, Windows/editor/AI onboarding,
-and a runnable app shell with settings, save, input, audio, and scene-routing
-services.
+the app shell, and a configurable meta-progression framework with a shop and
+skill tree.
 
 ## Before you clone
 
@@ -114,6 +118,10 @@ receive compatibility entries in `.gemini/`, `.agents/`, and `.cline/`.
   and quit controls from any scene.
 - `features/input/`, `features/audio/`, and `features/save/` contain the
   documented reusable services that later game and demo scenes can use.
+- `features/progression/` provides editable currencies and upgrades, persistent
+  wallet and level state, calculated effects, a shop, and a visual skill tree.
+- `app/progression_lab.tscn` is a safe, runnable review host for the progression
+  feature until the future home scene instances it.
 - `features/`, `components/`, `game/`, and `demo/` reserve clear homes for
   systems and examples introduced by later milestones.
 
@@ -123,6 +131,7 @@ receive compatibility entries in `.gemini/`, `.agents/`, and `.cline/`.
 - [GDScript starter exercises](docs/GDSCRIPT_BASICS.md)
 - [Architecture overview](docs/ARCHITECTURE.md)
 - [App shell and core services](docs/APP_SHELL.md)
+- [Meta-progression guide](docs/PROGRESSION.md)
 - [Extension recipes](docs/EXTENSION_RECIPES.md)
 - [AI and MCP guide](docs/AI_GUIDE.md)
 - [Incremental roadmap](docs/ROADMAP.md)

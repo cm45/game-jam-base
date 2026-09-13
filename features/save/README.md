@@ -2,8 +2,9 @@
 
 `SaveStore` writes one versioned `ConfigFile` at
 `user://game_jam_foundation.cfg`. It has separate settings and progress
-sections so temporary UI configuration and future meta-progression do not need
-different save systems.
+sections so temporary UI configuration and meta-progression do not need
+different save systems. The `Progression` service owns the current
+`progression_state` value in the progress section.
 
 ```gdscript
 SaveStore.set_progress(&"training_tokens", 5)

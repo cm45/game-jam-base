@@ -7,6 +7,8 @@ progression live here. Milestone 2 adds three small services:
 - `audio/` owns the Master, Music, and SFX bus volumes.
 - `save/` persists versioned settings and provides the future progression save
   section.
+- `progression/` owns currencies, upgrades, purchasing rules, permanent effects,
+  a shop, and a visual skill tree.
 
 Each feature folder documents its public methods. Keep a genre-specific system
 in `game/` until a second scene or participant needs it.

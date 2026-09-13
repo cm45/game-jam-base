@@ -10,10 +10,11 @@ after the current one has been reviewed.
   architecture recipes, AI instructions, skills, and MCP guidance.
 - [x] **2. App shell and core services** — Startup flow, scene switching,
   controls, audio/settings, pause menu, and save/reset infrastructure.
-- [ ] **3. Meta-progression framework** — Configurable currencies, persistent
+- [x] **3. Meta-progression framework** — Configurable currencies, persistent
   progress, upgrades, shop, and visual skill tree.
-- [ ] **4. Playable demo loop** — Movement, interactions, pickups,
-  collect-and-exit run, rewards, and home scene.
+- [ ] **4. Playable demo loop** — Top-down player movement and interactions,
+  a freely walkable 2D home hub with NPC/station/run-entry interactions,
+  pickups, collect-and-exit run, and rewards.
 - [ ] **5. Replaceable game integration** — Minimal starter scenes, the
   `RunContext`/`RunResult` contract, reusable components, and demo-removal
   proof.

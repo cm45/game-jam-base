@@ -19,6 +19,7 @@ config/icon="res://icon.svg"
 
 InputActions="*res://features/input/input_actions.gd"
 SaveStore="*res://features/save/save_store.gd"
+Progression="*res://features/progression/progression_service.gd"
 AudioSettings="*res://features/audio/audio_settings.gd"
 SceneRouter="*res://app/scene_router.gd"
 AppShell="*res://app/app_shell.gd"
@@ -27,9 +28,10 @@ AppShell="*res://app/app_shell.gd"
 
 window/size/viewport_width=640
 window/size/viewport_height=360
-window/size/window_width_override=1280
-window/size/window_height_override=720
+window/size/window_width_override=1920
+window/size/window_height_override=1080
 window/stretch/mode="canvas_items"
+window/stretch/aspect="keep"
 
 [audio]
 

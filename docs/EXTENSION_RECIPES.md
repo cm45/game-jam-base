@@ -30,23 +30,26 @@ committed.
 
 ## Add a new permanent resource
 
-When the progression framework exists:
+1. Add a `CurrencyDefinition` to the progression catalog with a stable ID,
+   display name, description, and color.
+2. Add that definition to the catalog's `currencies` array.
+3. Add costs using its ID to any relevant `UpgradeDefinition`.
+4. Award it with `Progression.grant_currency(&"currency_id", amount)` after a
+   completed run. The later run-result contract will decide exactly where that
+   call belongs.
+5. Document a balancing note in `features/progression/README.md`.
 
-1. Add the resource definition to the progression configuration.
-2. Give it a stable identifier and display name.
-3. Decide which run events earn it and which home actions spend it.
-4. Add it to the home UI only after earning and spending both work.
-5. Document the identifier and a balancing note in the feature README.
-
-Avoid storing a resource only in a label. The service must own the value so a
-save, a shop, and a reward summary agree.
+Avoid storing a resource only in a label. `Progression` owns the value so a
+save, a shop, a tree, and a later reward summary agree.
 
 ## Add an upgrade
 
-Define the cost, prerequisites, maximum level, and one explicit effect. The
-effect should be a named value the run can read, such as starting_health,
-pickup_radius, or enemy_reward_multiplier. Keep a first upgrade simple enough
-to verify in a later run before combining effects.
+Define the cost, prerequisites, maximum level, `cost_growth`, tree position,
+and one explicit effect in the catalog. The effect should be a named value the
+run can read, such as `starting_health`, `pickup_radius`, or
+`run_reward_multiplier`. Use
+`Progression.get_effective_stat(&"starting_health", base_health)` in a run
+rather than spreading upgrade checks across gameplay scripts.
 
 ## Add a run mechanic
 
