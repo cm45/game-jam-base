@@ -1,0 +1,12 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Debug Game Jam Foundation",
+            "type": "godot",
+            "request": "launch",
+            "project": "${workspaceFolder}",
+            "scene": "main"
+        }
+    ]
+}

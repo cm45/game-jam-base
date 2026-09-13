@@ -1,2 +1,16 @@
 # Normalize EOL for all files that Git considers text files.
 * text=auto eol=lf
+# Keep the vendored art and audio from being treated as text.
+*.png binary
+*.gif binary
+*.wav binary
+*.ogg binary
+*.ttf binary
+# Preserve the pack's original license and readme byte-for-byte.
+assets/ninja_adventure/source/LICENSE.txt binary
+assets/ninja_adventure/source/README.md binary
+assets/ninja_adventure/source/**/*.png filter=lfs diff=lfs merge=lfs -text
+assets/ninja_adventure/source/**/*.gif filter=lfs diff=lfs merge=lfs -text
+assets/ninja_adventure/source/**/*.wav filter=lfs diff=lfs merge=lfs -text
+assets/ninja_adventure/source/**/*.ogg filter=lfs diff=lfs merge=lfs -text
+assets/ninja_adventure/source/**/*.ttf filter=lfs diff=lfs merge=lfs -text

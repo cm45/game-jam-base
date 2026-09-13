@@ -1,0 +1,79 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Theme" path="res://ui/theme/game_jam_theme.tres" id="1_theme"]
+
+[node name="FoundationPreview" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_theme")
+
+[node name="Background" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.047, 0.082, 0.071, 1)
+mouse_filter = 2
+
+[node name="Content" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 56
+theme_override_constants/margin_top = 38
+theme_override_constants/margin_right = 56
+theme_override_constants/margin_bottom = 38
+
+[node name="FoundationPanel" type="PanelContainer" parent="Content"]
+custom_minimum_size = Vector2(460, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="Layout" type="VBoxContainer" parent="Content/FoundationPanel"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="Title" type="Label" parent="Content/FoundationPanel/Layout"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.17, 0.1, 0.05, 1)
+theme_override_font_sizes/font_size = 28
+text = "GAME JAM FOUNDATION"
+horizontal_alignment = 1
+
+[node name="Subtitle" type="Label" parent="Content/FoundationPanel/Layout"]
+layout_mode = 2
+text = "Milestone 1: project foundation"
+horizontal_alignment = 1
+
+[node name="Divider" type="HSeparator" parent="Content/FoundationPanel/Layout"]
+layout_mode = 2
+
+[node name="Description" type="Label" parent="Content/FoundationPanel/Layout"]
+layout_mode = 2
+text = "The full Ninja Adventure pack is ready.\nThis scene verifies pixel-art defaults and the shared UI theme."
+horizontal_alignment = 1
+
+[node name="ThemeButton" type="Button" parent="Content/FoundationPanel/Layout"]
+custom_minimum_size = Vector2(0, 34)
+layout_mode = 2
+text = "WOOD UI THEME READY"
+
+[node name="AssetsButton" type="Button" parent="Content/FoundationPanel/Layout"]
+custom_minimum_size = Vector2(0, 34)
+layout_mode = 2
+text = "ASSET PACK IMPORTED"
+
+[node name="RoadmapButton" type="Button" parent="Content/FoundationPanel/Layout"]
+custom_minimum_size = Vector2(0, 34)
+layout_mode = 2
+text = "NEXT: APP SHELL"
