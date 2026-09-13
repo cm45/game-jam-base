@@ -1,8 +1,17 @@
 {
-    "servers": {
-        "openaiDeveloperDocs": {
-            "type": "http",
-            "url": "https://developers.openai.com/mcp"
-        }
+  "servers": {
+    "openaiDeveloperDocs": {
+      "type": "http",
+      "url": "https://developers.openai.com/mcp"
+    },
+    "godotMcpToolkit": {
+      "type": "stdio",
+      "command": "cmd",
+      "args": ["/c", "npx", "-y", "@npgamedev/godot-mcp-server@1.0.0"],
+      "env": {
+        "GODOT_MCP_CONFIG_VERSION": "1",
+        "GODOT_MCP_READ_ONLY": "1"
+      }
     }
+  }
 }

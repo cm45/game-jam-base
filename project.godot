@@ -24,6 +24,7 @@ AudioSettings="*res://features/audio/audio_settings.gd"
 RunSession="*res://features/run_flow/run_session.gd"
 SceneRouter="*res://app/scene_router.gd"
 AppShell="*res://app/app_shell.gd"
+MCPRuntimeServer="*res://addons/godot_mcp_toolkit/runtime/mcp_runtime_server.gd"
 
 [display]
 
@@ -37,6 +38,10 @@ window/stretch/aspect="keep"
 [audio]
 
 default_bus_layout="res://features/audio/default_bus_layout.tres"
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/godot_mcp_toolkit/plugin.cfg")
 
 [rendering]
 

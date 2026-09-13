@@ -4,6 +4,10 @@ The root [README](../README.md) is the complete Windows setup checklist,
 including Git LFS, Godot, VS Code, extensions, external-editor settings, and
 AI/MCP setup. Follow it before the jam.
 
+The repository already includes the Godot MCP editor add-on and client
+configuration. Install Node.js 22 LTS or newer before cloning, then follow
+[the Godot MCP guide](GODOT_MCP.md) after the project first opens in Godot.
+
 The project uses Godot 4.7.2 Standard, the Compatibility renderer, a 640×360
 base viewport, and nearest-neighbor filtering. Its initial window is 1920×1080,
 which is an exact 3× scale of the internal pixel grid. A 2560×1440 display can

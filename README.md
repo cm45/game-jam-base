@@ -27,6 +27,9 @@ Install these tools on Windows:
 4. [Visual Studio Code](https://code.visualstudio.com/download). The Windows
    User installer is the simplest option and makes the `code` command available
    after reopening PowerShell.
+5. [Node.js 22 LTS or newer](https://nodejs.org/). The included local Godot MCP
+   bridge uses it; verify the installation in a new PowerShell window with
+   `node --version`.
 
 ## Clone and run
 
@@ -93,13 +96,15 @@ complete free-first setup for Gemini CLI in VS Code, Kilo Code, and Cline; it
 also covers prompt examples, this repository's agents and skills, and trusted
 MCP connections.
 
-This repository includes `.vscode/mcp.json` with an OpenAI Developer Docs MCP
-connection. The matching .mcp.json supports VS Code Agent Host sessions and
-other compatible agent tools. After installing an AI chat provider in VS Code, run **MCP: List
-Servers**, inspect the `openaiDeveloperDocs` URL, and start it when you are
-ready. It provides documentation tools only and contains no credentials. For
-Codex in VS Code, install the **Codex** extension, sign in, then use the Codex
-icon or run **Codex: Open Codex Sidebar**.
+This repository includes an enabled, pinned Godot MCP Toolkit add-on and
+read-only client entries for it alongside the OpenAI Developer Docs MCP. Open
+the project in Godot, then in VS Code run **MCP: List Servers** and start
+`godotMcpToolkit`. The first connection downloads the pinned local bridge via
+`npx`; no API key or machine-specific path is committed. Follow the
+[Godot MCP guide](docs/GODOT_MCP.md) for the first probe, Gemini/Cline/Kilo and
+Codex setup, or enabling write tools after review. For Codex in VS Code, install
+the **Codex** extension, sign in, then use the Codex icon or run **Codex: Open
+Codex Sidebar**.
 
 Project-wide instructions live in [AGENTS.md](AGENTS.md). VS Code additionally
 loads [Copilot instructions](.github/copilot-instructions.md), two focused
@@ -128,6 +133,8 @@ receive compatibility entries in `.gemini/`, `.agents/`, and `.cline/`.
   `demo/demo_home.tscn` and use **F6** to play it directly.
 - `components/` contains optional movement, interaction, and pickup building
   blocks used by the starter scenes and fuller demonstration.
+- `addons/godot_mcp_toolkit/` contains the pinned editor add-on that lets a
+  local MCP client inspect and, when enabled per developer, edit this project.
 
 ## Learn the foundation
 

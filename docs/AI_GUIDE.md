@@ -144,8 +144,9 @@ Implementer is for an already approved small change.
 
 ## Use MCP in VS Code and agents
 
-MCP connects an AI chat to named tools and resources. The repository ships
-three configurations for the same read-only OpenAI Developer Docs server:
+MCP connects an AI chat to named tools and resources. The repository ships the
+read-only OpenAI Developer Docs server and a local Godot MCP server that starts
+read-only. Both are included in these configurations:
 
 | Agent | Checked-in configuration | How to inspect it |
 | --- | --- | --- |
@@ -153,7 +154,7 @@ three configurations for the same read-only OpenAI Developer Docs server:
 | VS Code Agent Host and compatible agents | `.mcp.json` | Use that agent's MCP/server view. |
 | Gemini CLI | `.gemini/settings.json` | Start `gemini`, then run `/mcp`. |
 
-The server definition is public and contains no credential:
+The Developer Docs server definition is public and contains no credential:
 
 ~~~json
 {
@@ -164,35 +165,34 @@ The server definition is public and contains no credential:
 ~~~
 
 For VS Code chat, install an AI provider, run **MCP: List Servers**, inspect
-the server name, URL, and capabilities, then start it only if you trust the
-configuration. VS Code's [MCP guide](https://code.visualstudio.com/docs/agent-customization/mcp-servers)
+both server names and capabilities, then start them when you trust the
+configuration. `openaiDeveloperDocs` is a remote documentation service;
+`godotMcpToolkit` is local and requires Node.js 22+ plus an open Godot editor.
+VS Code's [MCP guide](https://code.visualstudio.com/docs/agent-customization/mcp-servers)
 explains workspace and user-level servers.
 
 Kilo and Cline also support MCP, but use their own configuration UI and file
-format. Add this server through their MCP setup, inspect the URL and requested
-tools, and keep credentials in their secret storage rather than a project file.
-For Codex CLI or Codex desktop, add the same server with:
+format. For the local Godot bridge, copy its `mcpServers` entry from
+`.mcp.json` if the extension does not discover it. Keep credentials in secret
+storage rather than a project file. For Codex CLI, add both services with:
 
 ~~~powershell
 codex mcp add openaiDeveloperDocs --url https://developers.openai.com/mcp
+codex mcp add godot-mcp-toolkit --env GODOT_MCP_CONFIG_VERSION=1 --env GODOT_MCP_READ_ONLY=1 -- cmd /c npx -y @npgamedev/godot-mcp-server@1.0.0
 codex mcp list
 ~~~
 
 See the [official Codex MCP documentation](https://learn.chatgpt.com/docs/extend/mcp)
 for authentication and server-management details.
 
-No third-party Godot-control MCP server is bundled. Such a server can execute
-commands or inspect your project, so choose one from a trusted publisher, read
-its configuration, and add it only to the participant's user profile unless the
-whole team has agreed to share it.
+## Included Godot editor MCP
 
-## Optional Godot editor MCP
-
-The documentation MCP server included with this repository is read-only and
-does not control Godot. For an optional local Godot editor connection, follow
-[the Godot MCP setup guide](GODOT_MCP.md). It uses a free community add-on, is
-not bundled with this project, starts in server-enforced read-only mode, and
-keeps every participant's connection out of version control.
+The repository includes a pinned community add-on in
+`addons/godot_mcp_toolkit/` and starts its bridge in server-enforced read-only
+mode. It can inspect the locally running Godot editor. Each participant can
+enable write tools after their first successful probe; the full process,
+configuration locations, and removal instructions are in [the Godot MCP
+guide](GODOT_MCP.md).
 
 ## Treat AI output as a draft
 
