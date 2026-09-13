@@ -7,7 +7,8 @@ after the current one has been reviewed.
 - [x] **1. Project foundation and developer experience** — Full asset pack,
   Git LFS, Godot 4.7.2 project settings, pixel-art defaults, shared UI theme,
   folder structure, Windows/Godot/VS Code setup, beginner exercises,
-  architecture recipes, AI instructions, skills, and MCP guidance.
+  architecture recipes, AI instructions, skills, and MCP guidance, including
+  an optional Godot MCP installation and usage guide.
 - [x] **2. App shell and core services** — Startup flow, scene switching,
   controls, audio/settings, pause menu, and save/reset infrastructure.
 - [x] **3. Meta-progression framework** — Configurable currencies, persistent

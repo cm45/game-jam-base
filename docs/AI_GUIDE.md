@@ -186,6 +186,14 @@ commands or inspect your project, so choose one from a trusted publisher, read
 its configuration, and add it only to the participant's user profile unless the
 whole team has agreed to share it.
 
+## Optional Godot editor MCP
+
+The documentation MCP server included with this repository is read-only and
+does not control Godot. For an optional local Godot editor connection, follow
+[the Godot MCP setup guide](GODOT_MCP.md). It uses a free community add-on, is
+not bundled with this project, starts in server-enforced read-only mode, and
+keeps every participant's connection out of version control.
+
 ## Treat AI output as a draft
 
 Never paste a secret, personal save file, or private key into an AI prompt.

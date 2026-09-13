@@ -127,8 +127,7 @@ receive compatibility entries in `.gemini/`, `.agents/`, and `.cline/`.
   tents, a Path Shrine, and a six-pickup run. It is optional: open
   `demo/demo_home.tscn` and use **F6** to play it directly.
 - `components/` contains optional movement, interaction, and pickup building
-  blocks used by the demonstration. `game/` remains reserved for a
-  participant's own starter scenes in milestone 5.
+  blocks used by the starter scenes and fuller demonstration.
 
 ## Learn the foundation
 
@@ -141,6 +140,7 @@ receive compatibility entries in `.gemini/`, `.agents/`, and `.cline/`.
 - [RunContext and RunResult contract](docs/RUN_CONTRACT.md)
 - [Extension recipes](docs/EXTENSION_RECIPES.md)
 - [AI and MCP guide](docs/AI_GUIDE.md)
+- [Optional local Godot MCP setup](docs/GODOT_MCP.md)
 - [Incremental roadmap](docs/ROADMAP.md)
 
 ## Folder map
