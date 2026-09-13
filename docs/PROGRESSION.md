@@ -13,9 +13,9 @@ buttons to exercise the complete meta-progression loop before gameplay exists.
 7. Use the pause menu's reset option to clear progression, then confirm the
    lab returns to zero balances and levels.
 
-The lab demonstrates the framework; it is not the future home scene. A later
-milestone will use a walkable top-down 2D hub and let the player interact with a
-shopkeeper, shrine, or workbench that opens
-`features/progression/ui/progression_panel.tscn` as an overlay. Keep the
-`Progression` API and catalog unchanged unless the whole project is intentionally
-changing its permanent-economy rules.
+The lab demonstrates the framework in isolation; it is not a home scene. The
+playable demo now uses a walkable top-down hub and opens
+`features/progression/ui/progression_panel.tscn` from its in-world Path Shrine.
+The demo turns off the panel's sandbox tools so progression comes only from a
+completed run. Keep the `Progression` API and catalog unchanged unless the
+whole project is intentionally changing its permanent-economy rules.

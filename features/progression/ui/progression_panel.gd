@@ -7,10 +7,13 @@ signal close_requested
 
 const SHOP_ITEM_SCENE := preload("res://features/progression/ui/upgrade_shop_item.tscn")
 
+@export var show_sandbox_tools := true
+@export var close_button_text := "CLOSE"
+
 var _selected_upgrade_id: StringName
 
 @onready var _wallet: HBoxContainer = %Wallet
-@onready var _shop_list: VBoxContainer = %ShopList
+@onready var _shop_list: GridContainer = %ShopList
 @onready var _tree: ProgressionTree = %ProgressionTree
 @onready var _selected_title: Label = %SelectedTitle
 @onready var _selected_description: Label = %SelectedDescription
@@ -24,6 +27,8 @@ var _selected_upgrade_id: StringName
 func _ready() -> void:
 	_tree.upgrade_selected.connect(select_upgrade)
 	%CloseButton.pressed.connect(func() -> void: close_requested.emit())
+	%CloseButton.text = close_button_text
+	%SandboxRow.visible = show_sandbox_tools
 	%GrantGoldButton.pressed.connect(func() -> void: Progression.grant_currency(&"gold", 25))
 	%GrantInsightButton.pressed.connect(func() -> void: Progression.grant_currency(&"insight", 1))
 	%PurchaseButton.pressed.connect(_purchase_selected_upgrade)
@@ -72,6 +77,7 @@ func _refresh_wallet() -> void:
 		var label := Label.new()
 		label.text = "%s: %d" % [currency.display_name, Progression.get_balance(currency.id)]
 		label.add_theme_color_override("font_color", currency.display_color)
+		label.add_theme_font_size_override("font_size", 9)
 		_wallet.add_child(label)
 
 

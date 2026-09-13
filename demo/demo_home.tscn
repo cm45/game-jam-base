@@ -1,0 +1,262 @@
+[gd_scene load_steps=16 format=3]
+
+[ext_resource type="Script" path="res://demo/demo_home.gd" id="1_script"]
+[ext_resource type="Script" path="res://demo/world_surface.gd" id="2_surface"]
+[ext_resource type="PackedScene" path="res://components/top_down_player.tscn" id="3_player"]
+[ext_resource type="Script" path="res://components/interaction_target.gd" id="4_interaction"]
+[ext_resource type="PackedScene" path="res://features/progression/ui/progression_panel.tscn" id="5_progression"]
+[ext_resource type="Theme" path="res://ui/theme/game_jam_theme.tres" id="6_theme"]
+[ext_resource type="StyleBox" path="res://ui/theme/hud_panel.tres" id="7_hud_panel"]
+[ext_resource type="Texture2D" path="res://assets/ninja_adventure/source/Actor/Character/OldMan/SeparateAnim/Idle.png" id="8_caretaker"]
+[ext_resource type="Texture2D" path="res://assets/ninja_adventure/source/Actor/Character/NinjaBlue/SeparateAnim/Idle.png" id="9_scout"]
+[ext_resource type="Texture2D" path="res://assets/ninja_adventure/source/Actor/Character/Woman/SeparateAnim/Idle.png" id="10_trader"]
+[ext_resource type="Texture2D" path="res://assets/ninja_adventure/source/Items/Treasure/BigTreasureChest.png" id="11_chest"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_caretaker"]
+radius = 22.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_scout"]
+radius = 22.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_trader"]
+radius = 22.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_shrine"]
+radius = 22.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_gate"]
+radius = 26.0
+
+[node name="DemoHome" type="Node2D"]
+script = ExtResource("1_script")
+
+[node name="WorldSurface" type="Node2D" parent="."]
+script = ExtResource("2_surface")
+
+[node name="Player" parent="." instance=ExtResource("3_player")]
+unique_name_in_owner = true
+position = Vector2(322, 306)
+
+[node name="CaretakerVisual" type="Node2D" parent="."]
+position = Vector2(160, 190)
+z_index = 1
+
+[node name="Sprite" type="Sprite2D" parent="CaretakerVisual"]
+position = Vector2(0, -8)
+texture = ExtResource("8_caretaker")
+hframes = 4
+
+[node name="Name" type="Label" parent="CaretakerVisual"]
+position = Vector2(-25, 9)
+theme_override_colors/font_color = Color(1, 0.91, 0.65, 1)
+theme_override_colors/font_outline_color = Color(0.12, 0.09, 0.05, 1)
+theme_override_constants/outline_size = 1
+theme_override_font_sizes/font_size = 7
+text = "CARETAKER"
+
+[node name="Caretaker" type="Area2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(160, 190)
+collision_layer = 0
+collision_mask = 1
+script = ExtResource("4_interaction")
+prompt = "Talk to Caretaker"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Caretaker"]
+shape = SubResource("CircleShape2D_caretaker")
+
+[node name="ScoutVisual" type="Node2D" parent="."]
+position = Vector2(285, 190)
+z_index = 1
+
+[node name="Sprite" type="Sprite2D" parent="ScoutVisual"]
+position = Vector2(0, -8)
+texture = ExtResource("9_scout")
+hframes = 4
+
+[node name="Name" type="Label" parent="ScoutVisual"]
+position = Vector2(-15, 9)
+theme_override_colors/font_color = Color(1, 0.91, 0.65, 1)
+theme_override_colors/font_outline_color = Color(0.12, 0.09, 0.05, 1)
+theme_override_constants/outline_size = 1
+theme_override_font_sizes/font_size = 7
+text = "SCOUT"
+
+[node name="Scout" type="Area2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(285, 190)
+collision_layer = 0
+collision_mask = 1
+script = ExtResource("4_interaction")
+prompt = "Talk to Scout"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Scout"]
+shape = SubResource("CircleShape2D_scout")
+
+[node name="TraderVisual" type="Node2D" parent="."]
+position = Vector2(410, 190)
+z_index = 1
+
+[node name="Sprite" type="Sprite2D" parent="TraderVisual"]
+position = Vector2(0, -8)
+texture = ExtResource("10_trader")
+hframes = 4
+
+[node name="Name" type="Label" parent="TraderVisual"]
+position = Vector2(-18, 9)
+theme_override_colors/font_color = Color(1, 0.91, 0.65, 1)
+theme_override_colors/font_outline_color = Color(0.12, 0.09, 0.05, 1)
+theme_override_constants/outline_size = 1
+theme_override_font_sizes/font_size = 7
+text = "TRADER"
+
+[node name="Trader" type="Area2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(410, 190)
+collision_layer = 0
+collision_mask = 1
+script = ExtResource("4_interaction")
+prompt = "Talk to Trader"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Trader"]
+shape = SubResource("CircleShape2D_trader")
+
+[node name="ShrineVisual" type="Node2D" parent="."]
+position = Vector2(318, 246)
+z_index = 1
+
+[node name="Chest" type="Sprite2D" parent="ShrineVisual"]
+position = Vector2(0, -8)
+texture = ExtResource("11_chest")
+hframes = 2
+
+[node name="Name" type="Label" parent="ShrineVisual"]
+position = Vector2(-31, 9)
+theme_override_colors/font_color = Color(1, 0.91, 0.65, 1)
+theme_override_colors/font_outline_color = Color(0.12, 0.09, 0.05, 1)
+theme_override_constants/outline_size = 1
+theme_override_font_sizes/font_size = 7
+text = "PATH SHRINE"
+
+[node name="Shrine" type="Area2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(318, 246)
+collision_layer = 0
+collision_mask = 1
+script = ExtResource("4_interaction")
+prompt = "Use Path Shrine"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Shrine"]
+shape = SubResource("CircleShape2D_shrine")
+
+[node name="RunGateVisual" type="Node2D" parent="."]
+position = Vector2(540, 270)
+z_index = 1
+
+[node name="Chest" type="Sprite2D" parent="RunGateVisual"]
+position = Vector2(0, -8)
+texture = ExtResource("11_chest")
+hframes = 2
+frame = 1
+
+[node name="Name" type="Label" parent="RunGateVisual"]
+position = Vector2(-34, 9)
+theme_override_colors/font_color = Color(1, 0.91, 0.65, 1)
+theme_override_colors/font_outline_color = Color(0.12, 0.09, 0.05, 1)
+theme_override_constants/outline_size = 1
+theme_override_font_sizes/font_size = 7
+text = "MEADOW GATE"
+
+[node name="RunGate" type="Area2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(540, 270)
+collision_layer = 0
+collision_mask = 1
+script = ExtResource("4_interaction")
+prompt = "Enter meadow"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RunGate"]
+shape = SubResource("CircleShape2D_gate")
+
+[node name="Interface" type="CanvasLayer" parent="."]
+
+[node name="HUD" type="Control" parent="Interface"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme = ExtResource("6_theme")
+
+[node name="WalletPanel" type="PanelContainer" parent="Interface/HUD"]
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 216.0
+offset_bottom = 30.0
+mouse_filter = 2
+theme_override_styles/panel = ExtResource("7_hud_panel")
+
+[node name="Wallet" type="Label" parent="Interface/HUD/WalletPanel"]
+unique_name_in_owner = true
+theme_override_font_sizes/font_size = 8
+text = "GOLD 0  •  INSIGHT 0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="StatsPanel" type="PanelContainer" parent="Interface/HUD"]
+offset_left = 450.0
+offset_top = 8.0
+offset_right = 632.0
+offset_bottom = 30.0
+mouse_filter = 2
+theme_override_styles/panel = ExtResource("7_hud_panel")
+
+[node name="NextRunStats" type="Label" parent="Interface/HUD/StatsPanel"]
+unique_name_in_owner = true
+theme_override_font_sizes/font_size = 8
+text = "SPD 72  x1.00  HP 5"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MessagePanel" type="PanelContainer" parent="Interface/HUD"]
+unique_name_in_owner = true
+visible = false
+offset_left = 70.0
+offset_top = 308.0
+offset_right = 570.0
+offset_bottom = 338.0
+mouse_filter = 2
+theme_override_styles/panel = ExtResource("7_hud_panel")
+
+[node name="Message" type="Label" parent="Interface/HUD/MessagePanel"]
+unique_name_in_owner = true
+theme_override_font_sizes/font_size = 7
+autowrap_mode = 2
+horizontal_alignment = 1
+vertical_alignment = 1
+text = "Camp message"
+
+[node name="InteractionPanel" type="PanelContainer" parent="Interface/HUD"]
+unique_name_in_owner = true
+visible = false
+offset_left = 210.0
+offset_top = 337.0
+offset_right = 430.0
+offset_bottom = 357.0
+mouse_filter = 2
+theme_override_styles/panel = ExtResource("7_hud_panel")
+
+[node name="InteractionHint" type="Label" parent="Interface/HUD/InteractionPanel"]
+unique_name_in_owner = true
+theme_override_font_sizes/font_size = 7
+text = "[E] Interact"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ProgressionPanel" parent="Interface/HUD" instance=ExtResource("5_progression")]
+unique_name_in_owner = true
+visible = false
+mouse_filter = 0
+show_sandbox_tools = false
+close_button_text = "CLOSE SHRINE"

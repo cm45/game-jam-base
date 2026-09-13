@@ -56,7 +56,7 @@ display_name = "Lucky Satchel"
 description = "Bring home more from every future run."
 costs = {"gold": 15}
 effects = Array[ExtResource("5_effect")]([SubResource("Effect_reward")])
-tree_position = Vector2(28, 108)
+tree_position = Vector2(16, 52)
 
 [sub_resource type="Resource" id="Upgrade_rations"]
 script = ExtResource("3_upgrade")
@@ -66,7 +66,7 @@ description = "Begin each run with a little more health."
 costs = {"gold": 25, "insight": 1}
 prerequisites = Array[ExtResource("4_requirement")]([SubResource("Requirement_satchel")])
 effects = Array[ExtResource("5_effect")]([SubResource("Effect_health")])
-tree_position = Vector2(182, 44)
+tree_position = Vector2(154, 10)
 
 [sub_resource type="Resource" id="Upgrade_pockets"]
 script = ExtResource("3_upgrade")
@@ -78,7 +78,7 @@ max_level = 3
 cost_growth = 1.4
 prerequisites = Array[ExtResource("4_requirement")]([SubResource("Requirement_satchel")])
 effects = Array[ExtResource("5_effect")]([SubResource("Effect_capacity")])
-tree_position = Vector2(182, 172)
+tree_position = Vector2(154, 94)
 
 [sub_resource type="Resource" id="Upgrade_pathfinder"]
 script = ExtResource("3_upgrade")
@@ -88,7 +88,7 @@ description = "Move faster through every future run."
 costs = {"gold": 45, "insight": 2}
 prerequisites = Array[ExtResource("4_requirement")]([SubResource("Requirement_rations")])
 effects = Array[ExtResource("5_effect")]([SubResource("Effect_speed")])
-tree_position = Vector2(336, 44)
+tree_position = Vector2(292, 10)
 
 [resource]
 script = ExtResource("1_catalog")

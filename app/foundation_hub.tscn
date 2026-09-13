@@ -54,7 +54,7 @@ horizontal_alignment = 1
 
 [node name="Subtitle" type="Label" parent="Center/Panel/Margin/Layout"]
 layout_mode = 2
-text = "Milestone 2: app shell and core services"
+text = "Milestone 4: playable demo loop"
 horizontal_alignment = 1
 
 [node name="Divider" type="HSeparator" parent="Center/Panel/Margin/Layout"]
@@ -62,8 +62,14 @@ layout_mode = 2
 
 [node name="Description" type="Label" parent="Center/Panel/Margin/Layout"]
 layout_mode = 2
-text = "The startup menu, scene router, pause menu,\naudio settings, keybind reference, save layer, and progression lab are ready."
+text = "Explore a walkable hub, collect Sun Shards in a short run,\nand spend your permanent rewards at the Path Shrine."
 horizontal_alignment = 1
+
+[node name="DemoButton" type="Button" parent="Center/Panel/Margin/Layout"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 28)
+layout_mode = 2
+text = "PLAY THE DEMO LOOP"
 
 [node name="PreviewButton" type="Button" parent="Center/Panel/Margin/Layout"]
 unique_name_in_owner = true
@@ -93,9 +99,10 @@ text = "QUIT"
 
 [node name="Hint" type="Label" parent="Center/Panel/Margin/Layout"]
 layout_mode = 2
-text = "Escape opens the pause menu from every scene."
+text = "WASD or arrow keys move. E interacts. Escape opens the pause menu."
 horizontal_alignment = 1
 
+[connection signal="pressed" from="Center/Panel/Margin/Layout/DemoButton" to="." method="_on_demo_button_pressed"]
 [connection signal="pressed" from="Center/Panel/Margin/Layout/PreviewButton" to="." method="_on_preview_button_pressed"]
 [connection signal="pressed" from="Center/Panel/Margin/Layout/ProgressionButton" to="." method="_on_progression_button_pressed"]
 [connection signal="pressed" from="Center/Panel/Margin/Layout/SettingsButton" to="." method="_on_settings_button_pressed"]

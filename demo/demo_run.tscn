@@ -1,0 +1,192 @@
+[gd_scene load_steps=12 format=3]
+
+[ext_resource type="Script" path="res://demo/demo_run.gd" id="1_script"]
+[ext_resource type="Script" path="res://demo/world_surface.gd" id="2_surface"]
+[ext_resource type="PackedScene" path="res://components/top_down_player.tscn" id="3_player"]
+[ext_resource type="PackedScene" path="res://components/resource_pickup.tscn" id="4_pickup"]
+[ext_resource type="Script" path="res://components/interaction_target.gd" id="5_interaction"]
+[ext_resource type="Theme" path="res://ui/theme/game_jam_theme.tres" id="6_theme"]
+[ext_resource type="StyleBox" path="res://ui/theme/hud_panel.tres" id="7_hud_panel"]
+[ext_resource type="Texture2D" path="res://assets/ninja_adventure/source/Items/Treasure/BigTreasureChest.png" id="8_chest"]
+[ext_resource type="AudioStream" path="res://assets/ninja_adventure/source/Audio/Sounds/Bonus/Coin.wav" id="9_coin"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_exit"]
+radius = 27.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_summary"]
+bg_color = Color(0.02, 0.05, 0.04, 0.76)
+
+[node name="DemoRun" type="Node2D"]
+script = ExtResource("1_script")
+
+[node name="WorldSurface" type="Node2D" parent="."]
+script = ExtResource("2_surface")
+map_kind = 1
+
+[node name="Player" parent="." instance=ExtResource("3_player")]
+unique_name_in_owner = true
+position = Vector2(72, 268)
+
+[node name="Pickups" type="Node2D" parent="."]
+unique_name_in_owner = true
+
+[node name="ShardOne" parent="Pickups" instance=ExtResource("4_pickup")]
+position = Vector2(112, 106)
+
+[node name="ShardTwo" parent="Pickups" instance=ExtResource("4_pickup")]
+position = Vector2(212, 164)
+
+[node name="ShardThree" parent="Pickups" instance=ExtResource("4_pickup")]
+position = Vector2(316, 84)
+
+[node name="ShardFour" parent="Pickups" instance=ExtResource("4_pickup")]
+position = Vector2(420, 150)
+
+[node name="ShardFive" parent="Pickups" instance=ExtResource("4_pickup")]
+position = Vector2(256, 258)
+
+[node name="ShardSix" parent="Pickups" instance=ExtResource("4_pickup")]
+position = Vector2(490, 266)
+
+[node name="ExitVisual" type="Node2D" parent="."]
+position = Vector2(554, 270)
+z_index = 1
+
+[node name="Chest" type="Sprite2D" parent="ExitVisual"]
+position = Vector2(0, -8)
+texture = ExtResource("8_chest")
+hframes = 2
+frame = 1
+
+[node name="Name" type="Label" parent="ExitVisual"]
+position = Vector2(-28, 9)
+theme_override_colors/font_color = Color(1, 0.91, 0.65, 1)
+theme_override_colors/font_outline_color = Color(0.12, 0.09, 0.05, 1)
+theme_override_constants/outline_size = 1
+theme_override_font_sizes/font_size = 7
+text = "MEADOW EXIT"
+
+[node name="ExitTarget" type="Area2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(554, 270)
+collision_layer = 0
+collision_mask = 1
+script = ExtResource("5_interaction")
+prompt = "Leave meadow"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ExitTarget"]
+shape = SubResource("CircleShape2D_exit")
+
+[node name="PickupSound" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("9_coin")
+bus = &"SFX"
+
+[node name="Interface" type="CanvasLayer" parent="."]
+
+[node name="HUD" type="Control" parent="Interface"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme = ExtResource("6_theme")
+
+[node name="ShardPanel" type="PanelContainer" parent="Interface/HUD"]
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 112.0
+offset_bottom = 30.0
+mouse_filter = 2
+theme_override_styles/panel = ExtResource("7_hud_panel")
+
+[node name="ShardCounter" type="Label" parent="Interface/HUD/ShardPanel"]
+unique_name_in_owner = true
+theme_override_font_sizes/font_size = 8
+text = "SUN  0 / 6"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="StatsPanel" type="PanelContainer" parent="Interface/HUD"]
+offset_left = 494.0
+offset_top = 8.0
+offset_right = 632.0
+offset_bottom = 30.0
+mouse_filter = 2
+theme_override_styles/panel = ExtResource("7_hud_panel")
+
+[node name="RunStats" type="Label" parent="Interface/HUD/StatsPanel"]
+unique_name_in_owner = true
+theme_override_font_sizes/font_size = 8
+text = "SPD 72  x1.00"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="InteractionPanel" type="PanelContainer" parent="Interface/HUD"]
+unique_name_in_owner = true
+visible = false
+offset_left = 180.0
+offset_top = 333.0
+offset_right = 460.0
+offset_bottom = 356.0
+mouse_filter = 2
+theme_override_styles/panel = ExtResource("7_hud_panel")
+
+[node name="InteractionHint" type="Label" parent="Interface/HUD/InteractionPanel"]
+unique_name_in_owner = true
+theme_override_font_sizes/font_size = 7
+text = "[E] Interact"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Summary" type="Control" parent="Interface/HUD"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 0
+
+[node name="Dim" type="Panel" parent="Interface/HUD/Summary"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_summary")
+
+[node name="Center" type="CenterContainer" parent="Interface/HUD/Summary"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="PanelContainer" parent="Interface/HUD/Summary/Center"]
+custom_minimum_size = Vector2(360, 0)
+layout_mode = 2
+
+[node name="Margin" type="MarginContainer" parent="Interface/HUD/Summary/Center/Panel"]
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 6
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 6
+
+[node name="Layout" type="VBoxContainer" parent="Interface/HUD/Summary/Center/Panel/Margin"]
+theme_override_constants/separation = 4
+
+[node name="SummaryText" type="Label" parent="Interface/HUD/Summary/Center/Panel/Margin/Layout"]
+unique_name_in_owner = true
+theme_override_font_sizes/font_size = 12
+horizontal_alignment = 1
+text = "RUN COMPLETE"
+
+[node name="ReturnButton" type="Button" parent="Interface/HUD/Summary/Center/Panel/Margin/Layout"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 26)
+text = "RETURN TO LANTERN VILLAGE"

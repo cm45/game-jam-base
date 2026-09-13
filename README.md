@@ -8,10 +8,10 @@ The future home is a walkable top-down 2D hub. The player moves through it to
 reach NPCs, shops, upgrade points, and the entrance to a run; menus are overlays
 opened by those world interactions rather than the home scene itself.
 
-Milestone 3 is ready. It includes the full Ninja Adventure asset pack,
+Milestone 4 is ready. It includes the full Ninja Adventure asset pack,
 pixel-rendering defaults, a reusable UI theme, Windows/editor/AI onboarding,
-the app shell, and a configurable meta-progression framework with a shop and
-skill tree.
+the app shell, a configurable meta-progression framework, and a complete
+collect-and-exit demonstration loop.
 
 ## Before you clone
 
@@ -120,10 +120,12 @@ receive compatibility entries in `.gemini/`, `.agents/`, and `.cline/`.
   documented reusable services that later game and demo scenes can use.
 - `features/progression/` provides editable currencies and upgrades, persistent
   wallet and level state, calculated effects, a shop, and a visual skill tree.
-- `app/progression_lab.tscn` is a safe, runnable review host for the progression
-  feature until the future home scene instances it.
-- `features/`, `components/`, `game/`, and `demo/` reserve clear homes for
-  systems and examples introduced by later milestones.
+- `demo/demo_home.tscn` is a freely walkable grass-field camp with three
+  residents, tents, a Path Shrine, and a run gate. `demo/demo_run.tscn` is a
+  short six-pickup collect-and-exit run.
+- `components/` contains optional movement, interaction, and pickup building
+  blocks used by the demonstration. `game/` remains reserved for a
+  participant's own starter scenes in milestone 5.
 
 ## Learn the foundation
 
@@ -132,6 +134,7 @@ receive compatibility entries in `.gemini/`, `.agents/`, and `.cline/`.
 - [Architecture overview](docs/ARCHITECTURE.md)
 - [App shell and core services](docs/APP_SHELL.md)
 - [Meta-progression guide](docs/PROGRESSION.md)
+- [Playable demo loop](docs/DEMO_LOOP.md)
 - [Extension recipes](docs/EXTENSION_RECIPES.md)
 - [AI and MCP guide](docs/AI_GUIDE.md)
 - [Incremental roadmap](docs/ROADMAP.md)

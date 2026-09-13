@@ -26,8 +26,9 @@ caller's back.
 
 The current shell introduces only services with active consumers: the pause
 menu uses input, audio, and save services, while the Foundation Hub uses the
-scene router. Later milestones build on these services rather than adding a
-second competing manager.
+scene router. The playable demo owns its world scenes under `demo/` and calls
+the same services through their public APIs. Later milestones build on these
+services rather than adding a second competing manager.
 
 ## Core services
 
@@ -50,8 +51,21 @@ control to save data.
 definitions. The `Progression` autoload loads that catalog and serializes only
 the wallet and upgrade levels; UI and game scenes ask it questions through
 methods rather than writing the save directly. Its shop and tree UI live beside
-the feature. `app/progression_lab.tscn` is only a host for reviewing the feature
-until a later home scene instances the same panel.
+the feature. `app/progression_lab.tscn` is a host for reviewing it in isolation,
+while the demo home instances the same panel from its Path Shrine.
+
+## Demonstration ownership
+
+`demo/demo_home.tscn` is an actual 2D hub: it owns its grass-field camp, player
+spawn, three residents, stations, and run entrance. Its shrine instances
+feature-owned progression UI as an overlay. `demo/demo_run.tscn` owns its
+pickup count, completion rule, and reward summary. It reads progression effects
+and grants the final reward only when that run succeeds.
+
+`components/` supplies movement, interaction, and pickup events to both scenes.
+Those components do not know which scene receives a reward, opens a panel, or
+changes route. The demonstration's temporary last-run message is confined to
+`demo/`; milestone 5 replaces it with the reusable scene contract.
 
 ## Choosing a location
 

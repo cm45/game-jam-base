@@ -6,9 +6,7 @@ signal selected(upgrade_id: StringName)
 var _upgrade: UpgradeDefinition
 
 @onready var _title: Label = %Title
-@onready var _level: Label = %Level
-@onready var _description: Label = %Description
-@onready var _cost: Label = %Cost
+@onready var _summary: Label = %Summary
 
 
 func _ready() -> void:
@@ -26,9 +24,11 @@ func refresh() -> void:
 	if _upgrade == null:
 		return
 	_title.text = _upgrade.display_name
-	_level.text = "LEVEL %d / %d" % [Progression.get_upgrade_level(_upgrade.id), _upgrade.max_level]
-	_description.text = _upgrade.description
-	_cost.text = _format_cost(Progression.get_upgrade_cost(_upgrade.id))
+	_summary.text = "LV %d/%d  •  %s" % [
+		Progression.get_upgrade_level(_upgrade.id),
+		_upgrade.max_level,
+		_format_cost(Progression.get_upgrade_cost(_upgrade.id)),
+	]
 
 
 func _format_cost(cost: Dictionary[StringName, int]) -> String:

@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=8 format=3]
+[gd_resource type="Theme" load_steps=9 format=3]
 
 [ext_resource type="FontFile" path="res://assets/ninja_adventure/source/Ui/Font/NormalFont.ttf" id="1_font"]
 [ext_resource type="Texture2D" path="res://assets/ninja_adventure/source/Ui/Theme/Theme Wood/button_normal.png" id="2_button_normal"]
@@ -78,8 +78,12 @@ expand_margin_top = 2.0
 expand_margin_right = 2.0
 expand_margin_bottom = 2.0
 
+[sub_resource type="FontVariation" id="FontVariation_readable_pixel"]
+base_font = ExtResource("1_font")
+spacing_space = 2
+
 [resource]
-default_font = ExtResource("1_font")
+default_font = SubResource("FontVariation_readable_pixel")
 default_font_size = 16
 Button/colors/font_color = Color(0.18, 0.12, 0.08, 1)
 Button/colors/font_hover_color = Color(0.18, 0.12, 0.08, 1)

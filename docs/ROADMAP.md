@@ -12,7 +12,7 @@ after the current one has been reviewed.
   controls, audio/settings, pause menu, and save/reset infrastructure.
 - [x] **3. Meta-progression framework** — Configurable currencies, persistent
   progress, upgrades, shop, and visual skill tree.
-- [ ] **4. Playable demo loop** — Top-down player movement and interactions,
+- [x] **4. Playable demo loop** — Top-down player movement and interactions,
   a freely walkable 2D home hub with NPC/station/run-entry interactions,
   pickups, collect-and-exit run, and rewards.
 - [ ] **5. Replaceable game integration** — Minimal starter scenes, the

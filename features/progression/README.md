@@ -35,7 +35,8 @@ single source of editable definitions. It currently demonstrates:
 
 To add an upgrade, duplicate an `UpgradeDefinition` subresource, give it a
 unique snake_case ID, add costs and effects, then append it to the catalog's
-`upgrades` array. Keep positions inside the current 480×238 skill-tree canvas.
+`upgrades` array. Keep positions inside the current 480×144 compact skill-tree
+canvas.
 
 ## Effects
 

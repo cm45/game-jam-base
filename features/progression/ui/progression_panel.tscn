@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" path="res://features/progression/ui/progression_panel.gd" id="1_script"]
 [ext_resource type="Script" path="res://features/progression/ui/progression_tree.gd" id="2_tree"]
+[ext_resource type="StyleBox" path="res://ui/theme/hud_panel.tres" id="3_compact_panel"]
 
 [node name="ProgressionPanel" type="Control"]
 layout_mode = 3
@@ -21,15 +22,16 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="Panel" type="PanelContainer" parent="Center"]
-custom_minimum_size = Vector2(570, 0)
+custom_minimum_size = Vector2(600, 0)
 layout_mode = 2
+theme_override_styles/panel = ExtResource("3_compact_panel")
 
 [node name="Margin" type="MarginContainer" parent="Center/Panel"]
 layout_mode = 2
-theme_override_constants/margin_left = 9
-theme_override_constants/margin_top = 3
-theme_override_constants/margin_right = 9
-theme_override_constants/margin_bottom = 3
+theme_override_constants/margin_left = 6
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 6
+theme_override_constants/margin_bottom = 4
 
 [node name="Layout" type="VBoxContainer" parent="Center/Panel/Margin"]
 layout_mode = 2
@@ -41,59 +43,66 @@ layout_mode = 2
 [node name="Title" type="Label" parent="Center/Panel/Margin/Layout/Header"]
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_font_sizes/font_size = 20
+theme_override_font_sizes/font_size = 16
 text = "META-PROGRESSION LAB"
 
 [node name="CloseButton" type="Button" parent="Center/Panel/Margin/Layout/Header"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(118, 26)
+custom_minimum_size = Vector2(94, 22)
 layout_mode = 2
+theme_override_font_sizes/font_size = 9
 text = "BACK TO HUB"
 
 [node name="Wallet" type="HBoxContainer" parent="Center/Panel/Margin/Layout"]
 unique_name_in_owner = true
 layout_mode = 2
 alignment = 1
-theme_override_constants/separation = 18
+theme_override_constants/separation = 12
 
 [node name="SandboxRow" type="HBoxContainer" parent="Center/Panel/Margin/Layout"]
+unique_name_in_owner = true
 layout_mode = 2
 alignment = 1
-theme_override_constants/separation = 8
+theme_override_constants/separation = 5
 
 [node name="SandboxLabel" type="Label" parent="Center/Panel/Margin/Layout/SandboxRow"]
 layout_mode = 2
+theme_override_font_sizes/font_size = 8
 text = "SANDBOX CURRENCY:"
 
 [node name="GrantGoldButton" type="Button" parent="Center/Panel/Margin/Layout/SandboxRow"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(110, 24)
+custom_minimum_size = Vector2(82, 20)
 layout_mode = 2
+theme_override_font_sizes/font_size = 8
 text = "+25 GOLD"
 
 [node name="GrantInsightButton" type="Button" parent="Center/Panel/Margin/Layout/SandboxRow"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(110, 24)
+custom_minimum_size = Vector2(82, 20)
 layout_mode = 2
+theme_override_font_sizes/font_size = 8
 text = "+1 INSIGHT"
 
 [node name="Divider" type="HSeparator" parent="Center/Panel/Margin/Layout"]
 layout_mode = 2
 
 [node name="Views" type="TabContainer" parent="Center/Panel/Margin/Layout"]
-custom_minimum_size = Vector2(0, 90)
+custom_minimum_size = Vector2(0, 150)
 layout_mode = 2
-size_flags_vertical = 3
+theme_override_font_sizes/font_size = 9
 
 [node name="Shop" type="ScrollContainer" parent="Center/Panel/Margin/Layout/Views"]
 layout_mode = 2
 metadata/_tab_index = 0
 
-[node name="ShopList" type="VBoxContainer" parent="Center/Panel/Margin/Layout/Views/Shop"]
+[node name="ShopList" type="GridContainer" parent="Center/Panel/Margin/Layout/Views/Shop"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_constants/separation = 4
+columns = 2
+theme_override_constants/h_separation = 4
+theme_override_constants/v_separation = 4
 
 [node name="SkillTree" type="ScrollContainer" parent="Center/Panel/Margin/Layout/Views"]
 layout_mode = 2
@@ -101,7 +110,7 @@ metadata/_tab_index = 1
 
 [node name="ProgressionTree" type="Control" parent="Center/Panel/Margin/Layout/Views/SkillTree"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(480, 238)
+custom_minimum_size = Vector2(480, 144)
 layout_mode = 2
 script = ExtResource("2_tree")
 
@@ -112,41 +121,47 @@ theme_override_constants/separation = 0
 [node name="SelectedTitle" type="Label" parent="Center/Panel/Margin/Layout/Selected"]
 unique_name_in_owner = true
 layout_mode = 2
-theme_override_font_sizes/font_size = 16
+theme_override_font_sizes/font_size = 12
 text = "Selected upgrade"
 
 [node name="SelectedDescription" type="Label" parent="Center/Panel/Margin/Layout/Selected"]
 unique_name_in_owner = true
 layout_mode = 2
+theme_override_font_sizes/font_size = 8
 text = "Description"
 
 [node name="SelectedLevel" type="Label" parent="Center/Panel/Margin/Layout/Selected"]
 unique_name_in_owner = true
 layout_mode = 2
+theme_override_font_sizes/font_size = 8
 text = "LEVEL 0 / 1"
 
 [node name="SelectedEffects" type="Label" parent="Center/Panel/Margin/Layout/Selected"]
 unique_name_in_owner = true
 layout_mode = 2
+theme_override_font_sizes/font_size = 8
 text = "EFFECT"
 
 [node name="SelectedCost" type="Label" parent="Center/Panel/Margin/Layout/Selected"]
 unique_name_in_owner = true
 layout_mode = 2
+theme_override_font_sizes/font_size = 8
 text = "COST"
 
 [node name="PurchaseRow" type="HBoxContainer" parent="Center/Panel/Margin/Layout/Selected"]
 layout_mode = 2
-theme_override_constants/separation = 8
+theme_override_constants/separation = 5
 
 [node name="PurchaseButton" type="Button" parent="Center/Panel/Margin/Layout/Selected/PurchaseRow"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(142, 26)
+custom_minimum_size = Vector2(102, 20)
 layout_mode = 2
+theme_override_font_sizes/font_size = 8
 text = "PURCHASE"
 
 [node name="PurchaseNotice" type="Label" parent="Center/Panel/Margin/Layout/Selected/PurchaseRow"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 8
 text = "Ready to purchase."

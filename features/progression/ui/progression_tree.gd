@@ -4,13 +4,13 @@ extends Control
 
 signal upgrade_selected(upgrade_id: StringName)
 
-const NODE_SIZE := Vector2(124, 52)
+const NODE_SIZE := Vector2(108, 40)
 
 var _buttons: Dictionary[StringName, Button] = {}
 
 
 func _ready() -> void:
-	custom_minimum_size = Vector2(480, 238)
+	custom_minimum_size = Vector2(480, 144)
 	Progression.currency_changed.connect(func(_id: StringName, _amount: int) -> void: refresh())
 	Progression.upgrade_purchased.connect(func(_id: StringName, _level: int) -> void: refresh())
 	Progression.progression_reset.connect(refresh)
@@ -32,6 +32,7 @@ func _build_buttons() -> void:
 		var button := Button.new()
 		button.position = upgrade.tree_position
 		button.size = NODE_SIZE
+		button.add_theme_font_size_override("font_size", 8)
 		button.tooltip_text = "%s\n%s" % [upgrade.display_name, upgrade.description]
 		button.pressed.connect(func() -> void: upgrade_selected.emit(upgrade.id))
 		add_child(button)
