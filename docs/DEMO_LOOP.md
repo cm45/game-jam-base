@@ -7,7 +7,7 @@ constraining a participant's genre.
 
 ## Manual review route
 
-1. Press **F5**, then choose **Play the Demo Loop**.
+1. Open `demo/demo_home.tscn` and press **F6** to run the optional demo.
 2. Walk around the grass-field camp. Confirm the player can approach the
    Caretaker, Scout, Trader, Path Shrine, and Meadow Gate from the world
    itself.
@@ -37,8 +37,9 @@ The run grants its permanent reward only when its exit is used after all six
 shards are collected. It calls `Progression.grant_currency()` for those changes,
 so the existing save, wallet, shop, and tree agree. It also saves a small
 `demo_last_run` dictionary solely so the home can show a last-expedition line.
-That direct demo handoff is deliberately temporary; milestone 5 introduces the
-general `RunContext` and `RunResult` contract for participant scenes.
+That direct demo handoff is deliberately confined to this teaching example.
+Milestone 5 provides the general `RunContext` and `RunResult` contract for
+participant scenes under `game/`; use that route for new work.
 
 ## Change it safely
 

@@ -21,6 +21,7 @@ InputActions="*res://features/input/input_actions.gd"
 SaveStore="*res://features/save/save_store.gd"
 Progression="*res://features/progression/progression_service.gd"
 AudioSettings="*res://features/audio/audio_settings.gd"
+RunSession="*res://features/run_flow/run_session.gd"
 SceneRouter="*res://app/scene_router.gd"
 AppShell="*res://app/app_shell.gd"
 

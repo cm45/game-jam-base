@@ -9,6 +9,8 @@ progression live here. Milestone 2 adds three small services:
   section.
 - `progression/` owns currencies, upgrades, purchasing rules, permanent effects,
   a shop, and a visual skill tree.
+- `run_flow/` passes a transient `RunContext` into a run and validates its
+  `RunResult` before granting permanent currency through progression.
 
 Each feature folder documents its public methods. Keep a genre-specific system
 in `game/` until a second scene or participant needs it.

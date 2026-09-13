@@ -15,7 +15,7 @@ after the current one has been reviewed.
 - [x] **4. Playable demo loop** — Top-down player movement and interactions,
   a freely walkable 2D home hub with NPC/station/run-entry interactions,
   pickups, collect-and-exit run, and rewards.
-- [ ] **5. Replaceable game integration** — Minimal starter scenes, the
+- [x] **5. Replaceable game integration** — Minimal starter scenes, the
   `RunContext`/`RunResult` contract, reusable components, and demo-removal
   proof.
 - [ ] **6. Release readiness** — Automated validation, fresh-clone check,

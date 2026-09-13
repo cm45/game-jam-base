@@ -10,5 +10,6 @@ components it needs.
 - `resource_pickup.tscn` emits `picked_up(pickup, amount)` once and then frees
   itself. The owning scene decides which counter or resource receives it.
 
-The demo uses all three. Duplicate them into a participant scene when they fit
-the game; edit the scene owner before changing a component's generic contract.
+The starter game and demo use all three. Duplicate them into a participant
+scene when they fit the game; let the scene owner create a `RunResult` rather
+than teaching a component about permanent rewards or scene routing.

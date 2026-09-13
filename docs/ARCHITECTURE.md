@@ -27,8 +27,8 @@ caller's back.
 The current shell introduces only services with active consumers: the pause
 menu uses input, audio, and save services, while the Foundation Hub uses the
 scene router. The playable demo owns its world scenes under `demo/` and calls
-the same services through their public APIs. Later milestones build on these
-services rather than adding a second competing manager.
+the same services through their public APIs. The participant-owned starter
+scenes live under `game/` and use `RunSession` for their home → run handoff.
 
 ## Core services
 
@@ -38,6 +38,7 @@ services rather than adding a second competing manager.
 | `AudioSettings` | `features/audio/` | Applies and persists Master, Music, and SFX volumes. |
 | `SaveStore` | `features/save/` | Stores versioned settings now and a reserved progress section later. |
 | `Progression` | `features/progression/` | Owns permanent currencies, upgrades, purchases, requirements, and calculated effects. |
+| `RunSession` | `features/run_flow/` | Carries a transient context into a run, validates its result, and commits completed rewards. |
 | `SceneRouter` | `app/` | Changes scenes and provides the return-to-hub route. |
 | `AppShell` | `app/` | Keeps the pause menu available across scene changes. |
 
@@ -54,18 +55,18 @@ methods rather than writing the save directly. Its shop and tree UI live beside
 the feature. `app/progression_lab.tscn` is a host for reviewing it in isolation,
 while the demo home instances the same panel from its Path Shrine.
 
-## Demonstration ownership
+## Starter and demonstration ownership
 
-`demo/demo_home.tscn` is an actual 2D hub: it owns its grass-field camp, player
-spawn, three residents, stations, and run entrance. Its shrine instances
-feature-owned progression UI as an overlay. `demo/demo_run.tscn` owns its
-pickup count, completion rule, and reward summary. It reads progression effects
-and grants the final reward only when that run succeeds.
+`game/starter_home.tscn` is a minimal actual 2D hub: it owns its grass clearing,
+player spawn, upgrade station, and run entrance. It creates a `RunContext`,
+then `game/starter_run.tscn` owns the pickup count and completion rule. The run
+returns a `RunResult`; `RunSession` commits its persistent rewards and the home
+shows the result. The longer `demo/` example remains separate and optional.
 
 `components/` supplies movement, interaction, and pickup events to both scenes.
 Those components do not know which scene receives a reward, opens a panel, or
-changes route. The demonstration's temporary last-run message is confined to
-`demo/`; milestone 5 replaces it with the reusable scene contract.
+changes route. The starter scenes are the reusable contract reference; the
+demonstration's old display-only last-run message remains confined to `demo/`.
 
 ## Choosing a location
 

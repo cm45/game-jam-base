@@ -22,11 +22,11 @@ purpose beside the audio service.
 
 ## Save a small permanent value
 
-Use `SaveStore.set_progress(&"stable_id", value)` for future meta-progression
-and `SaveStore.get_progress(&"stable_id", fallback)` to read it. Choose stable,
-snake_case identifiers. Do not save during a run from an arbitrary node; the
-run-result contract in a later milestone will decide when permanent rewards are
-committed.
+Use `SaveStore.set_progress(&"stable_id", value)` for small game-owned
+meta-progression and `SaveStore.get_progress(&"stable_id", fallback)` to read
+it. Choose stable, snake_case identifiers. Do not save during a run from an
+arbitrary node; return permanent currency through `RunResult` so it is committed
+at completion by `RunSession`.
 
 ## Add a new permanent resource
 
@@ -34,9 +34,8 @@ committed.
    display name, description, and color.
 2. Add that definition to the catalog's `currencies` array.
 3. Add costs using its ID to any relevant `UpgradeDefinition`.
-4. Award it with `Progression.grant_currency(&"currency_id", amount)` after a
-   completed run. The later run-result contract will decide exactly where that
-   call belongs.
+4. Add it as a positive amount in a completed `RunResult.rewards` dictionary.
+   `RunSession` grants it through `Progression` after validating the result.
 5. Document a balancing note in `features/progression/README.md`.
 
 Avoid storing a resource only in a label. `Progression` owns the value so a
@@ -54,9 +53,9 @@ rather than spreading upgrade checks across gameplay scripts.
 ## Add a run mechanic
 
 Put the mechanic in game/ if it defines the participant's genre. Extract a
-component only after a second scene needs the same behavior. At run completion,
-return all permanent rewards through the shared result contract instead of
-writing save data from a random gameplay node.
+component only after a second scene needs the same behavior. Read the active
+`RunContext` at start, then return permanent rewards through a completed
+`RunResult` instead of writing save data from a random gameplay node.
 
 ## Add an interface panel
 
@@ -66,7 +65,7 @@ whether the request succeeds, then refresh the panel from the resulting state.
 
 ## Replace the supplied demo
 
-Keep app/, features/, ui/, and game/ intact. Remove demo/ only after the
-replacement home and run scenes satisfy the documented RunContext and RunResult
-contract. Run the project immediately after removal; no demo script should be
-an implicit dependency.
+Keep app/, features/, ui/, and game/ intact. The starter scenes already satisfy
+the documented RunContext and RunResult contract. Remove demo/ when it is no
+longer useful, then run `tests/demo_removal_smoke.ps1` to confirm no demo script
+is an implicit dependency.

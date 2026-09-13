@@ -5,7 +5,7 @@ without becoming a dependency of `app/`, `features/`, `ui/`, or `game/`.
 
 ## Play it
 
-1. Press **F5** and choose **Play the Demo Loop**.
+1. Open `demo_home.tscn` in Godot and press **F6** to run this optional scene.
 2. Move through the grass-field camp with **WASD** or the arrow keys.
 3. Press **E** beside the Caretaker, Scout, or Trader for dialogue; use the
    Path Shrine to open the shop and skill tree, or the Meadow Gate to begin a
@@ -30,5 +30,5 @@ without becoming a dependency of `app/`, `features/`, `ui/`, or `game/`.
   health, making each configured effect easy to observe.
 
 The `demo_last_run` save value is a demo-only presentation shortcut. Do not copy
-it into a participant game. Milestone 5 replaces it with a documented,
-replaceable run-result contract.
+it into a participant game; use the documented
+[`RunContext` / `RunResult` contract](../docs/RUN_CONTRACT.md) instead.

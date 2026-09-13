@@ -4,14 +4,14 @@ An approachable, pixel-art Godot 4.7.2 starting point for a weekend game jam.
 Every participant starts from this repository, works in their own copy, and can
 extend a common home → run → reward → upgrade loop in their own direction.
 
-The future home is a walkable top-down 2D hub. The player moves through it to
+The starter home is a walkable top-down 2D hub. The player moves through it to
 reach NPCs, shops, upgrade points, and the entrance to a run; menus are overlays
 opened by those world interactions rather than the home scene itself.
 
-Milestone 4 is ready. It includes the full Ninja Adventure asset pack,
+Milestone 5 is ready. It includes the full Ninja Adventure asset pack,
 pixel-rendering defaults, a reusable UI theme, Windows/editor/AI onboarding,
 the app shell, a configurable meta-progression framework, and a complete
-collect-and-exit demonstration loop.
+starter home → run → reward → upgrade handoff.
 
 ## Before you clone
 
@@ -46,7 +46,7 @@ images or audio, run `git lfs pull` from the repository root and try again.
 
 In the Godot Project Manager, choose **Import**, select this repository's
 `project.godot`, and open it. The first import may take a moment. Press **F5**
-or use the play button to run the foundation preview.
+or use the play button to open the replaceable starter game.
 
 ## Configure VS Code for Godot
 
@@ -120,9 +120,12 @@ receive compatibility entries in `.gemini/`, `.agents/`, and `.cline/`.
   documented reusable services that later game and demo scenes can use.
 - `features/progression/` provides editable currencies and upgrades, persistent
   wallet and level state, calculated effects, a shop, and a visual skill tree.
-- `demo/demo_home.tscn` is a freely walkable grass-field camp with three
-  residents, tents, a Path Shrine, and a run gate. `demo/demo_run.tscn` is a
-  short six-pickup collect-and-exit run.
+- `game/starter_home.tscn` and `game/starter_run.tscn` are the minimal,
+  replaceable home and run. They demonstrate the `RunContext` / `RunResult`
+  contract through the `RunSession` feature.
+- `demo/` retains the fuller collect-and-exit example with three residents,
+  tents, a Path Shrine, and a six-pickup run. It is optional: open
+  `demo/demo_home.tscn` and use **F6** to play it directly.
 - `components/` contains optional movement, interaction, and pickup building
   blocks used by the demonstration. `game/` remains reserved for a
   participant's own starter scenes in milestone 5.
@@ -135,6 +138,7 @@ receive compatibility entries in `.gemini/`, `.agents/`, and `.cline/`.
 - [App shell and core services](docs/APP_SHELL.md)
 - [Meta-progression guide](docs/PROGRESSION.md)
 - [Playable demo loop](docs/DEMO_LOOP.md)
+- [RunContext and RunResult contract](docs/RUN_CONTRACT.md)
 - [Extension recipes](docs/EXTENSION_RECIPES.md)
 - [AI and MCP guide](docs/AI_GUIDE.md)
 - [Incremental roadmap](docs/ROADMAP.md)

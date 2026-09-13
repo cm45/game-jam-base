@@ -54,7 +54,7 @@ horizontal_alignment = 1
 
 [node name="Subtitle" type="Label" parent="Center/Panel/Margin/Layout"]
 layout_mode = 2
-text = "Milestone 4: playable demo loop"
+text = "Milestone 5: replaceable game starter"
 horizontal_alignment = 1
 
 [node name="Divider" type="HSeparator" parent="Center/Panel/Margin/Layout"]
@@ -62,14 +62,14 @@ layout_mode = 2
 
 [node name="Description" type="Label" parent="Center/Panel/Margin/Layout"]
 layout_mode = 2
-text = "Explore a walkable hub, collect Sun Shards in a short run,\nand spend your permanent rewards at the Path Shrine."
+text = "Start from a walkable home, complete a small run,\nand use the RunContext / RunResult handoff as your template."
 horizontal_alignment = 1
 
-[node name="DemoButton" type="Button" parent="Center/Panel/Margin/Layout"]
+[node name="StarterButton" type="Button" parent="Center/Panel/Margin/Layout"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 28)
 layout_mode = 2
-text = "PLAY THE DEMO LOOP"
+text = "OPEN STARTER GAME"
 
 [node name="PreviewButton" type="Button" parent="Center/Panel/Margin/Layout"]
 unique_name_in_owner = true
@@ -102,7 +102,7 @@ layout_mode = 2
 text = "WASD or arrow keys move. E interacts. Escape opens the pause menu."
 horizontal_alignment = 1
 
-[connection signal="pressed" from="Center/Panel/Margin/Layout/DemoButton" to="." method="_on_demo_button_pressed"]
+[connection signal="pressed" from="Center/Panel/Margin/Layout/StarterButton" to="." method="_on_starter_button_pressed"]
 [connection signal="pressed" from="Center/Panel/Margin/Layout/PreviewButton" to="." method="_on_preview_button_pressed"]
 [connection signal="pressed" from="Center/Panel/Margin/Layout/ProgressionButton" to="." method="_on_progression_button_pressed"]
 [connection signal="pressed" from="Center/Panel/Margin/Layout/SettingsButton" to="." method="_on_settings_button_pressed"]

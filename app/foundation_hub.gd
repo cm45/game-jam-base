@@ -1,15 +1,15 @@
 extends Control
 ## Small runnable landing scene for testing the app shell before game scenes exist.
 
-@onready var _demo_button: Button = %DemoButton
+@onready var _starter_button: Button = %StarterButton
 
 
 func _ready() -> void:
-	_demo_button.grab_focus()
+	_starter_button.grab_focus()
 
 
-func _on_demo_button_pressed() -> void:
-	SceneRouter.change_to("res://demo/demo_home.tscn")
+func _on_starter_button_pressed() -> void:
+	SceneRouter.change_to(StarterGame.HOME_SCENE)
 
 
 func _on_preview_button_pressed() -> void:

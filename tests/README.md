@@ -18,3 +18,14 @@ Run it from the repository root with:
 `progression_layout_smoke.tscn` verifies the Shop stays a two-column compact
 grid with space for six cards and that every catalog node fits inside the
 compact SkillTree canvas.
+
+`run_contract_smoke.tscn` starts a context, completes a result, verifies that
+only a completed result grants permanent currency, then restores the local save.
+
+`demo_removal_smoke.ps1` copies a demo-free project into a unique system-temp
+folder, excludes `.git`, `.godot`, `demo`, and `tests`, then starts the editor
+and main scene from that copy. Run it with the same Godot console executable:
+
+```powershell
+.\tests\demo_removal_smoke.ps1 -GodotPath "D:\Path\To\Godot_v4.7.2-stable_win64_console.exe"
+```
