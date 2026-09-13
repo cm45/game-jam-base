@@ -13,5 +13,7 @@ are LFS-managed, while its `LICENSE.txt` and `README.md` must remain intact.
 Add project-specific art elsewhere under `assets/`; do not edit the vendored
 pack in place.
 
-Run `app/foundation_preview.tscn` before beginning feature work. It verifies
-that the shared theme and original pack can be loaded in a fresh checkout.
+Run the project with **F5** before beginning feature work. It opens the
+Foundation Hub, which verifies the app shell, shared theme, settings menu, and
+asset pack. `app/foundation_preview.tscn` is available from the hub as a second
+scene for checking scene changes.

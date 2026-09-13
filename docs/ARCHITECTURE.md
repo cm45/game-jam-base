@@ -22,9 +22,24 @@ asks a service for progress. A run scene owns the moment-to-moment game and
 returns a result when it ends. A menu owns its controls and emits an intent; it
 does not change a game system behind the caller's back.
 
-This separation is introduced across later milestones. Milestone 1 contains
-only the runnable preview, so do not add placeholder autoloads or empty manager
-scripts before a feature needs them.
+The current shell introduces only services with active consumers: the pause
+menu uses input, audio, and save services, while the Foundation Hub uses the
+scene router. Later milestones build on these services rather than adding a
+second competing manager.
+
+## Core services
+
+| Service | Owner | Public responsibility |
+| --- | --- | --- |
+| `InputActions` | `features/input/` | Registers shared action names and supplies readable binding text. |
+| `AudioSettings` | `features/audio/` | Applies and persists Master, Music, and SFX volumes. |
+| `SaveStore` | `features/save/` | Stores versioned settings now and a reserved progress section later. |
+| `SceneRouter` | `app/` | Changes scenes and provides the return-to-hub route. |
+| `AppShell` | `app/` | Keeps the pause menu available across scene changes. |
+
+Services communicate through their public methods and signals. A menu never
+reaches into a game scene to change its state; a game scene never edits a UI
+control to save data.
 
 ## Choosing a location
 

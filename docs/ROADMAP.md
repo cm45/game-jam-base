@@ -8,7 +8,7 @@ after the current one has been reviewed.
   Git LFS, Godot 4.7.2 project settings, pixel-art defaults, shared UI theme,
   folder structure, Windows/Godot/VS Code setup, beginner exercises,
   architecture recipes, AI instructions, skills, and MCP guidance.
-- [ ] **2. App shell and core services** — Startup flow, scene switching,
+- [x] **2. App shell and core services** — Startup flow, scene switching,
   controls, audio/settings, pause menu, and save/reset infrastructure.
 - [ ] **3. Meta-progression framework** — Configurable currencies, persistent
   progress, upgrades, shop, and visual skill tree.

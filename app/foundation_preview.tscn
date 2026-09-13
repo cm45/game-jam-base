@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3]
+[gd_scene load_steps=3 format=3]
 
 [ext_resource type="Theme" path="res://ui/theme/game_jam_theme.tres" id="1_theme"]
+[ext_resource type="Script" path="res://app/foundation_preview.gd" id="2_script"]
 
 [node name="FoundationPreview" type="Control"]
 layout_mode = 3
@@ -10,6 +11,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_theme")
+script = ExtResource("2_script")
 
 [node name="Background" type="ColorRect" parent="."]
 layout_mode = 1
@@ -52,7 +54,7 @@ horizontal_alignment = 1
 
 [node name="Subtitle" type="Label" parent="Content/FoundationPanel/Layout"]
 layout_mode = 2
-text = "Milestone 1: project foundation"
+text = "Milestone 2: app shell and core services"
 horizontal_alignment = 1
 
 [node name="Divider" type="HSeparator" parent="Content/FoundationPanel/Layout"]
@@ -60,20 +62,30 @@ layout_mode = 2
 
 [node name="Description" type="Label" parent="Content/FoundationPanel/Layout"]
 layout_mode = 2
-text = "The full Ninja Adventure pack is ready.\nThis scene verifies pixel-art defaults and the shared UI theme."
+text = "The full Ninja Adventure pack is ready.\nThis scene also proves the shared app shell survives a scene change."
 horizontal_alignment = 1
 
 [node name="ThemeButton" type="Button" parent="Content/FoundationPanel/Layout"]
 custom_minimum_size = Vector2(0, 34)
 layout_mode = 2
 text = "WOOD UI THEME READY"
+disabled = true
 
 [node name="AssetsButton" type="Button" parent="Content/FoundationPanel/Layout"]
 custom_minimum_size = Vector2(0, 34)
 layout_mode = 2
 text = "ASSET PACK IMPORTED"
+disabled = true
 
-[node name="RoadmapButton" type="Button" parent="Content/FoundationPanel/Layout"]
+[node name="BackButton" type="Button" parent="Content/FoundationPanel/Layout"]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 34)
 layout_mode = 2
-text = "NEXT: APP SHELL"
+text = "BACK TO FOUNDATION HUB"
+
+[node name="Hint" type="Label" parent="Content/FoundationPanel/Layout"]
+layout_mode = 2
+text = "Press Escape to open settings, keybinds, or quit."
+horizontal_alignment = 1
+
+[connection signal="pressed" from="Content/FoundationPanel/Layout/BackButton" to="." method="_on_back_button_pressed"]

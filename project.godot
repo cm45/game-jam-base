@@ -11,9 +11,17 @@ config_version=5
 [application]
 
 config/name="Game Jam Foundation"
-run/main_scene="res://app/foundation_preview.tscn"
+run/main_scene="res://app/foundation_hub.tscn"
 config/features=PackedStringArray("4.7", "GL Compatibility")
 config/icon="res://icon.svg"
+
+[autoload]
+
+InputActions="*res://features/input/input_actions.gd"
+SaveStore="*res://features/save/save_store.gd"
+AudioSettings="*res://features/audio/audio_settings.gd"
+SceneRouter="*res://app/scene_router.gd"
+AppShell="*res://app/app_shell.gd"
 
 [display]
 
@@ -22,6 +30,10 @@ window/size/viewport_height=360
 window/size/window_width_override=1280
 window/size/window_height_override=720
 window/stretch/mode="canvas_items"
+
+[audio]
+
+default_bus_layout="res://features/audio/default_bus_layout.tres"
 
 [rendering]
 

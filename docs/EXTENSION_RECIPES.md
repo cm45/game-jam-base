@@ -4,6 +4,30 @@ These are small decision guides for later milestones. Follow the relevant
 milestone contract when it arrives; the recipes describe where the work belongs
 without committing the project to a genre.
 
+## Add a shared input action
+
+Add a named constant and a default binding in `features/input/input_actions.gd`.
+Use that constant in scripts, such as `InputActions.INTERACT`, rather than
+repeating a string. Add the action to the pause menu's keybind page if a player
+needs to discover it. This milestone deliberately has no rebinding UI; preserve
+existing Input Map events so that system can arrive later.
+
+## Play music or a sound effect
+
+Set an `AudioStreamPlayer` node's **Bus** to `Music` for background music or
+`SFX` for effects. Let `AudioSettings` control its volume through the shared bus
+rather than giving every player its own volume slider. If a game needs another
+mix group, add it to `features/audio/default_bus_layout.tres` and document its
+purpose beside the audio service.
+
+## Save a small permanent value
+
+Use `SaveStore.set_progress(&"stable_id", value)` for future meta-progression
+and `SaveStore.get_progress(&"stable_id", fallback)` to read it. Choose stable,
+snake_case identifiers. Do not save during a run from an arbitrary node; the
+run-result contract in a later milestone will decide when permanent rewards are
+committed.
+
 ## Add a new permanent resource
 
 When the progression framework exists:

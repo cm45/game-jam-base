@@ -4,9 +4,10 @@ An approachable, pixel-art Godot 4.7.2 starting point for a weekend game jam.
 Every participant starts from this repository, works in their own copy, and can
 extend a common home → run → reward → upgrade loop in their own direction.
 
-Milestone 1 is ready. It includes the full Ninja Adventure asset pack, pixel
-rendering defaults, a reusable UI theme, the project layout, and the complete
-Windows/editor/AI onboarding path.
+Milestone 2 is ready. It includes the full Ninja Adventure asset pack,
+pixel-rendering defaults, a reusable UI theme, Windows/editor/AI onboarding,
+and a runnable app shell with settings, save, input, audio, and scene-routing
+services.
 
 ## Before you clone
 
@@ -107,8 +108,12 @@ receive compatibility entries in `.gemini/`, `.agents/`, and `.cline/`.
   Binary assets use Git LFS; its original license and README remain beside them.
 - `ui/theme/game_jam_theme.tres` is the shared wood UI theme built from the
   supplied UI textures and pixel font.
-- `app/foundation_preview.tscn` is a deliberately small runnable scene used to
-  validate the project before gameplay systems are added.
+- `app/foundation_hub.tscn` is the runnable startup scene for testing the app
+  shell before gameplay systems are added.
+- `ui/pause_menu/` supplies pause, settings, keybinds, reset, return-to-hub,
+  and quit controls from any scene.
+- `features/input/`, `features/audio/`, and `features/save/` contain the
+  documented reusable services that later game and demo scenes can use.
 - `features/`, `components/`, `game/`, and `demo/` reserve clear homes for
   systems and examples introduced by later milestones.
 
@@ -117,6 +122,7 @@ receive compatibility entries in `.gemini/`, `.agents/`, and `.cline/`.
 - [Setup details](docs/SETUP.md)
 - [GDScript starter exercises](docs/GDSCRIPT_BASICS.md)
 - [Architecture overview](docs/ARCHITECTURE.md)
+- [App shell and core services](docs/APP_SHELL.md)
 - [Extension recipes](docs/EXTENSION_RECIPES.md)
 - [AI and MCP guide](docs/AI_GUIDE.md)
 - [Incremental roadmap](docs/ROADMAP.md)
