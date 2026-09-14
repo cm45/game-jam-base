@@ -1,23 +1,34 @@
-[gd_resource type="Theme" load_steps=9 format=3]
+[gd_resource type="Theme" format=3 uid="uid://6iytwmmhsvhp"]
 
-[ext_resource type="FontFile" path="res://assets/ninja_adventure/source/Ui/Font/NormalFont.ttf" id="1_font"]
-[ext_resource type="Texture2D" path="res://assets/ninja_adventure/source/Ui/Theme/Theme Wood/button_normal.png" id="2_button_normal"]
-[ext_resource type="Texture2D" path="res://assets/ninja_adventure/source/Ui/Theme/Theme Wood/button_hover.png" id="3_button_hover"]
-[ext_resource type="Texture2D" path="res://assets/ninja_adventure/source/Ui/Theme/Theme Wood/button_pressed.png" id="4_button_pressed"]
-[ext_resource type="Texture2D" path="res://assets/ninja_adventure/source/Ui/Theme/Theme Wood/button_disabled.png" id="5_button_disabled"]
-[ext_resource type="Texture2D" path="res://assets/ninja_adventure/source/Ui/Theme/Theme Wood/nine_path_panel.png" id="6_panel"]
-[ext_resource type="Texture2D" path="res://assets/ninja_adventure/source/Ui/Theme/Theme Wood/nine_path_focus.png" id="7_focus"]
+[ext_resource type="FontFile" uid="uid://b6mducv8cc5rk" path="res://assets/ninja_adventure/source/Ui/Font/NormalFont.ttf" id="1_font"]
+[ext_resource type="Texture2D" uid="uid://do086sin0vd6o" path="res://assets/ninja_adventure/source/Ui/Theme/Theme Wood/button_normal.png" id="2_button_normal"]
+[ext_resource type="Texture2D" uid="uid://c4uternyhrmtj" path="res://assets/ninja_adventure/source/Ui/Theme/Theme Wood/button_hover.png" id="3_button_hover"]
+[ext_resource type="Texture2D" uid="uid://d24dganyny015" path="res://assets/ninja_adventure/source/Ui/Theme/Theme Wood/button_pressed.png" id="4_button_pressed"]
+[ext_resource type="Texture2D" uid="uid://dg1x1npjhvv4n" path="res://assets/ninja_adventure/source/Ui/Theme/Theme Wood/button_disabled.png" id="5_button_disabled"]
+[ext_resource type="Texture2D" uid="uid://dn1vpxcw4nsl" path="res://assets/ninja_adventure/source/Ui/Theme/Theme Wood/nine_path_panel.png" id="6_panel"]
+[ext_resource type="Texture2D" uid="uid://clnkmu6yb0a0w" path="res://assets/ninja_adventure/source/Ui/Theme/Theme Wood/nine_path_focus.png" id="7_focus"]
 
-[sub_resource type="StyleBoxTexture" id="StyleBox_button_normal"]
+[sub_resource type="StyleBoxTexture" id="StyleBox_button_disabled"]
 content_margin_left = 10.0
 content_margin_top = 4.0
 content_margin_right = 10.0
 content_margin_bottom = 4.0
-texture = ExtResource("2_button_normal")
+texture = ExtResource("5_button_disabled")
 texture_margin_left = 5.0
 texture_margin_top = 3.0
 texture_margin_right = 5.0
 texture_margin_bottom = 3.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBox_focus"]
+texture = ExtResource("7_focus")
+texture_margin_left = 3.0
+texture_margin_top = 3.0
+texture_margin_right = 3.0
+texture_margin_bottom = 3.0
+expand_margin_left = 2.0
+expand_margin_top = 2.0
+expand_margin_right = 2.0
+expand_margin_bottom = 2.0
 
 [sub_resource type="StyleBoxTexture" id="StyleBox_button_hover"]
 content_margin_left = 10.0
@@ -34,6 +45,17 @@ expand_margin_top = 1.0
 expand_margin_right = 1.0
 expand_margin_bottom = 1.0
 
+[sub_resource type="StyleBoxTexture" id="StyleBox_button_normal"]
+content_margin_left = 10.0
+content_margin_top = 4.0
+content_margin_right = 10.0
+content_margin_bottom = 4.0
+texture = ExtResource("2_button_normal")
+texture_margin_left = 5.0
+texture_margin_top = 3.0
+texture_margin_right = 5.0
+texture_margin_bottom = 3.0
+
 [sub_resource type="StyleBoxTexture" id="StyleBox_button_pressed"]
 content_margin_left = 10.0
 content_margin_top = 5.0
@@ -42,17 +64,6 @@ content_margin_bottom = 3.0
 texture = ExtResource("4_button_pressed")
 texture_margin_left = 5.0
 texture_margin_top = 4.0
-texture_margin_right = 5.0
-texture_margin_bottom = 3.0
-
-[sub_resource type="StyleBoxTexture" id="StyleBox_button_disabled"]
-content_margin_left = 10.0
-content_margin_top = 4.0
-content_margin_right = 10.0
-content_margin_bottom = 4.0
-texture = ExtResource("5_button_disabled")
-texture_margin_left = 5.0
-texture_margin_top = 3.0
 texture_margin_right = 5.0
 texture_margin_bottom = 3.0
 
@@ -67,17 +78,6 @@ texture_margin_top = 6.0
 texture_margin_right = 6.0
 texture_margin_bottom = 6.0
 
-[sub_resource type="StyleBoxTexture" id="StyleBox_focus"]
-texture = ExtResource("7_focus")
-texture_margin_left = 3.0
-texture_margin_top = 3.0
-texture_margin_right = 3.0
-texture_margin_bottom = 3.0
-expand_margin_left = 2.0
-expand_margin_top = 2.0
-expand_margin_right = 2.0
-expand_margin_bottom = 2.0
-
 [sub_resource type="FontVariation" id="FontVariation_readable_pixel"]
 base_font = ExtResource("1_font")
 spacing_space = 2
@@ -86,13 +86,13 @@ spacing_space = 2
 default_font = SubResource("FontVariation_readable_pixel")
 default_font_size = 16
 Button/colors/font_color = Color(0.18, 0.12, 0.08, 1)
+Button/colors/font_disabled_color = Color(0.32, 0.25, 0.17, 1)
 Button/colors/font_hover_color = Color(0.18, 0.12, 0.08, 1)
 Button/colors/font_pressed_color = Color(0.18, 0.12, 0.08, 1)
-Button/colors/font_disabled_color = Color(0.32, 0.25, 0.17, 1)
-Button/styles/normal = SubResource("StyleBox_button_normal")
-Button/styles/hover = SubResource("StyleBox_button_hover")
-Button/styles/pressed = SubResource("StyleBox_button_pressed")
 Button/styles/disabled = SubResource("StyleBox_button_disabled")
 Button/styles/focus = SubResource("StyleBox_focus")
+Button/styles/hover = SubResource("StyleBox_button_hover")
+Button/styles/normal = SubResource("StyleBox_button_normal")
+Button/styles/pressed = SubResource("StyleBox_button_pressed")
 Label/colors/font_color = Color(0.18, 0.12, 0.08, 1)
 PanelContainer/styles/panel = SubResource("StyleBox_panel")

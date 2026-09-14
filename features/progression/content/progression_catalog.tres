@@ -1,10 +1,10 @@
-[gd_resource type="Resource" script_class="ProgressionCatalog" load_steps=31 format=3]
+[gd_resource type="Resource" script_class="ProgressionCatalog" format=3 uid="uid://dkt8exwo6vuww"]
 
-[ext_resource type="Script" path="res://features/progression/progression_catalog.gd" id="1_catalog"]
-[ext_resource type="Script" path="res://features/progression/currency_definition.gd" id="2_currency"]
-[ext_resource type="Script" path="res://features/progression/upgrade_definition.gd" id="3_upgrade"]
-[ext_resource type="Script" path="res://features/progression/upgrade_requirement.gd" id="4_requirement"]
-[ext_resource type="Script" path="res://features/progression/stat_effect.gd" id="5_effect"]
+[ext_resource type="Script" uid="uid://cyuvlp0sc68rv" path="res://features/progression/progression_catalog.gd" id="1_catalog"]
+[ext_resource type="Script" uid="uid://lhlw0nl5kqgc" path="res://features/progression/currency_definition.gd" id="2_currency"]
+[ext_resource type="Script" uid="uid://c13ml28k36n6a" path="res://features/progression/upgrade_definition.gd" id="3_upgrade"]
+[ext_resource type="Script" uid="uid://d1537hi1rpydo" path="res://features/progression/upgrade_requirement.gd" id="4_requirement"]
+[ext_resource type="Script" uid="uid://c8ljlxxlhproh" path="res://features/progression/stat_effect.gd" id="5_effect"]
 
 [sub_resource type="Resource" id="Currency_gold"]
 script = ExtResource("2_currency")
@@ -26,35 +26,116 @@ stat_id = &"run_reward_multiplier"
 operation = 1
 value = 1.5
 
+[sub_resource type="Resource" id="Shop_satchel"]
+script = ExtResource("3_upgrade")
+id = &"lucky_satchel"
+display_name = "Lucky Satchel"
+description = "Multiply completed-run Gold by 1.5 per rank."
+costs = {
+"gold": 15
+}
+max_level = 3
+cost_growth = 1.35
+effects = Array[ExtResource("5_effect")]([SubResource("Effect_satchel")])
+
 [sub_resource type="Resource" id="Effect_rations"]
 script = ExtResource("5_effect")
 stat_id = &"run_speed"
 value = 18.0
+
+[sub_resource type="Resource" id="Shop_rations"]
+script = ExtResource("3_upgrade")
+id = &"trail_rations"
+display_name = "Trail Rations"
+description = "Gain 18 movement speed per rank, in camp and on runs."
+costs = {
+"gold": 20
+}
+max_level = 3
+cost_growth = 1.3
+effects = Array[ExtResource("5_effect")]([SubResource("Effect_rations")])
 
 [sub_resource type="Resource" id="Effect_pockets"]
 script = ExtResource("5_effect")
 stat_id = &"bonus_gold"
 value = 5.0
 
+[sub_resource type="Resource" id="Shop_pockets"]
+script = ExtResource("3_upgrade")
+id = &"deep_pockets"
+display_name = "Bounty Contract"
+description = "Add 5 Gold per rank to each completed run before multipliers."
+costs = {
+"gold": 18
+}
+max_level = 3
+cost_growth = 1.35
+effects = Array[ExtResource("5_effect")]([SubResource("Effect_pockets")])
+
 [sub_resource type="Resource" id="Effect_map"]
 script = ExtResource("5_effect")
 stat_id = &"pickup_radius"
 value = 20.0
+
+[sub_resource type="Resource" id="Shop_map"]
+script = ExtResource("3_upgrade")
+id = &"field_map"
+display_name = "Gathering Charm"
+description = "Collect expedition tokens from 20 pixels farther away."
+costs = {
+"gold": 16
+}
+effects = Array[ExtResource("5_effect")]([SubResource("Effect_map")])
 
 [sub_resource type="Resource" id="Effect_tools"]
 script = ExtResource("5_effect")
 stat_id = &"insight_reward"
 value = 1.0
 
+[sub_resource type="Resource" id="Shop_tools"]
+script = ExtResource("3_upgrade")
+id = &"camp_tools"
+display_name = "Field Journal"
+description = "Earn 1 extra Insight per rank for each completed run."
+costs = {
+"gold": 22
+}
+max_level = 2
+cost_growth = 1.5
+effects = Array[ExtResource("5_effect")]([SubResource("Effect_tools")])
+
 [sub_resource type="Resource" id="Effect_boots"]
 script = ExtResource("5_effect")
 stat_id = &"run_speed"
 value = 24.0
 
+[sub_resource type="Resource" id="Shop_boots"]
+script = ExtResource("3_upgrade")
+id = &"sturdy_boots"
+display_name = "Sturdy Boots"
+description = "Gain 24 movement speed per rank, in camp and on runs."
+costs = {
+"gold": 26
+}
+max_level = 3
+cost_growth = 1.3
+effects = Array[ExtResource("5_effect")]([SubResource("Effect_boots")])
+
 [sub_resource type="Resource" id="Effect_pathfinder"]
 script = ExtResource("5_effect")
 stat_id = &"run_speed"
 value = 30.0
+
+[sub_resource type="Resource" id="Skill_pathfinder"]
+script = ExtResource("3_upgrade")
+id = &"pathfinder"
+display_name = "Pathfinder"
+description = "Gain 30 movement speed in camp and on runs."
+costs = {
+"insight": 2
+}
+effects = Array[ExtResource("5_effect")]([SubResource("Effect_pathfinder")])
+tree_position = Vector2(44, 184)
 
 [sub_resource type="Resource" id="Effect_keen_eye"]
 script = ExtResource("5_effect")
@@ -62,10 +143,38 @@ stat_id = &"run_reward_multiplier"
 operation = 1
 value = 1.35
 
+[sub_resource type="Resource" id="Requirement_pathfinder"]
+script = ExtResource("4_requirement")
+upgrade_id = &"pathfinder"
+
+[sub_resource type="Resource" id="Skill_keen_eye"]
+script = ExtResource("3_upgrade")
+id = &"keen_eye"
+display_name = "Keen Eye"
+description = "Multiply completed-run Gold by 1.35."
+costs = {
+"insight": 3
+}
+prerequisites = Array[ExtResource("4_requirement")]([SubResource("Requirement_pathfinder")])
+effects = Array[ExtResource("5_effect")]([SubResource("Effect_keen_eye")])
+tree_position = Vector2(270, 72)
+
 [sub_resource type="Resource" id="Effect_iron_will"]
 script = ExtResource("5_effect")
 stat_id = &"pickup_radius"
 value = 24.0
+
+[sub_resource type="Resource" id="Skill_iron_will"]
+script = ExtResource("3_upgrade")
+id = &"iron_will"
+display_name = "Far Reach"
+description = "Collect expedition tokens from 24 pixels farther away."
+costs = {
+"insight": 3
+}
+prerequisites = Array[ExtResource("4_requirement")]([SubResource("Requirement_pathfinder")])
+effects = Array[ExtResource("5_effect")]([SubResource("Effect_iron_will")])
+tree_position = Vector2(270, 294)
 
 [sub_resource type="Resource" id="Effect_resourceful"]
 script = ExtResource("5_effect")
@@ -73,145 +182,60 @@ stat_id = &"run_reward_multiplier"
 operation = 1
 value = 1.5
 
-[sub_resource type="Resource" id="Effect_pack_mule"]
-script = ExtResource("5_effect")
-stat_id = &"insight_reward"
-value = 2.0
-
-[sub_resource type="Resource" id="Effect_trailblazer"]
-script = ExtResource("5_effect")
-stat_id = &"run_speed"
-value = 48.0
-
-[sub_resource type="Resource" id="Requirement_pathfinder"]
-script = ExtResource("4_requirement")
-upgrade_id = &"pathfinder"
-
 [sub_resource type="Resource" id="Requirement_keen_eye"]
 script = ExtResource("4_requirement")
 upgrade_id = &"keen_eye"
-
-[sub_resource type="Resource" id="Requirement_iron_will"]
-script = ExtResource("4_requirement")
-upgrade_id = &"iron_will"
-
-[sub_resource type="Resource" id="Requirement_resourceful"]
-script = ExtResource("4_requirement")
-upgrade_id = &"resourceful"
-
-[sub_resource type="Resource" id="Shop_satchel"]
-script = ExtResource("3_upgrade")
-id = &"lucky_satchel"
-display_name = "Lucky Satchel"
-description = "Multiply completed-run Gold by 1.5 per rank."
-costs = {"gold": 15}
-max_level = 3
-cost_growth = 1.35
-effects = Array[ExtResource("5_effect")]([SubResource("Effect_satchel")])
-
-[sub_resource type="Resource" id="Shop_rations"]
-script = ExtResource("3_upgrade")
-id = &"trail_rations"
-display_name = "Trail Rations"
-description = "Gain 18 movement speed per rank, in camp and on runs."
-costs = {"gold": 20}
-max_level = 3
-cost_growth = 1.3
-effects = Array[ExtResource("5_effect")]([SubResource("Effect_rations")])
-
-[sub_resource type="Resource" id="Shop_pockets"]
-script = ExtResource("3_upgrade")
-id = &"deep_pockets"
-display_name = "Bounty Contract"
-description = "Add 5 Gold per rank to each completed run before multipliers."
-costs = {"gold": 18}
-max_level = 3
-cost_growth = 1.35
-effects = Array[ExtResource("5_effect")]([SubResource("Effect_pockets")])
-
-[sub_resource type="Resource" id="Shop_map"]
-script = ExtResource("3_upgrade")
-id = &"field_map"
-display_name = "Gathering Charm"
-description = "Collect expedition tokens from 20 pixels farther away."
-costs = {"gold": 16}
-effects = Array[ExtResource("5_effect")]([SubResource("Effect_map")])
-
-[sub_resource type="Resource" id="Shop_tools"]
-script = ExtResource("3_upgrade")
-id = &"camp_tools"
-display_name = "Field Journal"
-description = "Earn 1 extra Insight per rank for each completed run."
-costs = {"gold": 22}
-max_level = 2
-cost_growth = 1.5
-effects = Array[ExtResource("5_effect")]([SubResource("Effect_tools")])
-
-[sub_resource type="Resource" id="Shop_boots"]
-script = ExtResource("3_upgrade")
-id = &"sturdy_boots"
-display_name = "Sturdy Boots"
-description = "Gain 24 movement speed per rank, in camp and on runs."
-costs = {"gold": 26}
-max_level = 3
-cost_growth = 1.3
-effects = Array[ExtResource("5_effect")]([SubResource("Effect_boots")])
-
-[sub_resource type="Resource" id="Skill_pathfinder"]
-script = ExtResource("3_upgrade")
-id = &"pathfinder"
-display_name = "Pathfinder"
-description = "Gain 30 movement speed in camp and on runs."
-costs = {"insight": 2}
-effects = Array[ExtResource("5_effect")]([SubResource("Effect_pathfinder")])
-tree_position = Vector2(44, 184)
-
-[sub_resource type="Resource" id="Skill_keen_eye"]
-script = ExtResource("3_upgrade")
-id = &"keen_eye"
-display_name = "Keen Eye"
-description = "Multiply completed-run Gold by 1.35."
-costs = {"insight": 3}
-prerequisites = Array[ExtResource("4_requirement")]([SubResource("Requirement_pathfinder")])
-effects = Array[ExtResource("5_effect")]([SubResource("Effect_keen_eye")])
-tree_position = Vector2(270, 72)
-
-[sub_resource type="Resource" id="Skill_iron_will"]
-script = ExtResource("3_upgrade")
-id = &"iron_will"
-display_name = "Far Reach"
-description = "Collect expedition tokens from 24 pixels farther away."
-costs = {"insight": 3}
-prerequisites = Array[ExtResource("4_requirement")]([SubResource("Requirement_pathfinder")])
-effects = Array[ExtResource("5_effect")]([SubResource("Effect_iron_will")])
-tree_position = Vector2(270, 294)
 
 [sub_resource type="Resource" id="Skill_resourceful"]
 script = ExtResource("3_upgrade")
 id = &"resourceful"
 display_name = "Resourceful"
 description = "Multiply completed-run Gold by another 1.5."
-costs = {"insight": 4}
+costs = {
+"insight": 4
+}
 prerequisites = Array[ExtResource("4_requirement")]([SubResource("Requirement_keen_eye")])
 effects = Array[ExtResource("5_effect")]([SubResource("Effect_resourceful")])
 tree_position = Vector2(500, 72)
+
+[sub_resource type="Resource" id="Effect_pack_mule"]
+script = ExtResource("5_effect")
+stat_id = &"insight_reward"
+value = 2.0
+
+[sub_resource type="Resource" id="Requirement_iron_will"]
+script = ExtResource("4_requirement")
+upgrade_id = &"iron_will"
 
 [sub_resource type="Resource" id="Skill_pack_mule"]
 script = ExtResource("3_upgrade")
 id = &"pack_mule"
 display_name = "Field Scholar"
 description = "Earn 2 extra Insight per completed run."
-costs = {"insight": 4}
+costs = {
+"insight": 4
+}
 prerequisites = Array[ExtResource("4_requirement")]([SubResource("Requirement_iron_will")])
 effects = Array[ExtResource("5_effect")]([SubResource("Effect_pack_mule")])
 tree_position = Vector2(500, 294)
+
+[sub_resource type="Resource" id="Effect_trailblazer"]
+script = ExtResource("5_effect")
+stat_id = &"run_speed"
+value = 48.0
+
+[sub_resource type="Resource" id="Requirement_resourceful"]
+script = ExtResource("4_requirement")
+upgrade_id = &"resourceful"
 
 [sub_resource type="Resource" id="Skill_trailblazer"]
 script = ExtResource("3_upgrade")
 id = &"trailblazer"
 display_name = "Trailblazer"
 description = "Gain another 48 movement speed in camp and on runs."
-costs = {"insight": 6}
+costs = {
+"insight": 6
+}
 prerequisites = Array[ExtResource("4_requirement")]([SubResource("Requirement_resourceful")])
 effects = Array[ExtResource("5_effect")]([SubResource("Effect_trailblazer")])
 tree_position = Vector2(750, 184)
