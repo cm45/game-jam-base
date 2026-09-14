@@ -8,6 +8,12 @@ const SHARED_THEME := preload("res://ui/theme/game_jam_theme.tres")
 const TEXT_WIDTH := 168.0
 
 
+func _init() -> void:
+	# Godot wraps custom tooltips in a TooltipPanel. Only our wood panel draws.
+	theme = SHARED_THEME.duplicate() as Theme
+	theme.set_stylebox("panel", "TooltipPanel", StyleBoxEmpty.new())
+
+
 func _make_custom_tooltip(for_text: String) -> Object:
 	var panel := PanelContainer.new()
 	panel.theme = SHARED_THEME

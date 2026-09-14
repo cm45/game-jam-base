@@ -4,6 +4,8 @@ Skill nodes use `skill_tree_button.gd` for compact wood tooltips with a pixel
 heading and wrapped readable body text. Native tooltip popups bypass the
 half-scale UIScreen layout, so their width and font sizes are specified in
 640×360 viewport units. Keep these sizes independent of skill-tree zoom.
+The skill button uses an empty `TooltipPanel` wrapper style so only the custom
+wood panel draws, without Godot's default dark background or extra padding.
 
 `progression_panel.tscn` contains the wallet, sandbox controls, selected
 details, and separate **Shop** and **Skill Tree** views. It listens to
