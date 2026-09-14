@@ -1,6 +1,6 @@
-[gd_resource type="StyleBoxTexture" load_steps=2 format=3]
+[gd_resource type="StyleBoxTexture" format=3 uid="uid://yv1hwp7xoqak"]
 
-[ext_resource type="Texture2D" path="res://assets/ninja_adventure/source/Ui/Theme/Theme Wood/nine_path_panel.png" id="1_panel"]
+[ext_resource type="Texture2D" uid="uid://dn1vpxcw4nsl" path="res://assets/ninja_adventure/source/Ui/Theme/Theme Wood/nine_path_panel.png" id="1_panel"]
 
 [resource]
 content_margin_left = 5.0
