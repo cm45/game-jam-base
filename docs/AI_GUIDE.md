@@ -145,8 +145,8 @@ Implementer is for an already approved small change.
 ## Use MCP in VS Code and agents
 
 MCP connects an AI chat to named tools and resources. The repository ships the
-read-only OpenAI Developer Docs server and a local Godot MCP server that starts
-read-only. Both are included in these configurations:
+read-only OpenAI Developer Docs server and a local Godot MCP server with write
+tools enabled. Both are included in these configurations:
 
 | Agent | Checked-in configuration | How to inspect it |
 | --- | --- | --- |
@@ -178,7 +178,7 @@ storage rather than a project file. For Codex CLI, add both services with:
 
 ~~~powershell
 codex mcp add openaiDeveloperDocs --url https://developers.openai.com/mcp
-codex mcp add godot-mcp-toolkit --env GODOT_MCP_CONFIG_VERSION=1 --env GODOT_MCP_READ_ONLY=1 -- cmd /c npx -y @npgamedev/godot-mcp-server@1.0.0
+codex mcp add godot-mcp-toolkit --env GODOT_MCP_CONFIG_VERSION=1 -- cmd /c npx -y @npgamedev/godot-mcp-server@1.0.0
 codex mcp list
 ~~~
 
@@ -188,11 +188,10 @@ for authentication and server-management details.
 ## Included Godot editor MCP
 
 The repository includes a pinned community add-on in
-`addons/godot_mcp_toolkit/` and starts its bridge in server-enforced read-only
-mode. It can inspect the locally running Godot editor. Each participant can
-enable write tools after their first successful probe; the full process,
-configuration locations, and removal instructions are in [the Godot MCP
-guide](GODOT_MCP.md).
+`addons/godot_mcp_toolkit/` with write tools enabled by default. It can inspect
+and edit the locally running Godot editor. Start with a small, reviewable
+request; the full process, configuration locations, and temporary read-only
+option are in [the Godot MCP guide](GODOT_MCP.md).
 
 ## Treat AI output as a draft
 

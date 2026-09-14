@@ -97,7 +97,7 @@ also covers prompt examples, this repository's agents and skills, and trusted
 MCP connections.
 
 This repository includes an enabled, pinned Godot MCP Toolkit add-on and
-read-only client entries for it alongside the OpenAI Developer Docs MCP. Open
+client entries for it alongside the OpenAI Developer Docs MCP. Open
 the project in Godot, then in VS Code run **MCP: List Servers** and start
 `godotMcpToolkit`. The first connection downloads the pinned local bridge via
 `npx`; no API key or machine-specific path is committed. Follow the

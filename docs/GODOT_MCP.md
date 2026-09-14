@@ -5,9 +5,9 @@ client inspect the Godot editor that is running on the same computer. The
 plugin listens only on localhost; the bridge and editor token stay on the
 participant's machine.
 
-The project starts each shared configuration in **read-only mode**. That lets a
-new developer inspect scenes, scripts, project settings, and errors before an
-AI can change files or editor state.
+The shared configurations enable write tools. Treat an MCP request like a code
+change: keep it small, inspect the Godot and Git diffs, and run the affected
+scene before keeping it.
 
 ## What a clone already contains
 
@@ -23,6 +23,15 @@ The add-on is enabled in `project.godot`. Do not install it again through
 AssetLib. The bridge itself is started with the pinned npm package
 `@npgamedev/godot-mcp-server@1.0.0`; `npx` downloads it the first time a client
 connects. No API key, port, token, or absolute machine path belongs in Git.
+
+## Why there are two `mcp.json` files
+
+`/.mcp.json` is the generic project configuration. It uses the `mcpServers`
+shape that the Godot add-on and many MCP clients recognize. `/.vscode/mcp.json`
+is the VS Code workspace configuration and uses VS Code's `servers` shape.
+They intentionally define the same pinned bridge because each client discovers
+only its own configuration location. Gemini uses its separate
+`.gemini/settings.json` file.
 
 ## First connection in VS Code
 
@@ -62,35 +71,26 @@ keeps both its documentation and Godot server entries.
   its MCP server configuration and copy the `godot-mcp-toolkit` object from the
   file's `mcpServers` section. Keep its `command`, `args`, and `env` values
   unchanged.
-- **Codex CLI:** add the same pinned, read-only server to your user profile:
+- **Codex CLI:** add the same pinned server to your user profile:
 
   ```powershell
-  codex mcp add godot-mcp-toolkit --env GODOT_MCP_CONFIG_VERSION=1 --env GODOT_MCP_READ_ONLY=1 -- cmd /c npx -y @npgamedev/godot-mcp-server@1.0.0
+  codex mcp add godot-mcp-toolkit --env GODOT_MCP_CONFIG_VERSION=1 -- cmd /c npx -y @npgamedev/godot-mcp-server@1.0.0
   codex mcp list
   ```
 
 On Windows, `npx` is a `.cmd` shim. The `cmd /c` wrapper in every configuration
 is required for reliable client startup.
 
-## Enable write tools after the first probe
+## Use write tools deliberately
 
-The `GODOT_MCP_READ_ONLY` environment variable hides mutating tools at the
-server. It is stronger than asking an AI to avoid edits.
+Write tools are enabled by default. Start with a small, reviewable change,
+inspect the Godot scene diff and `git diff`, and run the affected scene before
+keeping it. Do not let an AI edit a script that has unsaved changes in Godot's
+built-in editor.
 
-After a successful read-only probe, choose one client configuration you use and
-change its value from `"1"` to `"0"` (or remove that environment entry):
-
-| Client | Configuration to change |
-| --- | --- |
-| VS Code chat / Copilot | `.vscode/mcp.json` |
-| Gemini CLI | `.gemini/settings.json` |
-| Cline or Kilo Code | Its local MCP server entry |
-| Codex CLI | Remove and re-add the server without `--env GODOT_MCP_READ_ONLY=1` |
-
-Restart or reconnect that MCP client after changing the setting. Then ask for
-one small, reviewable change, inspect the Godot scene diff and `git diff`, and
-run the affected scene before keeping it. Do not let an AI edit a script that
-has unsaved changes in Godot's built-in editor.
+To temporarily hide mutating tools for one client, add
+`"GODOT_MCP_READ_ONLY": "1"` to that server's `env` object, then reconnect
+the client. This is a server-side restriction rather than a prompt-only rule.
 
 ## Troubleshooting
 

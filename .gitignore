@@ -4,6 +4,7 @@
 
 # Local editor, export, and test output
 .vscode/.browse.VC.db*
+.vscode/settings.json
 build/
 exports/
 *.tmp
