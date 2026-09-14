@@ -18,7 +18,7 @@ const NATURE_TEXTURE := preload("res://assets/ninja_adventure/source/Backgrounds
 const CAMP_TEXTURE := preload("res://assets/ninja_adventure/source/Backgrounds/Tilesets/tileset_camp.png")
 const GRASS_REGION := Rect2(16, 64, 16, 16)
 const PATH_REGION := Rect2(16, 16, 16, 16)
-const TREE_REGION := Rect2(0, 0, 32, 48)
+const TREE_REGION := Rect2(0, 0, 32, 32)
 const TENT_REGIONS := [Rect2(64, 0, 48, 48), Rect2(112, 0, 48, 48), Rect2(160, 0, 48, 48)]
 
 @export var map_kind: MapKind = MapKind.HOME
@@ -69,7 +69,7 @@ func _draw_field_tile(cell: Vector2i, source_region: Rect2) -> void:
 
 
 func _draw_tree(position_in_world: Vector2) -> void:
-	draw_texture_rect_region(NATURE_TEXTURE, Rect2(position_in_world, Vector2(32, 48)), TREE_REGION)
+	draw_texture_rect_region(NATURE_TEXTURE, Rect2(position_in_world, Vector2(32, 32)), TREE_REGION)
 
 
 func _draw_tent(position_in_world: Vector2, source_region: Rect2) -> void:

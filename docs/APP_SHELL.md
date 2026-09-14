@@ -1,8 +1,7 @@
 # App shell and core services
 
-Milestone 2 adds a runnable app shell without choosing a genre. Press **F5** to
-open the Foundation Hub. Its preview button changes to the existing preview
-scene; the preview's back button returns through the shared router.
+Press **F5** to open the main menu. Play Starter Camp opens the walkable home;
+Settings, Keybinds, and Quit provide the remaining menu actions.
 
 ## What every participant can use
 
@@ -31,13 +30,13 @@ managers.
 ## Manual review route
 
 1. Press **F5** and confirm the Foundation Hub opens.
-2. Choose **Open Foundation Preview**, then use **Back to Foundation Hub**.
+2. Choose **Play Starter Camp**, then return through the pause menu.
 3. Press Escape in either scene. Check resume, keybinds, and return-to-hub.
 4. Open settings, move each volume slider, close and reopen the menu, and
    confirm the values remain.
 5. Choose **Reset Save and Settings**, confirm it, then check sliders return to
    the defaults. Restart the project to check persistence.
-6. Open the Progression Lab after a reset to confirm currencies and upgrade
+6. Visit Merchant and Mentor after a reset to confirm currencies and upgrade
    levels are also cleared.
 
 Headless validation catches parsing and loading faults. A person must perform

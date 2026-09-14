@@ -33,3 +33,8 @@ or removing the examples.
 5. Confirm Gold and Insight increased in the home HUD and the last-run message
    appears. Revisit the Merchant or Mentor to confirm the feature UI remains an
    in-world overlay.
+
+Scenery atlas regions: the round tree uses (0, 0, 32, 32) from TilesetNature;
+the complete first house uses (0, 0, 64, 48) from TilesetHouse. Include only
+the intended sprite, not pieces of adjacent atlas rows. Merchant and Mentor
+open independent, locked shop and skill windows without cross-navigation.

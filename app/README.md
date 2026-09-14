@@ -26,3 +26,8 @@ stations without sandbox tools.
 
 `app/` deliberately has no `demo/` scene reference. The demo remains runnable
 with **F6**, while the main app starts the independent starter game.
+
+The player menu contains only Play Starter Camp, Settings, Keybinds, and Quit.
+The foundation tour and progression lab are not exposed in the menu. Optional
+preview and lab scenes can still be opened directly in the editor with F6.
+The camp uses separate shop-only and skill-only window scenes.

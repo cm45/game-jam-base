@@ -21,8 +21,6 @@ are LFS-managed, while its `LICENSE.txt` and `README.md` must remain intact.
 Add project-specific art elsewhere under `assets/`; do not edit the vendored
 pack in place.
 
-Run the project with **F5** before beginning feature work. It opens the
-Foundation Hub, which verifies the app shell, shared theme, settings menu, and
-asset pack. It also opens the progression lab for reviewing permanent currencies,
-upgrades, shop purchasing, and the skill tree. `app/foundation_preview.tscn` is
-available from the hub as a second scene for checking scene changes.
+Run the project with **F5** and choose **Play Starter Camp**. Optional developer
+scenes `app/progression_lab.tscn` and `app/foundation_preview.tscn` can be
+opened directly with **F6**; they have no player-menu entries.

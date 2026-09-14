@@ -13,14 +13,6 @@ func _on_starter_button_pressed() -> void:
 	SceneRouter.change_to(StarterGame.HOME_SCENE)
 
 
-func _on_preview_button_pressed() -> void:
-	SceneRouter.change_to("res://app/foundation_preview.tscn")
-
-
-func _on_progression_button_pressed() -> void:
-	SceneRouter.change_to("res://app/progression_lab.tscn")
-
-
 func _on_settings_button_pressed() -> void:
 	AppShell.open_menu(&"settings")
 

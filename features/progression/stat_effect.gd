@@ -17,4 +17,4 @@ func describe() -> String:
 		Operation.MULTIPLY:
 			return "%s x%.2f" % [String(stat_id).capitalize(), value]
 		_:
-			return "%s %+g" % [String(stat_id).capitalize(), value]
+			return "%s %s%s" % [String(stat_id).capitalize(), "+" if value >= 0.0 else "", str(value)]

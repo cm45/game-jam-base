@@ -1,7 +1,7 @@
 # Meta-progression guide
 
-Press **F5**, choose **Open Progression Lab**, then use the sandbox currency
-buttons to exercise the complete meta-progression loop before gameplay exists.
+Open `app/progression_lab.tscn` in the editor and press **F6** to use the
+optional developer sandbox. It is not exposed in the player menu.
 
 1. Add Gold and Insight.
 2. In **Shop**, purchase **Lucky Satchel** with Gold. Shop improvements are

@@ -44,3 +44,6 @@ after the current one has been reviewed.
   services in the first foundation version.
 - Quests, inventory, combat, and customization are later extension recipes,
   not mandatory framework dependencies.
+
+- [x] Camp review corrections: remove tour/lab menu entries, correct full
+  house/tree atlas regions, and provide separate merchant/mentor windows.

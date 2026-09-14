@@ -77,19 +77,6 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 18
 text = "PLAY STARTER CAMP"
 
-[node name="PreviewButton" type="Button" parent="Center/Panel/Margin/Layout"]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(0, 42)
-layout_mode = 2
-theme_override_font_sizes/font_size = 16
-text = "FOUNDATION TOUR"
-
-[node name="ProgressionButton" type="Button" parent="Center/Panel/Margin/Layout"]
-custom_minimum_size = Vector2(0, 42)
-layout_mode = 2
-theme_override_font_sizes/font_size = 16
-text = "PROGRESSION LAB"
-
 [node name="SettingsButton" type="Button" parent="Center/Panel/Margin/Layout"]
 custom_minimum_size = Vector2(0, 42)
 layout_mode = 2
@@ -116,8 +103,6 @@ text = "WASD moves · E interacts · Escape opens the menu"
 horizontal_alignment = 1
 
 [connection signal="pressed" from="Center/Panel/Margin/Layout/StarterButton" to="." method="_on_starter_button_pressed"]
-[connection signal="pressed" from="Center/Panel/Margin/Layout/PreviewButton" to="." method="_on_preview_button_pressed"]
-[connection signal="pressed" from="Center/Panel/Margin/Layout/ProgressionButton" to="." method="_on_progression_button_pressed"]
 [connection signal="pressed" from="Center/Panel/Margin/Layout/SettingsButton" to="." method="_on_settings_button_pressed"]
 [connection signal="pressed" from="Center/Panel/Margin/Layout/ControlsButton" to="." method="_on_controls_button_pressed"]
 [connection signal="pressed" from="Center/Panel/Margin/Layout/QuitButton" to="." method="_on_quit_button_pressed"]

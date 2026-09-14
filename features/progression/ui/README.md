@@ -19,3 +19,12 @@ contextual close label without changing this shared panel.
 per skill definition. `tree_position` in the catalog controls its layout. Keep
 a connection readable, use requirements only for actual unlock rules, and do
 not encode progression state into scene-node names or colors.
+
+## Separate camp windows
+
+Instance `shop_window.tscn` at a merchant and `skill_tree_window.tscn` at a
+mentor. Each locks its content and selection to that system and hides the tab
+bar. They share layout and purchase logic through `progression_panel.tscn`.
+The combined panel is an optional developer lab, opened directly with F6;
+it has no main-menu entry. The camp keeps separate window instances and
+closes the other window before opening a station.

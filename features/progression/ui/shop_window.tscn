@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="PackedScene" path="res://features/progression/ui/progression_panel.tscn" id="1"]
+
+[node name="ShopWindow" instance=ExtResource("1")]
+window_mode = 1
+show_sandbox_tools = false

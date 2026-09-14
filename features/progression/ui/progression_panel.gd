@@ -5,7 +5,9 @@ extends UIScreen
 signal close_requested
 
 const SHOP_ITEM_SCENE := preload("res://features/progression/ui/upgrade_shop_item.tscn")
+enum WindowMode { LAB, SHOP, SKILLS }
 
+@export var window_mode: WindowMode = WindowMode.LAB
 @export var show_sandbox_tools := true
 @export var close_button_text := "BACK TO CAMP"
 
@@ -45,9 +47,20 @@ func _ready() -> void:
 	if not Progression.CATALOG.shop_upgrades.is_empty():
 		select_upgrade(Progression.CATALOG.shop_upgrades[0].id)
 	refresh()
+	if window_mode != WindowMode.LAB:
+		%Views.tabs_visible = false
+		%Views.set_tab_disabled(1 if window_mode == WindowMode.SHOP else 0, true)
+		if window_mode == WindowMode.SHOP:
+			show_shop()
+		else:
+			show_skill_tree()
 
 
 func select_upgrade(upgrade_id: StringName) -> void:
+	if window_mode == WindowMode.SHOP and not Progression.CATALOG.is_shop_upgrade(upgrade_id):
+		return
+	if window_mode == WindowMode.SKILLS and not Progression.CATALOG.is_skill_node(upgrade_id):
+		return
 	if Progression.CATALOG.get_upgrade(upgrade_id) == null:
 		return
 	_selected_upgrade_id = upgrade_id
@@ -56,12 +69,18 @@ func select_upgrade(upgrade_id: StringName) -> void:
 
 
 func show_shop() -> void:
+	if window_mode == WindowMode.SKILLS:
+		return
+	%Title.text = "SHOP"
 	%Views.current_tab = 0
 	if not Progression.CATALOG.shop_upgrades.is_empty():
 		select_upgrade(Progression.CATALOG.shop_upgrades[0].id)
 
 
 func show_skill_tree() -> void:
+	if window_mode == WindowMode.SHOP:
+		return
+	%Title.text = "SKILL TREE"
 	%Views.current_tab = 1
 	if not Progression.CATALOG.skill_nodes.is_empty():
 		select_upgrade(Progression.CATALOG.skill_nodes[0].id)

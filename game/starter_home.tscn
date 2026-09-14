@@ -1,10 +1,10 @@
-[gd_scene load_steps=25 format=3]
+[gd_scene load_steps=26 format=3]
 
 [ext_resource type="Script" path="res://game/starter_home.gd" id="1_script"]
 [ext_resource type="Script" path="res://game/starter_world_surface.gd" id="2_surface"]
 [ext_resource type="PackedScene" path="res://components/top_down_player.tscn" id="3_player"]
 [ext_resource type="Script" path="res://components/interaction_target.gd" id="4_interaction"]
-[ext_resource type="PackedScene" path="res://features/progression/ui/progression_panel.tscn" id="5_progression"]
+[ext_resource type="PackedScene" path="res://features/progression/ui/shop_window.tscn" id="5_progression"]
 [ext_resource type="Theme" path="res://ui/theme/game_jam_theme.tres" id="6_theme"]
 [ext_resource type="StyleBox" path="res://ui/theme/hud_panel.tres" id="7_hud_panel"]
 [ext_resource type="Texture2D" path="res://assets/ninja_adventure/source/Backgrounds/Tilesets/TilesetHouse.png" id="8_house"]
@@ -19,6 +19,8 @@
 [ext_resource type="Script" path="res://components/looping_music.gd" id="17_music"]
 [ext_resource type="AudioStream" path="res://assets/ninja_adventure/source/Audio/Musics/4 - Village.ogg" id="18_music_stream"]
 
+[ext_resource type="PackedScene" path="res://features/progression/ui/skill_tree_window.tscn" id="19_skills"]
+
 [sub_resource type="CircleShape2D" id="CircleShape2D_merchant"]
 radius = 24.0
 
@@ -29,7 +31,7 @@ radius = 24.0
 radius = 28.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_house"]
-size = Vector2(42, 18)
+size = Vector2(58, 18)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tent"]
 size = Vector2(38, 14)
@@ -48,10 +50,10 @@ script = ExtResource("2_surface")
 position = Vector2(130, 142)
 
 [node name="Sprite" type="Sprite2D" parent="CampHouse"]
-position = Vector2(0, -30)
+position = Vector2(0, -22)
 texture = ExtResource("8_house")
 region_enabled = true
-region_rect = Rect2(0, 0, 48, 64)
+region_rect = Rect2(0, 0, 64, 48)
 
 [node name="Collider" type="StaticBody2D" parent="CampHouse"]
 collision_layer = 1
@@ -128,10 +130,10 @@ shape = SubResource("RectangleShape2D_tent")
 position = Vector2(62, 102)
 
 [node name="Sprite" type="Sprite2D" parent="TreeWest"]
-position = Vector2(0, -26)
+position = Vector2(0, -14)
 texture = ExtResource("10_nature")
 region_enabled = true
-region_rect = Rect2(0, 0, 32, 48)
+region_rect = Rect2(0, 0, 32, 32)
 
 [node name="Collider" type="StaticBody2D" parent="TreeWest"]
 collision_layer = 1
@@ -145,10 +147,10 @@ shape = SubResource("RectangleShape2D_tree")
 position = Vector2(580, 102)
 
 [node name="Sprite" type="Sprite2D" parent="TreeNorth"]
-position = Vector2(0, -26)
+position = Vector2(0, -14)
 texture = ExtResource("10_nature")
 region_enabled = true
-region_rect = Rect2(0, 0, 32, 48)
+region_rect = Rect2(0, 0, 32, 32)
 
 [node name="Collider" type="StaticBody2D" parent="TreeNorth"]
 collision_layer = 1
@@ -162,10 +164,10 @@ shape = SubResource("RectangleShape2D_tree")
 position = Vector2(536, 320)
 
 [node name="Sprite" type="Sprite2D" parent="TreeSouth"]
-position = Vector2(0, -26)
+position = Vector2(0, -14)
 texture = ExtResource("10_nature")
 region_enabled = true
-region_rect = Rect2(0, 0, 32, 48)
+region_rect = Rect2(0, 0, 32, 32)
 
 [node name="Collider" type="StaticBody2D" parent="TreeSouth"]
 collision_layer = 1
@@ -356,9 +358,14 @@ text = "[E] Interact"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="ProgressionPanel" parent="Interface/HUD" instance=ExtResource("5_progression")]
+[node name="ShopWindow" parent="Interface" instance=ExtResource("5_progression")]
 unique_name_in_owner = true
 visible = false
 mouse_filter = 0
 show_sandbox_tools = false
 close_button_text = "BACK TO CAMP"
+
+[node name="SkillTreeWindow" parent="Interface" instance=ExtResource("19_skills")]
+unique_name_in_owner = true
+visible = false
+mouse_filter = 0

@@ -43,6 +43,33 @@ func _run() -> void:
 			return
 	panel.queue_free()
 	await get_tree().process_frame
+	for scene_path: String in ["res://features/progression/ui/shop_window.tscn", "res://features/progression/ui/skill_tree_window.tscn"]:
+		var station := (load(scene_path) as PackedScene).instantiate() as ProgressionPanel
+		add_child(station)
+		await get_tree().process_frame
+		var station_views := station.get_node("Center/Panel/Margin/Layout/Content/Views") as TabContainer
+		var is_shop := station.window_mode == ProgressionPanel.WindowMode.SHOP
+		var expected_tab := 0 if is_shop else 1
+		if not _require(not station_views.tabs_visible and station_views.current_tab == expected_tab, "Station window should expose only its own system."):
+			return
+		station.show_skill_tree() if is_shop else station.show_shop()
+		if not _require(station_views.current_tab == expected_tab, "Station window must reject cross-system navigation."):
+			return
+		station.queue_free()
+		await get_tree().process_frame
+	var camp := (load("res://game/starter_home.tscn") as PackedScene).instantiate()
+	add_child(camp)
+	await get_tree().process_frame
+	var shop_window := camp.get_node("Interface/ShopWindow") as Control
+	var skill_window := camp.get_node("Interface/SkillTreeWindow") as Control
+	camp.get_node("Merchant").activated.emit(null)
+	if not _require(shop_window.visible and not skill_window.visible, "Merchant must open only the shop."):
+		return
+	camp.get_node("Mentor").activated.emit(null)
+	if not _require(skill_window.visible and not shop_window.visible, "Mentor must open only skills."):
+		return
+	camp.queue_free()
+	await get_tree().process_frame
 	print("progression_layout_smoke: PASS")
 	get_tree().quit(0)
 

@@ -1,7 +1,8 @@
 extends Node2D
 ## Walkable camp hub that demonstrates separate shop, skill, and run stations.
 
-@onready var _progression_panel: ProgressionPanel = %ProgressionPanel
+@onready var _shop_window: ProgressionPanel = %ShopWindow
+@onready var _skill_window: ProgressionPanel = %SkillTreeWindow
 @onready var _merchant: InteractionTarget = %Merchant
 @onready var _mentor: InteractionTarget = %Mentor
 @onready var _scout: InteractionTarget = %Scout
@@ -19,7 +20,8 @@ func _ready() -> void:
 	_merchant.activated.connect(_open_shop)
 	_mentor.activated.connect(_open_skill_tree)
 	_scout.activated.connect(_start_run)
-	_progression_panel.close_requested.connect(_progression_panel.hide)
+	_shop_window.close_requested.connect(_shop_window.hide)
+	_skill_window.close_requested.connect(_skill_window.hide)
 	Progression.currency_changed.connect(func(_id: StringName, _amount: int) -> void: _refresh_hud())
 	Progression.upgrade_purchased.connect(func(_id: StringName, _level: int) -> void: _refresh_hud())
 	Progression.progression_reset.connect(_refresh_hud)
@@ -32,7 +34,7 @@ func _process(delta: float) -> void:
 		_message_time_remaining -= delta
 		if _message_time_remaining <= 0.0:
 			_message_panel.hide()
-	if _progression_panel.visible:
+	if _shop_window.visible or _skill_window.visible:
 		_interaction_panel.hide()
 		return
 	var nearby_target := _get_nearby_target()
@@ -44,15 +46,15 @@ func _process(delta: float) -> void:
 
 
 func _open_shop(_actor: Node2D) -> void:
-	_progression_panel.show()
-	_progression_panel.show_shop()
-	_progression_panel.refresh()
+	_skill_window.hide()
+	_shop_window.show()
+	_shop_window.refresh()
 
 
 func _open_skill_tree(_actor: Node2D) -> void:
-	_progression_panel.show()
-	_progression_panel.show_skill_tree()
-	_progression_panel.refresh()
+	_shop_window.hide()
+	_skill_window.show()
+	_skill_window.refresh()
 
 
 func _start_run(_actor: Node2D) -> void:
