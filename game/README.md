@@ -25,7 +25,7 @@ or removing the examples.
 
 ## Manual review route
 
-1. Press **F5** and choose **Play Starter Camp**.
+1. Press **F5** to start directly in camp.
 2. Walk to the Merchant or Mentor and press **E** to compare the shop and
    skill-tree systems. Walk into scenery to test its collisions.
 3. Walk to the Scout, press **E**, and collect the three yellow tokens.
@@ -38,3 +38,7 @@ Scenery atlas regions: the round tree uses (0, 0, 32, 32) from TilesetNature;
 the complete first house uses (0, 0, 64, 48) from TilesetHouse. Include only
 the intended sprite, not pieces of adjacent atlas rows. Merchant and Mentor
 open independent, locked shop and skill windows without cross-navigation.
+
+F5 starts in camp directly. Escape opens settings, controls, quit, and Return
+to Camp above station windows. Run completion freezes the local world while
+the reward interface stays interactive; closing pause does not unfreeze it.

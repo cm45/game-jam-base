@@ -16,6 +16,9 @@ static func create_run_context() -> RunContext:
 		HOME_SCENE,
 		"Starter Expedition",
 		{
+			&"pickup_radius": Progression.get_effective_stat(&"pickup_radius", 7.0),
+			&"bonus_gold": Progression.get_effective_stat(&"bonus_gold", 0.0),
+			&"insight_reward": Progression.get_effective_stat(&"insight_reward", 1.0),
 			&"move_speed": Progression.get_effective_stat(&"run_speed", BASE_MOVE_SPEED),
 			&"reward_multiplier": Progression.get_effective_stat(
 				&"run_reward_multiplier",

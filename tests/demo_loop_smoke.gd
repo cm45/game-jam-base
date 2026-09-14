@@ -38,7 +38,7 @@ func _run() -> void:
 	interact_event.pressed = true
 	exit_target._unhandled_input(interact_event)
 	await get_tree().process_frame
-	if not _require(Progression.get_balance(&"gold") == 18, "Lucky Satchel should raise the 15 Gold reward to 18."):
+	if not _require(Progression.get_balance(&"gold") == 23, "Lucky Satchel should raise the 15 Gold reward to 23."):
 		return
 	if not _require(Progression.get_balance(&"insight") == 1, "Completed run should award one Insight."):
 		return

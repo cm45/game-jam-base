@@ -68,7 +68,7 @@ failure leaves no temporary clone behind.
 Headless checks cannot judge player movement, menu focus, visual scale, or
 sound. Before the weekend, run this route in the editor:
 
-1. Press **F5**, open the starter game, start a run, collect its three tokens,
+1. Press **F5**, visit the Scout in camp, start a run, collect its three tokens,
    and claim the result at home.
 2. Press Escape in the home and run. Check pause, resume, controls, settings,
    reset, return to hub, and quit.

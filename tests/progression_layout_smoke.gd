@@ -68,6 +68,19 @@ func _run() -> void:
 	camp.get_node("Mentor").activated.emit(null)
 	if not _require(skill_window.visible and not shop_window.visible, "Mentor must open only skills."):
 		return
+	var fitted_tree := skill_window.get_node("Center/Panel/Margin/Layout/Content/Views/SkillTree/TreeScroll/ProgressionTree") as ProgressionTree
+	await get_tree().process_frame
+	fitted_tree.fit_to_tree()
+	await get_tree().process_frame
+	await get_tree().process_frame
+	var tree_scroll := fitted_tree.get_parent() as ScrollContainer
+	if not _require(not tree_scroll.get_h_scroll_bar().visible and not tree_scroll.get_v_scroll_bar().visible, "Fit must remove both tree scrollbars."):
+		return
+	if not _require(AppShell.layer > (camp.get_node("Interface") as CanvasLayer).layer, "Pause must draw above station windows."):
+		return
+	for child: Node in fitted_tree.get_children():
+		if child is Button and not _require(Rect2(Vector2.ZERO, fitted_tree.size).encloses(child.get_rect()), "Fit must contain every skill node."):
+			return
 	camp.queue_free()
 	await get_tree().process_frame
 	print("progression_layout_smoke: PASS")

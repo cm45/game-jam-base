@@ -47,3 +47,6 @@ after the current one has been reviewed.
 
 - [x] Camp review corrections: remove tour/lab menu entries, correct full
   house/tree atlas regions, and provide separate merchant/mentor windows.
+
+- [x] Camp-first startup, normalized volume sliders, pause layering, working
+  buffed upgrades, viewport-based tree fit, and frozen run-completion worlds.

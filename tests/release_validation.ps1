@@ -76,6 +76,7 @@ $null = Invoke-GodotCheck -Name "main-startup" -Arguments @("--headless", "--pat
 Write-Output "main_startup: PASS"
 
 $sceneTests = @(
+    @{ Name = "camp_runtime_smoke"; Scene = "res://tests/camp_runtime_smoke.tscn" },
     @{ Name = "progression_layout_smoke"; Scene = "res://tests/progression_layout_smoke.tscn" },
     @{ Name = "progression_mechanics_smoke"; Scene = "res://tests/progression_mechanics_smoke.tscn" },
     @{ Name = "save_reset_smoke"; Scene = "res://tests/save_reset_smoke.tscn" },

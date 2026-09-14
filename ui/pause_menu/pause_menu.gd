@@ -110,7 +110,7 @@ func _play_preview_sound() -> void:
 
 func _return_to_hub() -> void:
 	close_menu()
-	SceneRouter.return_to_foundation_hub()
+	SceneRouter.return_home()
 
 
 func _quit_game() -> void:

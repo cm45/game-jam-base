@@ -27,18 +27,18 @@ exchange.
    constants in your copied game configuration.
 2. Confirm **F5** can start your copied home, begin your copied run, and return
    a completed `RunResult`. Do this before deleting the originals.
-3. Replace the Foundation Hub's starter route if you renamed the game
-   configuration class or moved the home scene.
+3. Set Project Settings > Application > Run > Main Scene to your new home.
+   Update SceneRouter.HOME_SCENE and your copied game configuration paths.
 4. Remove the components you do not use. `top_down_player`,
    `interaction_target`, and `resource_pickup` are optional; no service imports
    them.
-5. Remove `demo/` whenever it stops being useful. The Foundation Hub only opens
-   the starter and laboratory scenes, so the demo is not on the normal route.
+5. Remove `demo/` whenever it stops being useful. Startup opens the camp
+   directly; the demo is not on the normal route.
 6. Remove preview entries, demo-only save keys, and documentation references
    only after their replacement route works. `demo_last_run` is only used by
    the old demo; it is safe to leave in existing local saves or ignore it.
 7. Run `tests/demo_removal_smoke.ps1` and then manually start your own home and
-   run from the Foundation Hub.
+   run using F5.
 
 Do not delete `app/`, `features/`, or `ui/` as a first step. Start with a
 working replacement route, then trim a service only when you know your game
@@ -92,7 +92,7 @@ player, pickups, tents, shop content, and skill nodes can all be replaced.
 | --- | --- | --- |
 | Roguelike | Starter run with rooms, combat, and a death/victory result. | Context/result handoff, settings, and progression effects. |
 | Extraction game | Starter run with loot inventory, an extraction zone, and risk/reward rules. | Completed-result rewards and a permanent wallet. |
-| Mining game | Starter run with a dig map, haul capacity, and a surface return. | `carry_capacity`, currencies, and the camp/home concept. |
+| Mining game | Starter run with a dig map, haul capacity, and a surface return. | Currencies and the camp/home concept; add your own haul-capacity stat. |
 | Entirely custom game | Both starter scenes and optional components. | Only the services and UI your game actually uses. |
 
 If a sample stat does not match your genre, rename it in the progression

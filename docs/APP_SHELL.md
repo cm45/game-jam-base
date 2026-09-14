@@ -1,14 +1,14 @@
 # App shell and core services
 
-Press **F5** to open the main menu. Play Starter Camp opens the walkable home;
-Settings, Keybinds, and Quit provide the remaining menu actions.
+Press **F5** to enter the camp. Escape opens settings, keybinds, reset, return
+to camp, and quit; no separate foundation menu is needed.
 
 ## What every participant can use
 
 | Need | Use |
 | --- | --- |
 | Change scenes | `SceneRouter.change_to("res://path/to/scene.tscn")` |
-| Return to the current startup scene | `SceneRouter.return_to_foundation_hub()` |
+| Return to the current startup scene | `SceneRouter.return_home()` |
 | Open the pause menu | `AppShell.open_menu()` |
 | Open settings or controls directly | `AppShell.open_menu(&"settings")` or `AppShell.open_menu(&"controls")` |
 | Read a starter input binding | `InputActions.get_binding_text(InputActions.INTERACT)` |
@@ -29,8 +29,8 @@ managers.
 
 ## Manual review route
 
-1. Press **F5** and confirm the Foundation Hub opens.
-2. Choose **Play Starter Camp**, then return through the pause menu.
+1. Press **F5** and confirm the camp opens.
+2. Start a run at the Scout, then return through the pause menu.
 3. Press Escape in either scene. Check resume, keybinds, and return-to-hub.
 4. Open settings, move each volume slider, close and reopen the menu, and
    confirm the values remain.

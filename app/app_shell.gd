@@ -10,6 +10,7 @@ var _ui_click: AudioStreamPlayer
 
 func _ready() -> void:
 	process_mode = Node.PROCESS_MODE_ALWAYS
+	layer = 100
 	_ui_click = AudioStreamPlayer.new()
 	# Loading after startup lets a brand-new clone finish importing the WAV first.
 	_ui_click.stream = load(UI_CLICK_STREAM_PATH) as AudioStream

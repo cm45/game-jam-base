@@ -10,4 +10,4 @@ func _ready() -> void:
 
 
 func _on_back_button_pressed() -> void:
-	SceneRouter.return_to_foundation_hub()
+	SceneRouter.return_home()

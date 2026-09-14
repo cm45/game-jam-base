@@ -39,7 +39,7 @@ func set_volume(bus_name: StringName, linear_volume: float, persist := true) -> 
 		return
 	var clamped_volume := clampf(linear_volume, 0.0, 1.0)
 	AudioServer.set_bus_mute(bus_index, is_zero_approx(clamped_volume))
-	AudioServer.set_bus_volume_db(bus_index, linear_to_db(maxf(clamped_volume, 0.001)))
+	AudioServer.set_bus_volume_db(bus_index, linear_to_db(maxf(clamped_volume * clamped_volume, 0.000001)))
 	if persist:
 		SaveStore.set_setting(_setting_key(bus_name), clamped_volume)
 	volume_changed.emit(bus_name, clamped_volume)

@@ -61,3 +61,15 @@ clears the save and tells `Progression` to clear its in-memory state too.
 
 The lab's grant buttons are a review tool. A later playable run will award
 currencies through the same `grant_currency()` API after a successful result.
+
+## Active starter effects
+
+Every sample upgrade now affects the playable starter: movement speed (also
+in camp), pickup radius, completed-run bonus Gold, reward multiplier, or
+Insight reward. Starting Gold, health, and carrying capacity are no longer
+sample effects. Old stable upgrade IDs remain so purchased ranks survive:
+Deep Pockets becomes Bounty Contract, Camp Tools becomes Field Journal,
+Iron Will becomes Far Reach, and Pack Mule becomes Field Scholar.
+
+Movement bonuses are +18/+24 per shop rank, +30 for Pathfinder and +48 for
+Trailblazer. RunContext snapshots all five effects when the Scout starts a run.

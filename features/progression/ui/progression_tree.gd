@@ -6,7 +6,7 @@ signal upgrade_selected(upgrade_id: StringName)
 
 const BASE_CANVAS_SIZE := Vector2(980, 440)
 const NODE_SIZE := Vector2(164, 64)
-const MIN_ZOOM := 0.7
+const MIN_ZOOM := 0.1
 const MAX_ZOOM := 1.35
 
 var _buttons: Dictionary[StringName, Button] = {}
@@ -49,11 +49,24 @@ func zoom_out() -> void:
 
 
 func fit_to_tree() -> void:
-	set_zoom(0.9)
-	call_deferred("center_on_root")
+	var scroll := get_parent() as ScrollContainer
+	if scroll == null or scroll.size.x <= 0.0 or scroll.size.y <= 0.0:
+		return
+	# Leave space for container borders; derive zoom from both available axes.
+	var available := scroll.size - Vector2(24, 24)
+	set_zoom(minf(available.x / BASE_CANVAS_SIZE.x, available.y / BASE_CANVAS_SIZE.y))
+	# Fit displays the whole canvas; manual zoom restores scrolling.
+	scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
+	scroll.vertical_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
+	scroll.scroll_horizontal = 0
+	scroll.scroll_vertical = 0
 
 
 func set_zoom(value: float) -> void:
+	var scroll := get_parent() as ScrollContainer
+	if scroll != null:
+		scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_AUTO
+		scroll.vertical_scroll_mode = ScrollContainer.SCROLL_MODE_AUTO
 	_zoom = clampf(value, MIN_ZOOM, MAX_ZOOM)
 	_apply_zoom()
 
@@ -81,6 +94,9 @@ func _build_buttons() -> void:
 func _apply_zoom() -> void:
 	custom_minimum_size = BASE_CANVAS_SIZE * _zoom
 	size = custom_minimum_size
+	var scroll := get_parent() as ScrollContainer
+	if scroll != null:
+		scroll.queue_sort()
 	for skill: UpgradeDefinition in Progression.CATALOG.skill_nodes:
 		var button := _buttons.get(skill.id) as Button
 		if button == null:

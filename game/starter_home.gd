@@ -68,6 +68,7 @@ func _start_run(_actor: Node2D) -> void:
 
 
 func _refresh_hud() -> void:
+	$Player.set_movement_speed(Progression.get_effective_stat(&"run_speed", StarterGame.BASE_MOVE_SPEED))
 	_wallet.text = "GOLD %d  •  INSIGHT %d" % [
 		Progression.get_balance(&"gold"),
 		Progression.get_balance(&"insight"),

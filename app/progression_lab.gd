@@ -9,4 +9,4 @@ func _ready() -> void:
 
 
 func _return_to_hub() -> void:
-	SceneRouter.return_to_foundation_hub()
+	SceneRouter.return_home()

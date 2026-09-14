@@ -42,3 +42,8 @@ validates a clean editor launch and main scene before removing the clone.
 demo-removal and fresh-clone checks, and a temporary Windows release export.
 See [`docs/RELEASE.md`](../docs/RELEASE.md) for commands and export-template
 setup.
+
+`camp_runtime_smoke.tscn` uses isolated saves to exercise actual volume
+sliders, every sample upgrade, pickup reach, reward amounts, and local world
+freeze across pause/resume. Layout checks verify Fit hides both scrollbars
+and contains all skill nodes, and pause draws above station windows.

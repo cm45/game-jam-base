@@ -28,3 +28,11 @@ func collect() -> void:
 func _on_body_entered(body: Node2D) -> void:
 	if body.is_in_group(&"player"):
 		collect()
+
+
+func set_pickup_radius(radius: float) -> void:
+	# Each pickup needs its own shape; scene instances share their source resource.
+	var collider := $CollisionShape2D as CollisionShape2D
+	var circle := collider.shape.duplicate() as CircleShape2D
+	circle.radius = maxf(radius, 1.0)
+	collider.shape = circle

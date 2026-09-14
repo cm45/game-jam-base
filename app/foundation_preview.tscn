@@ -86,7 +86,7 @@ disabled = true
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 34)
 layout_mode = 2
-text = "BACK TO FOUNDATION HUB"
+text = "BACK TO CAMP"
 
 [node name="Hint" type="Label" parent="Content/FoundationPanel/Layout"]
 layout_mode = 2

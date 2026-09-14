@@ -81,6 +81,8 @@ func _complete_run(_actor: Node2D) -> void:
 		multiplier,
 		INSIGHT_REWARD,
 	]
+	process_mode = Node.PROCESS_MODE_DISABLED
+	_summary.process_mode = Node.PROCESS_MODE_ALWAYS
 	_summary.show()
 	_return_button.grab_focus()
 

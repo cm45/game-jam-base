@@ -4,7 +4,7 @@ extends Node
 signal scene_change_started(scene_path: String)
 signal scene_changed(scene_path: String)
 
-const FOUNDATION_HUB_SCENE := "res://app/foundation_hub.tscn"
+const HOME_SCENE := "res://game/starter_home.tscn"
 
 var _is_changing_scene := false
 
@@ -25,5 +25,6 @@ func change_to(scene_path: String) -> Error:
 	return result
 
 
-func return_to_foundation_hub() -> Error:
-	return change_to(FOUNDATION_HUB_SCENE)
+func return_home() -> Error:
+	RunSession.abandon_active_run()
+	return change_to(HOME_SCENE)

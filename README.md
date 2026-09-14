@@ -50,7 +50,7 @@ images or audio, run `git lfs pull` from the repository root and try again.
 
 In the Godot Project Manager, choose **Import**, select this repository's
 `project.godot`, and open it. The first import may take a moment. Press **F5**
-or use the play button to open the replaceable starter game.
+or use the play button to enter the camp directly.
 
 ## Configure VS Code for Godot
 
@@ -118,8 +118,8 @@ receive compatibility entries in `.gemini/`, `.agents/`, and `.cline/`.
   Binary assets use Git LFS; its original license and README remain beside them.
 - `ui/theme/game_jam_theme.tres` is the shared wood UI theme built from the
   supplied UI textures and pixel font.
-- `app/foundation_hub.tscn` is the runnable startup scene for testing the app
-  shell before gameplay systems are added.
+- `game/starter_home.tscn` is the startup hub. Escape provides settings,
+  keybinds, reset, return to camp, and quit; there is no separate main menu.
 - `ui/pause_menu/` supplies pause, settings, keybinds, reset, return-to-hub,
   and quit controls from any scene.
 - `features/input/`, `features/audio/`, and `features/save/` contain the

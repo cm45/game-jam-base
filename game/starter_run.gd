@@ -28,6 +28,7 @@ func _ready() -> void:
 	_player.set_movement_speed(float(_context.get_starting_value(&"move_speed", StarterGame.BASE_MOVE_SPEED)))
 	for pickup: ResourcePickup in _pickups.get_children():
 		pickup.picked_up.connect(_on_pickup_collected)
+		pickup.set_pickup_radius(float(_context.get_starting_value(&"pickup_radius", 7.0)))
 	_exit_target.activated.connect(_prepare_completion)
 	_claim_button.pressed.connect(_claim_and_return_home)
 	_exit_target.interaction_enabled = false
@@ -67,8 +68,12 @@ func _prepare_completion(_actor: Node2D) -> void:
 	_summary_text.text = "RUN COMPLETE\n\n%d expedition tokens recovered\n\n+%d GOLD\n+%d INSIGHT\n\nClaim these rewards at home." % [
 		_collected_tokens,
 		earned_gold,
-		INSIGHT_REWARD,
+		_earned_insight(),
 	]
+	# Freeze this world locally; closing the global pause menu must not resume it.
+	process_mode = Node.PROCESS_MODE_DISABLED
+	_summary.process_mode = Node.PROCESS_MODE_ALWAYS
+	_reward_sound.process_mode = Node.PROCESS_MODE_ALWAYS
 	_summary.show()
 	_claim_button.grab_focus()
 
@@ -77,8 +82,8 @@ func _claim_and_return_home() -> void:
 	var result := RunResult.new(
 		_context.run_id,
 		true,
-		{&"gold": _earned_gold(), &"insight": INSIGHT_REWARD},
-		"+%d Gold, +%d Insight" % [_earned_gold(), INSIGHT_REWARD],
+		{&"gold": _earned_gold(), &"insight": _earned_insight()},
+		"+%d Gold, +%d Insight" % [_earned_gold(), _earned_insight()],
 		{&"tokens": _collected_tokens},
 	)
 	if RunSession.complete_run(result) != OK:
@@ -96,7 +101,7 @@ func _refresh_hud() -> void:
 
 
 func _earned_gold() -> int:
-	return ceili(BASE_GOLD_REWARD * float(_context.get_starting_value(
+	return ceili((BASE_GOLD_REWARD + float(_context.get_starting_value(&"bonus_gold", 0.0))) * float(_context.get_starting_value(
 		&"reward_multiplier",
 		StarterGame.BASE_REWARD_MULTIPLIER,
 	)))
@@ -109,3 +114,7 @@ func _get_or_create_context() -> RunContext:
 	var fallback_context := StarterGame.create_run_context()
 	RunSession.begin_run(fallback_context)
 	return fallback_context
+
+
+func _earned_insight() -> int:
+	return maxi(1, roundi(float(_context.get_starting_value(&"insight_reward", 1.0))))
