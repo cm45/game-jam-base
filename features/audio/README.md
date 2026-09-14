@@ -18,6 +18,6 @@ progression panel, and run provide SFX examples. Attach
 `components/looping_music.gd` to a music player when the supplied stream should
 restart after it finishes.
 
-Volume controls use a normalized 0–1 range with 0.01 steps. Output amplitude
+Volume controls use a normalized 0â€“1 range with 0.01 steps. Output amplitude
 is the square of that value for finer quiet-volume control; zero mutes the bus.
 The same normalized value is saved and restored.

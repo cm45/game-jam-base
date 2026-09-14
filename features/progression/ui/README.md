@@ -1,5 +1,10 @@
 # Progression UI
 
+Skill nodes use `skill_tree_button.gd` for compact wood tooltips with a pixel
+heading and wrapped readable body text. Native tooltip popups bypass the
+half-scale UIScreen layout, so their width and font sizes are specified in
+640×360 viewport units. Keep these sizes independent of skill-tree zoom.
+
 `progression_panel.tscn` contains the wallet, sandbox controls, selected
 details, and separate **Shop** and **Skill Tree** views. It listens to
 `Progression` signals and never changes saved state itself. Gold purchases use

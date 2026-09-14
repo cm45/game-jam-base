@@ -17,6 +17,14 @@ func _run() -> void:
 	var shop_scroll: ScrollContainer = panel.get_node("Center/Panel/Margin/Layout/Content/Views/Shop")
 	var shop_list: VBoxContainer = panel.get_node("Center/Panel/Margin/Layout/Content/Views/Shop/ShopList")
 	var tree: ProgressionTree = panel.get_node("Center/Panel/Margin/Layout/Content/Views/SkillTree/TreeScroll/ProgressionTree")
+	var skill_button := tree.get_child(0) as Button
+	var tooltip := skill_button.call("_make_custom_tooltip", skill_button.tooltip_text) as Control
+	add_child(tooltip)
+	await get_tree().process_frame
+	await get_tree().process_frame
+	if not _require(tooltip.size.x <= 200.0 and tooltip.size.y <= 100.0, "Skill tooltip must stay compact in viewport coordinates."):
+		return
+	tooltip.queue_free()
 	if not _require(panel.size == Vector2(1280, 720), "Fullscreen panels should use the 1280×720 UI canvas."):
 		return
 	if not _require(is_equal_approx(panel.scale.x, 0.5), "Fullscreen panels should scale into the 640×360 world canvas."):

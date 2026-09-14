@@ -5,6 +5,7 @@ extends Control
 signal upgrade_selected(upgrade_id: StringName)
 
 const BASE_CANVAS_SIZE := Vector2(980, 440)
+const SKILL_BUTTON := preload("res://features/progression/ui/skill_tree_button.gd")
 const NODE_SIZE := Vector2(164, 64)
 const MIN_ZOOM := 0.1
 const MAX_ZOOM := 1.35
@@ -83,7 +84,7 @@ func center_on_root() -> void:
 
 func _build_buttons() -> void:
 	for skill: UpgradeDefinition in Progression.CATALOG.skill_nodes:
-		var button := Button.new()
+		var button := SKILL_BUTTON.new() as Button
 		button.tooltip_text = "%s\n%s" % [skill.display_name, skill.description]
 		button.pressed.connect(func() -> void: upgrade_selected.emit(skill.id))
 		add_child(button)
