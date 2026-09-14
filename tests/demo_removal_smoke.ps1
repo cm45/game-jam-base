@@ -15,7 +15,34 @@ if (-not $temporaryProject.StartsWith($temporaryRoot, [System.StringComparison]:
     throw "Temporary test directory must stay inside the system temp directory."
 }
 if (-not (Test-Path -LiteralPath $GodotPath -PathType Leaf)) {
-    throw "Godot console executable was not found: $GodotPath"
+    throw "Godot executable was not found: $GodotPath"
+}
+
+function Invoke-GodotCheck {
+    param(
+        [Parameter(Mandatory = $true)]
+        [string[]]$Arguments,
+        [Parameter(Mandatory = $true)]
+        [string]$Name
+    )
+
+    $logStem = "game-jam-foundation-" + $Name + "-" + [System.Guid]::NewGuid().ToString("N")
+    $logPath = Join-Path $temporaryRoot ($logStem + ".log")
+    $stdoutPath = Join-Path $temporaryRoot ($logStem + ".stdout")
+    $stderrPath = Join-Path $temporaryRoot ($logStem + ".stderr")
+    $quotedArguments = (($Arguments + @("--log-file", $logPath)) | ForEach-Object { '"' + $_.Replace('"', '\"') + '"' }) -join " "
+    try {
+        $process = Start-Process -FilePath $GodotPath -ArgumentList $quotedArguments -Wait -PassThru -NoNewWindow -RedirectStandardOutput $stdoutPath -RedirectStandardError $stderrPath
+        $log = if (Test-Path -LiteralPath $logPath) { Get-Content -Raw -LiteralPath $logPath } else { "" }
+        if ($process.ExitCode -ne 0) {
+            throw "$Name failed with exit code $($process.ExitCode).`n$log"
+        }
+    }
+    finally {
+        Remove-Item -LiteralPath $logPath -Force -ErrorAction SilentlyContinue
+        Remove-Item -LiteralPath $stdoutPath -Force -ErrorAction SilentlyContinue
+        Remove-Item -LiteralPath $stderrPath -Force -ErrorAction SilentlyContinue
+    }
 }
 
 try {
@@ -25,14 +52,8 @@ try {
         Where-Object { $_.Name -notin $excludedNames } |
         ForEach-Object { Copy-Item -LiteralPath $_.FullName -Destination $temporaryProject -Recurse -Force }
 
-    & $GodotPath --headless --path $temporaryProject --editor --quit
-    if ($LASTEXITCODE -ne 0) {
-        throw "The demo-free project could not load in the Godot editor."
-    }
-    & $GodotPath --headless --path $temporaryProject --quit-after 3
-    if ($LASTEXITCODE -ne 0) {
-        throw "The demo-free project could not start its main scene."
-    }
+    Invoke-GodotCheck -Name "demo-free-editor" -Arguments @("--headless", "--path", $temporaryProject, "--editor", "--quit")
+    Invoke-GodotCheck -Name "demo-free-main" -Arguments @("--headless", "--path", $temporaryProject, "--quit-after", "3")
     Write-Output "demo_removal_smoke: PASS"
 }
 finally {

@@ -17,7 +17,9 @@ func _ready() -> void:
 
 
 func get_setting(key: StringName, fallback: Variant = null) -> Variant:
-	return _config.get_value(SETTINGS_SECTION, key, fallback)
+	if not _config.has_section_key(SETTINGS_SECTION, key):
+		return fallback
+	return _config.get_value(SETTINGS_SECTION, key)
 
 
 func set_setting(key: StringName, value: Variant) -> void:
@@ -26,7 +28,9 @@ func set_setting(key: StringName, value: Variant) -> void:
 
 
 func get_progress(key: StringName, fallback: Variant = null) -> Variant:
-	return _config.get_value(PROGRESS_SECTION, key, fallback)
+	if not _config.has_section_key(PROGRESS_SECTION, key):
+		return fallback
+	return _config.get_value(PROGRESS_SECTION, key)
 
 
 func set_progress(key: StringName, value: Variant) -> void:

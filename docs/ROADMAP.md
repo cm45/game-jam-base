@@ -19,7 +19,7 @@ after the current one has been reviewed.
 - [x] **5. Replaceable game integration** — Minimal starter scenes, the
   `RunContext`/`RunResult` contract, reusable components, and demo-removal
   proof.
-- [ ] **6. Release readiness** — Automated validation, fresh-clone check,
+- [x] **6. Release readiness** — Automated validation, fresh-clone check,
   save/reset tests, Windows export, and final jam checklist.
 
 ## Review gates
@@ -30,6 +30,7 @@ after the current one has been reviewed.
 3. Test progression configuration and assess the shop/tree workflow.
 4. Play the complete loop and tune its pace.
 5. Review adaptability, onboarding quality, and export readiness.
+6. Confirm the remote `main` branch, fresh clone, Windows export, and weekend checklist.
 
 ## Defaults
 

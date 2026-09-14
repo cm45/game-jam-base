@@ -8,10 +8,11 @@ The starter home is a walkable top-down 2D hub. The player moves through it to
 reach NPCs, shops, upgrade points, and the entrance to a run; menus are overlays
 opened by those world interactions rather than the home scene itself.
 
-Milestone 5 is ready. It includes the full Ninja Adventure asset pack,
+Milestone 6 is ready. It includes the full Ninja Adventure asset pack,
 pixel-rendering defaults, a reusable UI theme, Windows/editor/AI onboarding,
 the app shell, a configurable meta-progression framework, and a complete
-starter home → run → reward → upgrade handoff.
+starter home → run → reward → upgrade handoff. It also includes repeatable
+release checks, a Windows export preset, and a weekend checklist.
 
 ## Before you clone
 
@@ -148,6 +149,7 @@ receive compatibility entries in `.gemini/`, `.agents/`, and `.cline/`.
 - [Extension recipes](docs/EXTENSION_RECIPES.md)
 - [AI and MCP guide](docs/AI_GUIDE.md)
 - [Optional local Godot MCP setup](docs/GODOT_MCP.md)
+- [Release readiness and weekend checklist](docs/RELEASE.md)
 - [Incremental roadmap](docs/ROADMAP.md)
 
 ## Folder map

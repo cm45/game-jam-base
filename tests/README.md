@@ -29,3 +29,14 @@ and main scene from that copy. Run it with the same Godot console executable:
 ```powershell
 .\tests\demo_removal_smoke.ps1 -GodotPath "D:\Path\To\Godot_v4.7.2-stable_win64_console.exe"
 ```
+
+`save_reset_smoke.tscn` verifies that settings and progression both persist to
+disk, then that the shared reset clears and persists both sections while
+restoring the developer's original local save afterward.
+
+`fresh_clone_smoke.ps1` clones a selected branch into a unique system-temp
+folder, verifies Git LFS, imports it in Godot, starts the main scene, and
+removes the clone. `release_validation.ps1` runs every smoke test, the
+demo-removal and fresh-clone checks, and a temporary Windows release export.
+See [`docs/RELEASE.md`](../docs/RELEASE.md) for commands and export-template
+setup.
