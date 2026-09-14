@@ -79,8 +79,12 @@ Tell Godot to open scripts in VS Code:
 
 1. In Godot, open **Editor > Editor Settings > Text Editor > External**.
 2. Enable **Use External Editor**.
-3. Set **Exec Path** to your `Code.exe`, normally
-   `%LOCALAPPDATA%\Programs\Microsoft VS Code\Code.exe` for the User installer.
+3. Set **Exec Path** to VS Code's Windows command launcher, normally
+   `%LOCALAPPDATA%\Programs\Microsoft VS Code\bin\code.cmd` for the User installer.
+   Use the file picker to select the actual file; do not enter the environment
+   variable literally. Godot's [external editor guide](https://docs.godotengine.org/en/stable/tutorials/editor/external_editor.html)
+   specifies `code.cmd` on Windows. If scripts stay in Godot with `Code.exe`
+   configured, change this path in the running editor's settings.
 4. Set **Exec Flags** to `{project} --goto {file}:{line}:{col}`.
 5. Also enable **Text Editor > Behavior > Files > Auto Reload Scripts on
    External Change**, **Interface > Editor > Save on Focus Loss**, and
