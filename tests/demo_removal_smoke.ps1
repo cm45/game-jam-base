@@ -1,7 +1,9 @@
 [CmdletBinding()]
 param(
     [Parameter(Mandatory = $true)]
-    [string]$GodotPath
+    [string]$GodotPath,
+    [ValidateRange(10, 300)]
+    [int]$TimeoutSeconds = 60
 )
 
 $ErrorActionPreference = "Stop"
@@ -32,10 +34,19 @@ function Invoke-GodotCheck {
     $stderrPath = Join-Path $temporaryRoot ($logStem + ".stderr")
     $quotedArguments = (($Arguments + @("--log-file", $logPath)) | ForEach-Object { '"' + $_.Replace('"', '\"') + '"' }) -join " "
     try {
-        $process = Start-Process -FilePath $GodotPath -ArgumentList $quotedArguments -Wait -PassThru -NoNewWindow -RedirectStandardOutput $stdoutPath -RedirectStandardError $stderrPath
+        $process = Start-Process -FilePath $GodotPath -ArgumentList $quotedArguments -PassThru -NoNewWindow -RedirectStandardOutput $stdoutPath -RedirectStandardError $stderrPath
+        if (-not $process.WaitForExit($TimeoutSeconds * 1000)) {
+            Stop-Process -Id $process.Id -Force
+            throw "$Name did not finish within $TimeoutSeconds seconds."
+        }
         $log = if (Test-Path -LiteralPath $logPath) { Get-Content -Raw -LiteralPath $logPath } else { "" }
+        $stdout = if (Test-Path -LiteralPath $stdoutPath) { Get-Content -Raw -LiteralPath $stdoutPath } else { "" }
+        $stderr = if (Test-Path -LiteralPath $stderrPath) { Get-Content -Raw -LiteralPath $stderrPath } else { "" }
         if ($process.ExitCode -ne 0) {
-            throw "$Name failed with exit code $($process.ExitCode).`n$log"
+            throw "$Name failed with exit code $($process.ExitCode).`n$log`n$stdout`n$stderr"
+        }
+        if (($log + $stdout + $stderr) -match "SCRIPT ERROR:") {
+            throw "$Name reported a script error.`n$log`n$stdout`n$stderr"
         }
     }
     finally {

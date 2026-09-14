@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene load_steps=4 format=3]
 
 [ext_resource type="Theme" path="res://ui/theme/game_jam_theme.tres" id="1_theme"]
 [ext_resource type="Script" path="res://app/foundation_preview.gd" id="2_script"]
+[ext_resource type="Font" path="res://ui/theme/readable_body_font.tres" id="3_body_font"]
 
 [node name="FoundationPreview" type="Control"]
 layout_mode = 3
@@ -54,7 +55,9 @@ horizontal_alignment = 1
 
 [node name="Subtitle" type="Label" parent="Content/FoundationPanel/Layout"]
 layout_mode = 2
-text = "Milestone 2: app shell and core services"
+theme_override_fonts/font = ExtResource("3_body_font")
+theme_override_font_sizes/font_size = 20
+text = "A quick tour of the reusable services"
 horizontal_alignment = 1
 
 [node name="Divider" type="HSeparator" parent="Content/FoundationPanel/Layout"]
@@ -62,7 +65,9 @@ layout_mode = 2
 
 [node name="Description" type="Label" parent="Content/FoundationPanel/Layout"]
 layout_mode = 2
-text = "The full Ninja Adventure pack is ready.\nThis scene also proves the shared app shell survives a scene change."
+theme_override_fonts/font = ExtResource("3_body_font")
+theme_override_font_sizes/font_size = 19
+text = "The shared shell, settings, progression, and run handoff are ready to adapt."
 horizontal_alignment = 1
 
 [node name="ThemeButton" type="Button" parent="Content/FoundationPanel/Layout"]

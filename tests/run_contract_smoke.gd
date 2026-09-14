@@ -1,11 +1,6 @@
 extends Node
 ## Checks the reusable RunContext → RunResult reward transaction.
-## It restores the local save file, so it is safe to run during development.
-
-const SAVE_PATH := "user://game_jam_foundation.cfg"
-
-var _had_save := false
-var _saved_bytes := PackedByteArray()
+## It uses a temporary SaveStore file, so it is safe to run during development.
 
 
 func _ready() -> void:
@@ -67,18 +62,10 @@ func _require(condition: bool, message: String) -> bool:
 
 
 func _backup_save() -> void:
-	var absolute_path := ProjectSettings.globalize_path(SAVE_PATH)
-	_had_save = FileAccess.file_exists(absolute_path)
-	if _had_save:
-		_saved_bytes = FileAccess.get_file_as_bytes(absolute_path)
+	SaveStore.use_temporary_storage(&"run_contract")
+	Progression.load_progress()
 
 
 func _restore_save() -> void:
-	var absolute_path := ProjectSettings.globalize_path(SAVE_PATH)
-	if _had_save:
-		var file := FileAccess.open(absolute_path, FileAccess.WRITE)
-		file.store_buffer(_saved_bytes)
-	else:
-		DirAccess.remove_absolute(absolute_path)
-	SaveStore.load_from_disk()
+	SaveStore.restore_default_storage()
 	Progression.load_progress()

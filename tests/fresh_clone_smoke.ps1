@@ -3,7 +3,9 @@ param(
     [Parameter(Mandatory = $true)]
     [string]$GodotPath,
     [string]$Repository,
-    [string]$Branch
+    [string]$Branch,
+    [ValidateRange(10, 300)]
+    [int]$TimeoutSeconds = 120
 )
 
 $ErrorActionPreference = "Stop"
@@ -37,7 +39,8 @@ function Invoke-GodotCheck {
         [Parameter(Mandatory = $true)]
         [string[]]$Arguments,
         [Parameter(Mandatory = $true)]
-        [string]$Name
+        [string]$Name,
+        [switch]$AllowScriptErrors
     )
 
     $logStem = "game-jam-foundation-" + $Name + "-" + [System.Guid]::NewGuid().ToString("N")
@@ -46,10 +49,19 @@ function Invoke-GodotCheck {
     $stderrPath = Join-Path $temporaryRoot ($logStem + ".stderr")
     $quotedArguments = (($Arguments + @("--log-file", $logPath)) | ForEach-Object { '"' + $_.Replace('"', '\"') + '"' }) -join " "
     try {
-        $process = Start-Process -FilePath $GodotPath -ArgumentList $quotedArguments -Wait -PassThru -NoNewWindow -RedirectStandardOutput $stdoutPath -RedirectStandardError $stderrPath
+        $process = Start-Process -FilePath $GodotPath -ArgumentList $quotedArguments -PassThru -NoNewWindow -RedirectStandardOutput $stdoutPath -RedirectStandardError $stderrPath
+        if (-not $process.WaitForExit($TimeoutSeconds * 1000)) {
+            Stop-Process -Id $process.Id -Force
+            throw "$Name did not finish within $TimeoutSeconds seconds."
+        }
         $log = if (Test-Path -LiteralPath $logPath) { Get-Content -Raw -LiteralPath $logPath } else { "" }
+        $stdout = if (Test-Path -LiteralPath $stdoutPath) { Get-Content -Raw -LiteralPath $stdoutPath } else { "" }
+        $stderr = if (Test-Path -LiteralPath $stderrPath) { Get-Content -Raw -LiteralPath $stderrPath } else { "" }
         if ($process.ExitCode -ne 0) {
-            throw "$Name failed with exit code $($process.ExitCode).`n$log"
+            throw "$Name failed with exit code $($process.ExitCode).`n$log`n$stdout`n$stderr"
+        }
+        if (-not $AllowScriptErrors -and ($log + $stdout + $stderr) -match "SCRIPT ERROR:") {
+            throw "$Name reported a script error.`n$log`n$stdout`n$stderr"
         }
     }
     finally {
@@ -78,6 +90,10 @@ try {
         throw "The fresh clone does not contain a populated Ninja Adventure image."
     }
 
+    # The first project import builds .godot entries for every vendored asset.
+    # Godot can report temporary loader errors while that import is still in
+    # progress, so only the clean second editor launch is used as validation.
+    Invoke-GodotCheck -Name "fresh-bootstrap-import" -Arguments @("--headless", "--path", $temporaryProject, "--editor", "--quit") -AllowScriptErrors
     Invoke-GodotCheck -Name "fresh-editor" -Arguments @("--headless", "--path", $temporaryProject, "--editor", "--quit")
     Invoke-GodotCheck -Name "fresh-main" -Arguments @("--headless", "--path", $temporaryProject, "--quit-after", "3")
 

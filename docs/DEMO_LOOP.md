@@ -17,9 +17,9 @@ constraining a participant's genre.
    Exit and press **E**.
 5. Confirm the reward screen shows Gold, Insight, and the reward multiplier.
    Return home and confirm the wallet changed.
-6. Buy **Lucky Satchel** when affordable, complete another run, and check that
-   its Gold reward is multiplied. Follow its upgrade chain to **Pathfinder**;
-   the next run HUD should show the higher speed.
+6. Buy **Lucky Satchel** with Gold when affordable, complete another run, and
+   check that its Gold reward is multiplied. Earn Insight, open **Skill Tree**,
+   and unlock **Pathfinder**; the next run HUD should show the higher speed.
 7. Press Escape from either scene and confirm the shared pause menu still works.
 
 Headless checks catch scene and script errors. This route needs a person because

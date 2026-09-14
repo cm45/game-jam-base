@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3]
+[gd_scene load_steps=16 format=3]
 
 [ext_resource type="Script" path="res://game/starter_run.gd" id="1_script"]
 [ext_resource type="Script" path="res://game/starter_world_surface.gd" id="2_surface"]
@@ -8,6 +8,10 @@
 [ext_resource type="Theme" path="res://ui/theme/game_jam_theme.tres" id="6_theme"]
 [ext_resource type="StyleBox" path="res://ui/theme/hud_panel.tres" id="7_hud_panel"]
 [ext_resource type="Texture2D" path="res://assets/ninja_adventure/source/Items/Treasure/BigTreasureChest.png" id="8_chest"]
+[ext_resource type="Script" path="res://components/looping_music.gd" id="9_music"]
+[ext_resource type="AudioStream" path="res://assets/ninja_adventure/source/Audio/Musics/35 - Adventure.ogg" id="10_music_stream"]
+[ext_resource type="AudioStream" path="res://assets/ninja_adventure/source/Audio/Sounds/Bonus/Coin.wav" id="11_pickup_sound"]
+[ext_resource type="AudioStream" path="res://assets/ninja_adventure/source/Audio/Jingles/Success1.wav" id="12_reward_sound"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_exit"]
 radius = 28.0
@@ -66,6 +70,22 @@ prompt = "Return home"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ExitTarget"]
 shape = SubResource("CircleShape2D_exit")
+
+[node name="RunMusic" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("10_music_stream")
+volume_db = -11.0
+bus = &"Music"
+script = ExtResource("9_music")
+
+[node name="PickupSound" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("11_pickup_sound")
+bus = &"SFX"
+
+[node name="RewardSound" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("12_reward_sound")
+bus = &"SFX"
 
 [node name="Interface" type="CanvasLayer" parent="."]
 

@@ -68,4 +68,5 @@ whether the request succeeds, then refresh the panel from the resulting state.
 Keep app/, features/, ui/, and game/ intact. The starter scenes already satisfy
 the documented RunContext and RunResult contract. Remove demo/ when it is no
 longer useful, then run `tests/demo_removal_smoke.ps1` to confirm no demo script
-is an implicit dependency.
+is an implicit dependency. For a complete removal sequence and genre-specific
+examples, read [Replace the starter and remove the demo](REPLACE_STARTER.md).

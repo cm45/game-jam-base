@@ -1,12 +1,8 @@
 extends Node
 ## Verifies that settings and progression persist, then reset together.
-## The existing local save is restored before this scene closes.
-
-const SAVE_PATH := "user://game_jam_foundation.cfg"
+## The test runs in a temporary SaveStore file and leaves the local save alone.
 const TEST_SETTING: StringName = &"release_smoke_volume"
 
-var _had_save := false
-var _saved_bytes := PackedByteArray()
 var _reset_received := false
 
 
@@ -21,6 +17,22 @@ func _run() -> void:
 	Progression.load_progress()
 	if not _require(Progression.get_balance(&"gold") == 0, "A reset save should start with no Gold."):
 		return
+	SaveStore.set_progress(Progression.SAVE_KEY, {
+		"balances": {"gold": 17, "insight": 5},
+		"upgrade_levels": {"lucky_satchel": 1, "deep_pockets": 2, "pathfinder": 1},
+	})
+	Progression.load_progress()
+	if not _require(Progression.get_shop_level(&"lucky_satchel") == 1, "Legacy shop levels should migrate into shop storage."):
+		return
+	if not _require(Progression.get_shop_level(&"deep_pockets") == 2, "Legacy multi-rank shop levels should migrate."):
+		return
+	if not _require(Progression.get_skill_level(&"pathfinder") == 1, "Legacy skill levels should migrate into skill storage."):
+		return
+	var migrated_state: Variant = SaveStore.get_progress(Progression.SAVE_KEY, {})
+	if not _require(migrated_state is Dictionary and migrated_state.has("shop_levels") and migrated_state.has("skill_levels"), "Migration should save separate shop and skill sections."):
+		return
+	SaveStore.reset_all()
+	Progression.load_progress()
 
 	SaveStore.set_setting(TEST_SETTING, 0.35)
 	if not _require(is_equal_approx(float(SaveStore.get_setting(TEST_SETTING, -1.0)), 0.35), "A setting should be readable after saving."):
@@ -71,18 +83,10 @@ func _require(condition: bool, message: String) -> bool:
 
 
 func _backup_save() -> void:
-	var absolute_path := ProjectSettings.globalize_path(SAVE_PATH)
-	_had_save = FileAccess.file_exists(absolute_path)
-	if _had_save:
-		_saved_bytes = FileAccess.get_file_as_bytes(absolute_path)
+	SaveStore.use_temporary_storage(&"save_reset")
+	Progression.load_progress()
 
 
 func _restore_save() -> void:
-	var absolute_path := ProjectSettings.globalize_path(SAVE_PATH)
-	if _had_save:
-		var file := FileAccess.open(absolute_path, FileAccess.WRITE)
-		file.store_buffer(_saved_bytes)
-	else:
-		DirAccess.remove_absolute(absolute_path)
-	SaveStore.load_from_disk()
+	SaveStore.restore_default_storage()
 	Progression.load_progress()

@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3]
+[gd_scene load_steps=25 format=3]
 
 [ext_resource type="Script" path="res://game/starter_home.gd" id="1_script"]
 [ext_resource type="Script" path="res://game/starter_world_surface.gd" id="2_surface"]
@@ -7,79 +7,278 @@
 [ext_resource type="PackedScene" path="res://features/progression/ui/progression_panel.tscn" id="5_progression"]
 [ext_resource type="Theme" path="res://ui/theme/game_jam_theme.tres" id="6_theme"]
 [ext_resource type="StyleBox" path="res://ui/theme/hud_panel.tres" id="7_hud_panel"]
-[ext_resource type="Texture2D" path="res://assets/ninja_adventure/source/Items/Treasure/BigTreasureChest.png" id="8_chest"]
+[ext_resource type="Texture2D" path="res://assets/ninja_adventure/source/Backgrounds/Tilesets/TilesetHouse.png" id="8_house"]
+[ext_resource type="Texture2D" path="res://assets/ninja_adventure/source/Backgrounds/Tilesets/tileset_camp.png" id="9_camp"]
+[ext_resource type="Texture2D" path="res://assets/ninja_adventure/source/Backgrounds/Tilesets/TilesetNature.png" id="10_nature"]
+[ext_resource type="Texture2D" path="res://assets/ninja_adventure/source/Actor/Character/Woman/SeparateAnim/Idle.png" id="11_merchant"]
+[ext_resource type="Texture2D" path="res://assets/ninja_adventure/source/Actor/Character/OldMan/SeparateAnim/Idle.png" id="12_mentor"]
+[ext_resource type="Texture2D" path="res://assets/ninja_adventure/source/Actor/Character/NinjaBlue/SeparateAnim/Idle.png" id="13_scout"]
+[ext_resource type="Texture2D" path="res://assets/ninja_adventure/source/Items/Object/MoneyBag.png" id="14_money_bag"]
+[ext_resource type="Texture2D" path="res://assets/ninja_adventure/source/Items/Object/Book.png" id="15_book"]
+[ext_resource type="Texture2D" path="res://assets/ninja_adventure/source/Items/Other/Letter.png" id="16_letter"]
+[ext_resource type="Script" path="res://components/looping_music.gd" id="17_music"]
+[ext_resource type="AudioStream" path="res://assets/ninja_adventure/source/Audio/Musics/4 - Village.ogg" id="18_music_stream"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_shrine"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_merchant"]
 radius = 24.0
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_gate"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_mentor"]
+radius = 24.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_scout"]
 radius = 28.0
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_house"]
+size = Vector2(42, 18)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tent"]
+size = Vector2(38, 14)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tree"]
+size = Vector2(18, 12)
+
 [node name="StarterHome" type="Node2D"]
+y_sort_enabled = true
 script = ExtResource("1_script")
 
 [node name="WorldSurface" type="Node2D" parent="."]
 script = ExtResource("2_surface")
 
+[node name="CampHouse" type="Node2D" parent="."]
+position = Vector2(130, 142)
+
+[node name="Sprite" type="Sprite2D" parent="CampHouse"]
+position = Vector2(0, -30)
+texture = ExtResource("8_house")
+region_enabled = true
+region_rect = Rect2(0, 0, 48, 64)
+
+[node name="Collider" type="StaticBody2D" parent="CampHouse"]
+collision_layer = 1
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CampHouse/Collider"]
+position = Vector2(0, -4)
+shape = SubResource("RectangleShape2D_house")
+
+[node name="MerchantTent" type="Node2D" parent="."]
+position = Vector2(274, 152)
+
+[node name="Sprite" type="Sprite2D" parent="MerchantTent"]
+position = Vector2(0, -22)
+texture = ExtResource("9_camp")
+region_enabled = true
+region_rect = Rect2(64, 0, 48, 48)
+
+[node name="MoneyBag" type="Sprite2D" parent="MerchantTent"]
+position = Vector2(24, -2)
+texture = ExtResource("14_money_bag")
+
+[node name="Collider" type="StaticBody2D" parent="MerchantTent"]
+collision_layer = 1
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MerchantTent/Collider"]
+position = Vector2(0, -3)
+shape = SubResource("RectangleShape2D_tent")
+
+[node name="MentorTent" type="Node2D" parent="."]
+position = Vector2(444, 152)
+
+[node name="Sprite" type="Sprite2D" parent="MentorTent"]
+position = Vector2(0, -22)
+texture = ExtResource("9_camp")
+region_enabled = true
+region_rect = Rect2(112, 0, 48, 48)
+
+[node name="Book" type="Sprite2D" parent="MentorTent"]
+position = Vector2(24, -2)
+texture = ExtResource("15_book")
+
+[node name="Collider" type="StaticBody2D" parent="MentorTent"]
+collision_layer = 1
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MentorTent/Collider"]
+position = Vector2(0, -3)
+shape = SubResource("RectangleShape2D_tent")
+
+[node name="ScoutCamp" type="Node2D" parent="."]
+position = Vector2(548, 246)
+
+[node name="Sprite" type="Sprite2D" parent="ScoutCamp"]
+position = Vector2(0, -22)
+texture = ExtResource("9_camp")
+region_enabled = true
+region_rect = Rect2(64, 0, 48, 48)
+
+[node name="Letter" type="Sprite2D" parent="ScoutCamp"]
+position = Vector2(-26, -1)
+texture = ExtResource("16_letter")
+
+[node name="Collider" type="StaticBody2D" parent="ScoutCamp"]
+collision_layer = 1
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ScoutCamp/Collider"]
+position = Vector2(0, -3)
+shape = SubResource("RectangleShape2D_tent")
+
+[node name="TreeWest" type="Node2D" parent="."]
+position = Vector2(62, 102)
+
+[node name="Sprite" type="Sprite2D" parent="TreeWest"]
+position = Vector2(0, -26)
+texture = ExtResource("10_nature")
+region_enabled = true
+region_rect = Rect2(0, 0, 32, 48)
+
+[node name="Collider" type="StaticBody2D" parent="TreeWest"]
+collision_layer = 1
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TreeWest/Collider"]
+position = Vector2(0, -2)
+shape = SubResource("RectangleShape2D_tree")
+
+[node name="TreeNorth" type="Node2D" parent="."]
+position = Vector2(580, 102)
+
+[node name="Sprite" type="Sprite2D" parent="TreeNorth"]
+position = Vector2(0, -26)
+texture = ExtResource("10_nature")
+region_enabled = true
+region_rect = Rect2(0, 0, 32, 48)
+
+[node name="Collider" type="StaticBody2D" parent="TreeNorth"]
+collision_layer = 1
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TreeNorth/Collider"]
+position = Vector2(0, -2)
+shape = SubResource("RectangleShape2D_tree")
+
+[node name="TreeSouth" type="Node2D" parent="."]
+position = Vector2(536, 320)
+
+[node name="Sprite" type="Sprite2D" parent="TreeSouth"]
+position = Vector2(0, -26)
+texture = ExtResource("10_nature")
+region_enabled = true
+region_rect = Rect2(0, 0, 32, 48)
+
+[node name="Collider" type="StaticBody2D" parent="TreeSouth"]
+collision_layer = 1
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TreeSouth/Collider"]
+position = Vector2(0, -2)
+shape = SubResource("RectangleShape2D_tree")
+
+[node name="MerchantVisual" type="Node2D" parent="."]
+position = Vector2(238, 210)
+
+[node name="Sprite" type="Sprite2D" parent="MerchantVisual"]
+position = Vector2(0, -8)
+texture = ExtResource("11_merchant")
+hframes = 4
+
+[node name="Name" type="Label" parent="MerchantVisual"]
+offset_left = -40.0
+offset_top = 10.0
+offset_right = 40.0
+offset_bottom = 22.0
+theme = ExtResource("6_theme")
+theme_override_colors/font_color = Color(1, 0.91, 0.65, 1)
+theme_override_colors/font_outline_color = Color(0.12, 0.09, 0.05, 1)
+theme_override_constants/outline_size = 1
+theme_override_font_sizes/font_size = 7
+text = "MERCHANT"
+horizontal_alignment = 1
+
+[node name="Merchant" type="Area2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(238, 210)
+collision_layer = 0
+collision_mask = 1
+script = ExtResource("4_interaction")
+prompt = "Visit the Gold shop"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Merchant"]
+shape = SubResource("CircleShape2D_merchant")
+
+[node name="MentorVisual" type="Node2D" parent="."]
+position = Vector2(416, 210)
+
+[node name="Sprite" type="Sprite2D" parent="MentorVisual"]
+position = Vector2(0, -8)
+texture = ExtResource("12_mentor")
+hframes = 4
+
+[node name="Name" type="Label" parent="MentorVisual"]
+offset_left = -40.0
+offset_top = 10.0
+offset_right = 40.0
+offset_bottom = 22.0
+theme = ExtResource("6_theme")
+theme_override_colors/font_color = Color(1, 0.91, 0.65, 1)
+theme_override_colors/font_outline_color = Color(0.12, 0.09, 0.05, 1)
+theme_override_constants/outline_size = 1
+theme_override_font_sizes/font_size = 7
+text = "MENTOR"
+horizontal_alignment = 1
+
+[node name="Mentor" type="Area2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(416, 210)
+collision_layer = 0
+collision_mask = 1
+script = ExtResource("4_interaction")
+prompt = "Study the skill tree"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Mentor"]
+shape = SubResource("CircleShape2D_mentor")
+
+[node name="ScoutVisual" type="Node2D" parent="."]
+position = Vector2(514, 275)
+
+[node name="Sprite" type="Sprite2D" parent="ScoutVisual"]
+position = Vector2(0, -8)
+texture = ExtResource("13_scout")
+hframes = 4
+
+[node name="Name" type="Label" parent="ScoutVisual"]
+offset_left = -40.0
+offset_top = 10.0
+offset_right = 40.0
+offset_bottom = 22.0
+theme = ExtResource("6_theme")
+theme_override_colors/font_color = Color(1, 0.91, 0.65, 1)
+theme_override_colors/font_outline_color = Color(0.12, 0.09, 0.05, 1)
+theme_override_constants/outline_size = 1
+theme_override_font_sizes/font_size = 7
+text = "SCOUT"
+horizontal_alignment = 1
+
+[node name="Scout" type="Area2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(514, 275)
+collision_layer = 0
+collision_mask = 1
+script = ExtResource("4_interaction")
+prompt = "Begin an expedition"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Scout"]
+shape = SubResource("CircleShape2D_scout")
+
 [node name="Player" parent="." instance=ExtResource("3_player")]
-position = Vector2(320, 292)
+position = Vector2(320, 304)
 
-[node name="ShrineVisual" type="Node2D" parent="."]
-position = Vector2(258, 198)
-z_index = 1
-
-[node name="Chest" type="Sprite2D" parent="ShrineVisual"]
-position = Vector2(0, -8)
-texture = ExtResource("8_chest")
-hframes = 2
-
-[node name="Name" type="Label" parent="ShrineVisual"]
-position = Vector2(-29, 10)
-theme_override_colors/font_color = Color(1, 0.91, 0.65, 1)
-theme_override_colors/font_outline_color = Color(0.12, 0.09, 0.05, 1)
-theme_override_constants/outline_size = 1
-theme_override_font_sizes/font_size = 7
-text = "UPGRADES"
-
-[node name="Shrine" type="Area2D" parent="."]
-unique_name_in_owner = true
-position = Vector2(258, 198)
-collision_layer = 0
-collision_mask = 1
-script = ExtResource("4_interaction")
-prompt = "Open upgrades"
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Shrine"]
-shape = SubResource("CircleShape2D_shrine")
-
-[node name="RunGateVisual" type="Node2D" parent="."]
-position = Vector2(488, 208)
-z_index = 1
-
-[node name="Chest" type="Sprite2D" parent="RunGateVisual"]
-position = Vector2(0, -8)
-texture = ExtResource("8_chest")
-hframes = 2
-frame = 1
-
-[node name="Name" type="Label" parent="RunGateVisual"]
-position = Vector2(-25, 10)
-theme_override_colors/font_color = Color(1, 0.91, 0.65, 1)
-theme_override_colors/font_outline_color = Color(0.12, 0.09, 0.05, 1)
-theme_override_constants/outline_size = 1
-theme_override_font_sizes/font_size = 7
-text = "START RUN"
-
-[node name="RunGate" type="Area2D" parent="."]
-unique_name_in_owner = true
-position = Vector2(488, 208)
-collision_layer = 0
-collision_mask = 1
-script = ExtResource("4_interaction")
-prompt = "Start starter expedition"
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="RunGate"]
-shape = SubResource("CircleShape2D_gate")
+[node name="CampMusic" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("18_music_stream")
+volume_db = -9.0
+bus = &"Music"
+script = ExtResource("17_music")
 
 [node name="Interface" type="CanvasLayer" parent="."]
 
@@ -95,7 +294,7 @@ theme = ExtResource("6_theme")
 [node name="WalletPanel" type="PanelContainer" parent="Interface/HUD"]
 offset_left = 8.0
 offset_top = 8.0
-offset_right = 214.0
+offset_right = 218.0
 offset_bottom = 30.0
 mouse_filter = 2
 theme_override_styles/panel = ExtResource("7_hud_panel")
@@ -103,12 +302,12 @@ theme_override_styles/panel = ExtResource("7_hud_panel")
 [node name="Wallet" type="Label" parent="Interface/HUD/WalletPanel"]
 unique_name_in_owner = true
 theme_override_font_sizes/font_size = 8
-text = "GOLD 0  •  INSIGHT 0"
+text = "GOLD 0  ·  INSIGHT 0"
 horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="RunPreviewPanel" type="PanelContainer" parent="Interface/HUD"]
-offset_left = 452.0
+offset_left = 442.0
 offset_top = 8.0
 offset_right = 632.0
 offset_bottom = 30.0
@@ -118,17 +317,17 @@ theme_override_styles/panel = ExtResource("7_hud_panel")
 [node name="RunPreview" type="Label" parent="Interface/HUD/RunPreviewPanel"]
 unique_name_in_owner = true
 theme_override_font_sizes/font_size = 8
-text = "NEXT: SPD 72  x1.00"
+text = "NEXT RUN  SPD 72  ×1.00"
 horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="MessagePanel" type="PanelContainer" parent="Interface/HUD"]
 unique_name_in_owner = true
 visible = false
-offset_left = 100.0
-offset_top = 308.0
-offset_right = 540.0
-offset_bottom = 334.0
+offset_left = 90.0
+offset_top = 304.0
+offset_right = 550.0
+offset_bottom = 330.0
 mouse_filter = 2
 theme_override_styles/panel = ExtResource("7_hud_panel")
 
@@ -143,9 +342,9 @@ text = "Run result"
 [node name="InteractionPanel" type="PanelContainer" parent="Interface/HUD"]
 unique_name_in_owner = true
 visible = false
-offset_left = 190.0
+offset_left = 176.0
 offset_top = 336.0
-offset_right = 450.0
+offset_right = 464.0
 offset_bottom = 357.0
 mouse_filter = 2
 theme_override_styles/panel = ExtResource("7_hud_panel")
@@ -162,4 +361,4 @@ unique_name_in_owner = true
 visible = false
 mouse_filter = 0
 show_sandbox_tools = false
-close_button_text = "CLOSE UPGRADES"
+close_button_text = "BACK TO CAMP"

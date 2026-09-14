@@ -1,9 +1,10 @@
 extends Node2D
-## A minimal freely walkable home that demonstrates the run-flow contract.
+## Walkable camp hub that demonstrates separate shop, skill, and run stations.
 
 @onready var _progression_panel: ProgressionPanel = %ProgressionPanel
-@onready var _shrine: InteractionTarget = %Shrine
-@onready var _run_gate: InteractionTarget = %RunGate
+@onready var _merchant: InteractionTarget = %Merchant
+@onready var _mentor: InteractionTarget = %Mentor
+@onready var _scout: InteractionTarget = %Scout
 @onready var _wallet: Label = %Wallet
 @onready var _run_preview: Label = %RunPreview
 @onready var _interaction_panel: PanelContainer = %InteractionPanel
@@ -15,8 +16,9 @@ var _message_time_remaining := 0.0
 
 
 func _ready() -> void:
-	_shrine.activated.connect(_open_progression)
-	_run_gate.activated.connect(_start_run)
+	_merchant.activated.connect(_open_shop)
+	_mentor.activated.connect(_open_skill_tree)
+	_scout.activated.connect(_start_run)
 	_progression_panel.close_requested.connect(_progression_panel.hide)
 	Progression.currency_changed.connect(func(_id: StringName, _amount: int) -> void: _refresh_hud())
 	Progression.upgrade_purchased.connect(func(_id: StringName, _level: int) -> void: _refresh_hud())
@@ -41,8 +43,15 @@ func _process(delta: float) -> void:
 	_interaction_panel.show()
 
 
-func _open_progression(_actor: Node2D) -> void:
+func _open_shop(_actor: Node2D) -> void:
 	_progression_panel.show()
+	_progression_panel.show_shop()
+	_progression_panel.refresh()
+
+
+func _open_skill_tree(_actor: Node2D) -> void:
+	_progression_panel.show()
+	_progression_panel.show_skill_tree()
 	_progression_panel.refresh()
 
 
@@ -61,7 +70,7 @@ func _refresh_hud() -> void:
 		Progression.get_balance(&"gold"),
 		Progression.get_balance(&"insight"),
 	]
-	_run_preview.text = "NEXT: SPD %d  x%.2f" % [
+	_run_preview.text = "NEXT RUN  SPD %d  ×%.2f" % [
 		roundi(Progression.get_effective_stat(&"run_speed", StarterGame.BASE_MOVE_SPEED)),
 		Progression.get_effective_stat(&"run_reward_multiplier", StarterGame.BASE_REWARD_MULTIPLIER),
 	]

@@ -15,6 +15,8 @@ const INSIGHT_REWARD := 1
 @onready var _summary: Control = %Summary
 @onready var _summary_text: Label = %SummaryText
 @onready var _claim_button: Button = %ClaimButton
+@onready var _pickup_sound: AudioStreamPlayer = %PickupSound
+@onready var _reward_sound: AudioStreamPlayer = %RewardSound
 
 var _context: RunContext
 var _collected_tokens := 0
@@ -49,6 +51,7 @@ func _on_pickup_collected(_pickup: ResourcePickup, amount: int) -> void:
 	if _completion_ready:
 		return
 	_collected_tokens += amount
+	_pickup_sound.play()
 	if _collected_tokens >= REQUIRED_TOKENS:
 		_exit_target.interaction_enabled = true
 	_refresh_hud()
@@ -58,6 +61,7 @@ func _prepare_completion(_actor: Node2D) -> void:
 	if _completion_ready or _collected_tokens < REQUIRED_TOKENS:
 		return
 	_completion_ready = true
+	_reward_sound.play()
 	_exit_target.interaction_enabled = false
 	var earned_gold := _earned_gold()
 	_summary_text.text = "RUN COMPLETE\n\n%d expedition tokens recovered\n\n+%d GOLD\n+%d INSIGHT\n\nClaim these rewards at home." % [

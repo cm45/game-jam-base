@@ -8,8 +8,7 @@ radius = 6.0
 
 [node name="TopDownPlayer" type="CharacterBody2D"]
 collision_layer = 1
-collision_mask = 0
-z_index = 2
+collision_mask = 1
 script = ExtResource("1_script")
 
 [node name="Sprite" type="Sprite2D" parent="."]

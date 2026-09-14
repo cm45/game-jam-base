@@ -4,17 +4,17 @@
 [ext_resource type="StyleBox" path="res://ui/theme/hud_panel.tres" id="2_panel"]
 
 [node name="UpgradeShopItem" type="PanelContainer"]
-custom_minimum_size = Vector2(0, 32)
+custom_minimum_size = Vector2(0, 58)
 layout_mode = 2
 theme_override_styles/panel = ExtResource("2_panel")
 script = ExtResource("1_script")
 
 [node name="Margin" type="MarginContainer" parent="."]
 layout_mode = 2
-theme_override_constants/margin_left = 4
-theme_override_constants/margin_top = 2
-theme_override_constants/margin_right = 4
-theme_override_constants/margin_bottom = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 6
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 6
 
 [node name="Layout" type="HBoxContainer" parent="Margin"]
 layout_mode = 2
@@ -28,18 +28,18 @@ theme_override_constants/separation = 0
 [node name="Title" type="Label" parent="Margin/Layout/Text"]
 unique_name_in_owner = true
 layout_mode = 2
-theme_override_font_sizes/font_size = 10
+theme_override_font_sizes/font_size = 15
 text = "Upgrade"
 
 [node name="Summary" type="Label" parent="Margin/Layout/Text"]
 unique_name_in_owner = true
 layout_mode = 2
-theme_override_font_sizes/font_size = 8
+theme_override_font_sizes/font_size = 13
 text = "LV 0/1  •  15 Gold"
 
 [node name="ViewButton" type="Button" parent="Margin/Layout"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(42, 22)
+custom_minimum_size = Vector2(94, 38)
 layout_mode = 2
-theme_override_font_sizes/font_size = 8
-text = "VIEW"
+theme_override_font_sizes/font_size = 13
+text = "DETAILS"

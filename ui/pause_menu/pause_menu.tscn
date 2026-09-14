@@ -1,6 +1,9 @@
-[gd_scene load_steps=2 format=3]
+[gd_scene load_steps=5 format=3]
 
 [ext_resource type="Script" path="res://ui/pause_menu/pause_menu.gd" id="1_script"]
+[ext_resource type="Theme" path="res://ui/theme/game_jam_theme.tres" id="2_theme"]
+[ext_resource type="Font" path="res://ui/theme/readable_body_font.tres" id="3_body_font"]
+[ext_resource type="AudioStream" path="res://assets/ninja_adventure/source/Audio/Sounds/Menu/Accept.wav" id="4_preview_sound"]
 
 [node name="PauseMenu" type="Control"]
 layout_mode = 3
@@ -10,6 +13,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 0
+theme = ExtResource("2_theme")
 script = ExtResource("1_script")
 
 [node name="Dimmer" type="ColorRect" parent="."]
@@ -19,7 +23,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.015, 0.025, 0.02, 0.82)
+color = Color(0.015, 0.025, 0.02, 0.68)
 mouse_filter = 0
 
 [node name="Center" type="CenterContainer" parent="."]
@@ -31,24 +35,24 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="Panel" type="PanelContainer" parent="Center"]
-custom_minimum_size = Vector2(430, 0)
+custom_minimum_size = Vector2(620, 0)
 layout_mode = 2
 
 [node name="Margin" type="MarginContainer" parent="Center/Panel"]
 layout_mode = 2
-theme_override_constants/margin_left = 8
-theme_override_constants/margin_top = 6
-theme_override_constants/margin_right = 8
-theme_override_constants/margin_bottom = 6
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 16
 
 [node name="Layout" type="VBoxContainer" parent="Center/Panel/Margin"]
 layout_mode = 2
-theme_override_constants/separation = 10
+theme_override_constants/separation = 12
 
 [node name="PageTitle" type="Label" parent="Center/Panel/Margin/Layout"]
 unique_name_in_owner = true
 layout_mode = 2
-theme_override_font_sizes/font_size = 26
+theme_override_font_sizes/font_size = 28
 text = "PAUSED"
 horizontal_alignment = 1
 
@@ -58,40 +62,47 @@ layout_mode = 2
 [node name="MainPage" type="VBoxContainer" parent="Center/Panel/Margin/Layout"]
 unique_name_in_owner = true
 layout_mode = 2
-theme_override_constants/separation = 8
+theme_override_constants/separation = 10
 
 [node name="ResumeButton" type="Button" parent="Center/Panel/Margin/Layout/MainPage"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(0, 34)
+custom_minimum_size = Vector2(0, 42)
 layout_mode = 2
+theme_override_font_sizes/font_size = 16
 text = "RESUME"
 
 [node name="SettingsButton" type="Button" parent="Center/Panel/Margin/Layout/MainPage"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(0, 34)
+custom_minimum_size = Vector2(0, 42)
 layout_mode = 2
+theme_override_font_sizes/font_size = 16
 text = "SETTINGS"
 
 [node name="ControlsButton" type="Button" parent="Center/Panel/Margin/Layout/MainPage"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(0, 34)
+custom_minimum_size = Vector2(0, 42)
 layout_mode = 2
+theme_override_font_sizes/font_size = 16
 text = "KEYBINDS"
 
 [node name="HubButton" type="Button" parent="Center/Panel/Margin/Layout/MainPage"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(0, 34)
+custom_minimum_size = Vector2(0, 42)
 layout_mode = 2
+theme_override_font_sizes/font_size = 16
 text = "RETURN TO FOUNDATION HUB"
 
 [node name="QuitButton" type="Button" parent="Center/Panel/Margin/Layout/MainPage"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(0, 34)
+custom_minimum_size = Vector2(0, 42)
 layout_mode = 2
+theme_override_font_sizes/font_size = 16
 text = "QUIT"
 
 [node name="Hint" type="Label" parent="Center/Panel/Margin/Layout/MainPage"]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("3_body_font")
+theme_override_font_sizes/font_size = 18
 text = "Press Escape to close this menu."
 horizontal_alignment = 1
 
@@ -103,6 +114,8 @@ theme_override_constants/separation = 8
 
 [node name="Description" type="Label" parent="Center/Panel/Margin/Layout/SettingsPage"]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("3_body_font")
+theme_override_font_sizes/font_size = 18
 text = "Changes save automatically for the next launch."
 horizontal_alignment = 1
 
@@ -111,14 +124,16 @@ layout_mode = 2
 theme_override_constants/separation = 12
 
 [node name="Label" type="Label" parent="Center/Panel/Margin/Layout/SettingsPage/MasterRow"]
-custom_minimum_size = Vector2(100, 0)
+custom_minimum_size = Vector2(120, 0)
 layout_mode = 2
+theme_override_font_sizes/font_size = 16
 text = "MASTER"
 
 [node name="MasterSlider" type="HSlider" parent="Center/Panel/Margin/Layout/SettingsPage/MasterRow"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
+custom_minimum_size = Vector2(300, 24)
 step = 0.05
 value = 0.8
 
@@ -127,14 +142,16 @@ layout_mode = 2
 theme_override_constants/separation = 12
 
 [node name="Label" type="Label" parent="Center/Panel/Margin/Layout/SettingsPage/MusicRow"]
-custom_minimum_size = Vector2(100, 0)
+custom_minimum_size = Vector2(120, 0)
 layout_mode = 2
+theme_override_font_sizes/font_size = 16
 text = "MUSIC"
 
 [node name="MusicSlider" type="HSlider" parent="Center/Panel/Margin/Layout/SettingsPage/MusicRow"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
+custom_minimum_size = Vector2(300, 24)
 step = 0.05
 value = 0.65
 
@@ -143,24 +160,34 @@ layout_mode = 2
 theme_override_constants/separation = 12
 
 [node name="Label" type="Label" parent="Center/Panel/Margin/Layout/SettingsPage/SfxRow"]
-custom_minimum_size = Vector2(100, 0)
+custom_minimum_size = Vector2(120, 0)
 layout_mode = 2
+theme_override_font_sizes/font_size = 16
 text = "SFX"
 
 [node name="SfxSlider" type="HSlider" parent="Center/Panel/Margin/Layout/SettingsPage/SfxRow"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
+custom_minimum_size = Vector2(300, 24)
 step = 0.05
 value = 0.75
 
 [node name="Divider" type="HSeparator" parent="Center/Panel/Margin/Layout/SettingsPage"]
 layout_mode = 2
 
+[node name="PreviewSoundButton" type="Button" parent="Center/Panel/Margin/Layout/SettingsPage"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 38)
+layout_mode = 2
+theme_override_font_sizes/font_size = 15
+text = "PLAY TEST SOUND"
+
 [node name="ResetButton" type="Button" parent="Center/Panel/Margin/Layout/SettingsPage"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(0, 34)
+custom_minimum_size = Vector2(0, 42)
 layout_mode = 2
+theme_override_font_sizes/font_size = 16
 text = "RESET SAVE AND SETTINGS"
 
 [node name="ResetConfirmation" type="VBoxContainer" parent="Center/Panel/Margin/Layout/SettingsPage"]
@@ -171,6 +198,8 @@ theme_override_constants/separation = 6
 
 [node name="Warning" type="Label" parent="Center/Panel/Margin/Layout/SettingsPage/ResetConfirmation"]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("3_body_font")
+theme_override_font_sizes/font_size = 16
 text = "This clears saved settings and future progression data."
 horizontal_alignment = 1
 
@@ -193,8 +222,9 @@ text = "CONFIRM RESET"
 
 [node name="SettingsBackButton" type="Button" parent="Center/Panel/Margin/Layout/SettingsPage"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(0, 34)
+custom_minimum_size = Vector2(0, 42)
 layout_mode = 2
+theme_override_font_sizes/font_size = 16
 text = "BACK"
 
 [node name="ControlsPage" type="VBoxContainer" parent="Center/Panel/Margin/Layout"]
@@ -205,16 +235,26 @@ theme_override_constants/separation = 10
 
 [node name="Description" type="Label" parent="Center/Panel/Margin/Layout/ControlsPage"]
 layout_mode = 2
-text = "These starter actions are registered by InputActions."
+theme_override_fonts/font = ExtResource("3_body_font")
+theme_override_font_sizes/font_size = 18
+text = "These actions are registered in the Input Map."
 horizontal_alignment = 1
 
 [node name="BindingList" type="Label" parent="Center/Panel/Margin/Layout/ControlsPage"]
 unique_name_in_owner = true
 layout_mode = 2
+theme_override_fonts/font = ExtResource("3_body_font")
+theme_override_font_sizes/font_size = 18
 text = "Move: W, A, S, D\nInteract: E\nPause: Escape"
 
 [node name="ControlsBackButton" type="Button" parent="Center/Panel/Margin/Layout/ControlsPage"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(0, 34)
+custom_minimum_size = Vector2(0, 42)
 layout_mode = 2
+theme_override_font_sizes/font_size = 16
 text = "BACK"
+
+[node name="PreviewSound" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("4_preview_sound")
+bus = &"SFX"

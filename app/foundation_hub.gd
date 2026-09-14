@@ -1,10 +1,11 @@
-extends Control
+extends UIScreen
 ## Small runnable landing scene for testing the app shell before game scenes exist.
 
 @onready var _starter_button: Button = %StarterButton
 
 
 func _ready() -> void:
+	super()
 	_starter_button.grab_focus()
 
 

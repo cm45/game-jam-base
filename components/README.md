@@ -9,6 +9,8 @@ components it needs.
   **E** within its `Area2D`. The owning scene supplies the result.
 - `resource_pickup.tscn` emits `picked_up(pickup, amount)` once and then frees
   itself. The owning scene decides which counter or resource receives it.
+- `looping_music.gd` can be attached to an `AudioStreamPlayer` on the `Music`
+  bus to loop a supplied stream without altering the vendored audio asset.
 
 The starter game and demo use all three. Duplicate them into a participant
 scene when they fit the game; let the scene owner create a `RunResult` rather

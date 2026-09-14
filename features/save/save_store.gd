@@ -10,6 +10,7 @@ const SETTINGS_SECTION := "settings"
 const PROGRESS_SECTION := "progress"
 
 var _config := ConfigFile.new()
+var _storage_path := SAVE_PATH
 
 
 func _ready() -> void:
@@ -40,10 +41,10 @@ func set_progress(key: StringName, value: Variant) -> void:
 
 func load_from_disk() -> void:
 	_config = ConfigFile.new()
-	if not FileAccess.file_exists(SAVE_PATH):
+	if not FileAccess.file_exists(_storage_path):
 		_write_version()
 		return
-	var result := _config.load(SAVE_PATH)
+	var result := _config.load(_storage_path)
 	if result != OK:
 		push_warning("Could not load foundation save data. Defaults will be used.")
 		_config = ConfigFile.new()
@@ -52,7 +53,7 @@ func load_from_disk() -> void:
 
 func save_to_disk() -> Error:
 	_write_version()
-	var result := _config.save(SAVE_PATH)
+	var result := _config.save(_storage_path)
 	if result == OK:
 		data_saved.emit()
 	else:
@@ -66,6 +67,24 @@ func reset_all() -> Error:
 	if result == OK:
 		data_reset.emit()
 	return result
+
+
+func use_temporary_storage(test_name: StringName) -> void:
+	## Test helper that prevents smoke checks from writing a developer's save.
+	_storage_path = "user://game_jam_foundation_test_%s.cfg" % test_name
+	var absolute_path := ProjectSettings.globalize_path(_storage_path)
+	if FileAccess.file_exists(absolute_path):
+		DirAccess.remove_absolute(absolute_path)
+	load_from_disk()
+
+
+func restore_default_storage() -> void:
+	if _storage_path != SAVE_PATH:
+		var temporary_path := ProjectSettings.globalize_path(_storage_path)
+		if FileAccess.file_exists(temporary_path):
+			DirAccess.remove_absolute(temporary_path)
+	_storage_path = SAVE_PATH
+	load_from_disk()
 
 
 func _write_version() -> void:

@@ -1,10 +1,11 @@
-extends Control
+extends UIScreen
 ## Keeps the Milestone 1 preview as a second scene for router verification.
 
 @onready var _back_button: Button = %BackButton
 
 
 func _ready() -> void:
+	super()
 	_back_button.grab_focus()
 
 

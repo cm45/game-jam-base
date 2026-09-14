@@ -21,6 +21,10 @@ after the current one has been reviewed.
   proof.
 - [x] **6. Release readiness** — Automated validation, fresh-clone check,
   save/reset tests, Windows export, and final jam checklist.
+- [x] **Post-release foundation polish** — Desktop-sized shared UI, themed
+  pause/settings screens, separate Gold shop and Insight skill-tree mechanics,
+  an audible collision-ready starter camp, isolated save smoke tests, and a
+  guide for replacing the starter or removing the demo.
 
 ## Review gates
 

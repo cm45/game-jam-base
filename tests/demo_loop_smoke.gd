@@ -1,15 +1,9 @@
 extends Node
 ## Focused headless check for the milestone 4 collect-and-exit transaction.
-## It restores the local save file so it is safe to run during development.
+## It uses a temporary SaveStore file, so it is safe to run during development.
 
 const RUN_SCENE := preload("res://demo/demo_run.tscn")
 const HOME_SCENE_PATH := "res://demo/demo_home.tscn"
-const SAVE_PATH := "user://game_jam_foundation.cfg"
-
-var _had_save := false
-var _saved_bytes := PackedByteArray()
-
-
 func _init() -> void:
 	call_deferred("_run")
 
@@ -70,18 +64,10 @@ func _require(condition: bool, message: String) -> bool:
 
 
 func _backup_save() -> void:
-	var absolute_path := ProjectSettings.globalize_path(SAVE_PATH)
-	_had_save = FileAccess.file_exists(absolute_path)
-	if _had_save:
-		_saved_bytes = FileAccess.get_file_as_bytes(absolute_path)
+	SaveStore.use_temporary_storage(&"demo_loop")
+	Progression.load_progress()
 
 
 func _restore_save() -> void:
-	var absolute_path := ProjectSettings.globalize_path(SAVE_PATH)
-	if _had_save:
-		var file := FileAccess.open(absolute_path, FileAccess.WRITE)
-		file.store_buffer(_saved_bytes)
-	else:
-		DirAccess.remove_absolute(absolute_path)
-	SaveStore.load_from_disk()
+	SaveStore.restore_default_storage()
 	Progression.load_progress()

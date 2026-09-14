@@ -1,8 +1,11 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene load_steps=7 format=3]
 
 [ext_resource type="Script" path="res://features/progression/ui/progression_panel.gd" id="1_script"]
 [ext_resource type="Script" path="res://features/progression/ui/progression_tree.gd" id="2_tree"]
 [ext_resource type="StyleBox" path="res://ui/theme/hud_panel.tres" id="3_compact_panel"]
+[ext_resource type="Theme" path="res://ui/theme/game_jam_theme.tres" id="4_theme"]
+[ext_resource type="Font" path="res://ui/theme/readable_body_font.tres" id="5_body_font"]
+[ext_resource type="AudioStream" path="res://assets/ninja_adventure/source/Audio/Sounds/Bonus/PowerUp1.wav" id="6_purchase_sound"]
 
 [node name="ProgressionPanel" type="Control"]
 layout_mode = 3
@@ -11,6 +14,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("4_theme")
 script = ExtResource("1_script")
 
 [node name="Center" type="CenterContainer" parent="."]
@@ -22,20 +26,20 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="Panel" type="PanelContainer" parent="Center"]
-custom_minimum_size = Vector2(600, 0)
+custom_minimum_size = Vector2(1120, 600)
 layout_mode = 2
 theme_override_styles/panel = ExtResource("3_compact_panel")
 
 [node name="Margin" type="MarginContainer" parent="Center/Panel"]
 layout_mode = 2
-theme_override_constants/margin_left = 6
-theme_override_constants/margin_top = 4
-theme_override_constants/margin_right = 6
-theme_override_constants/margin_bottom = 4
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 14
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 14
 
 [node name="Layout" type="VBoxContainer" parent="Center/Panel/Margin"]
 layout_mode = 2
-theme_override_constants/separation = 2
+theme_override_constants/separation = 8
 
 [node name="Header" type="HBoxContainer" parent="Center/Panel/Margin/Layout"]
 layout_mode = 2
@@ -43,125 +47,197 @@ layout_mode = 2
 [node name="Title" type="Label" parent="Center/Panel/Margin/Layout/Header"]
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_font_sizes/font_size = 16
-text = "META-PROGRESSION LAB"
+theme_override_font_sizes/font_size = 28
+text = "PROGRESSION"
 
 [node name="CloseButton" type="Button" parent="Center/Panel/Margin/Layout/Header"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(94, 22)
+custom_minimum_size = Vector2(150, 42)
 layout_mode = 2
-theme_override_font_sizes/font_size = 9
-text = "BACK TO HUB"
+theme_override_font_sizes/font_size = 15
+text = "BACK TO CAMP"
 
 [node name="Wallet" type="HBoxContainer" parent="Center/Panel/Margin/Layout"]
 unique_name_in_owner = true
 layout_mode = 2
 alignment = 1
-theme_override_constants/separation = 12
+theme_override_constants/separation = 24
 
 [node name="SandboxRow" type="HBoxContainer" parent="Center/Panel/Margin/Layout"]
 unique_name_in_owner = true
 layout_mode = 2
 alignment = 1
-theme_override_constants/separation = 5
+theme_override_constants/separation = 8
 
 [node name="SandboxLabel" type="Label" parent="Center/Panel/Margin/Layout/SandboxRow"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 8
-text = "SANDBOX CURRENCY:"
+theme_override_font_sizes/font_size = 12
+text = "SANDBOX CURRENCY"
 
 [node name="GrantGoldButton" type="Button" parent="Center/Panel/Margin/Layout/SandboxRow"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(82, 20)
+custom_minimum_size = Vector2(118, 32)
 layout_mode = 2
-theme_override_font_sizes/font_size = 8
+theme_override_font_sizes/font_size = 12
 text = "+25 GOLD"
 
 [node name="GrantInsightButton" type="Button" parent="Center/Panel/Margin/Layout/SandboxRow"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(82, 20)
+custom_minimum_size = Vector2(118, 32)
 layout_mode = 2
-theme_override_font_sizes/font_size = 8
+theme_override_font_sizes/font_size = 12
 text = "+1 INSIGHT"
 
 [node name="Divider" type="HSeparator" parent="Center/Panel/Margin/Layout"]
 layout_mode = 2
 
-[node name="Views" type="TabContainer" parent="Center/Panel/Margin/Layout"]
-custom_minimum_size = Vector2(0, 150)
+[node name="Content" type="HBoxContainer" parent="Center/Panel/Margin/Layout"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 9
+size_flags_vertical = 3
+theme_override_constants/separation = 12
 
-[node name="Shop" type="ScrollContainer" parent="Center/Panel/Margin/Layout/Views"]
+[node name="Views" type="TabContainer" parent="Center/Panel/Margin/Layout/Content"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(760, 420)
 layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 15
+
+[node name="Shop" type="ScrollContainer" parent="Center/Panel/Margin/Layout/Content/Views"]
+layout_mode = 2
+horizontal_scroll_mode = 0
 metadata/_tab_index = 0
 
-[node name="ShopList" type="GridContainer" parent="Center/Panel/Margin/Layout/Views/Shop"]
+[node name="ShopList" type="VBoxContainer" parent="Center/Panel/Margin/Layout/Content/Views/Shop"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
-columns = 2
-theme_override_constants/h_separation = 4
-theme_override_constants/v_separation = 4
+theme_override_constants/separation = 6
 
-[node name="SkillTree" type="ScrollContainer" parent="Center/Panel/Margin/Layout/Views"]
+[node name="SkillTree" type="VBoxContainer" parent="Center/Panel/Margin/Layout/Content/Views"]
 layout_mode = 2
 metadata/_tab_index = 1
 
-[node name="ProgressionTree" type="Control" parent="Center/Panel/Margin/Layout/Views/SkillTree"]
+[node name="TreeToolbar" type="HBoxContainer" parent="Center/Panel/Margin/Layout/Content/Views/SkillTree"]
+layout_mode = 2
+theme_override_constants/separation = 6
+
+[node name="PanHint" type="Label" parent="Center/Panel/Margin/Layout/Content/Views/SkillTree/TreeToolbar"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("5_body_font")
+theme_override_font_sizes/font_size = 16
+text = "Insight skills · drag with middle mouse to pan"
+
+[node name="ZoomOutButton" type="Button" parent="Center/Panel/Margin/Layout/Content/Views/SkillTree/TreeToolbar"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(480, 144)
+custom_minimum_size = Vector2(58, 30)
+layout_mode = 2
+theme_override_font_sizes/font_size = 13
+text = "−"
+
+[node name="FitTreeButton" type="Button" parent="Center/Panel/Margin/Layout/Content/Views/SkillTree/TreeToolbar"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(74, 30)
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+text = "FIT"
+
+[node name="ZoomInButton" type="Button" parent="Center/Panel/Margin/Layout/Content/Views/SkillTree/TreeToolbar"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(58, 30)
+layout_mode = 2
+theme_override_font_sizes/font_size = 13
+text = "+"
+
+[node name="TreeScroll" type="ScrollContainer" parent="Center/Panel/Margin/Layout/Content/Views/SkillTree"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="ProgressionTree" type="Control" parent="Center/Panel/Margin/Layout/Content/Views/SkillTree/TreeScroll"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(980, 440)
 layout_mode = 2
 script = ExtResource("2_tree")
 
-[node name="Selected" type="VBoxContainer" parent="Center/Panel/Margin/Layout"]
+[node name="Details" type="PanelContainer" parent="Center/Panel/Margin/Layout/Content"]
+custom_minimum_size = Vector2(300, 420)
 layout_mode = 2
-theme_override_constants/separation = 0
+theme_override_styles/panel = ExtResource("3_compact_panel")
 
-[node name="SelectedTitle" type="Label" parent="Center/Panel/Margin/Layout/Selected"]
+[node name="Margin" type="MarginContainer" parent="Center/Panel/Margin/Layout/Content/Details"]
+layout_mode = 2
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 10
+
+[node name="Selected" type="VBoxContainer" parent="Center/Panel/Margin/Layout/Content/Details/Margin"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="SelectedKind" type="Label" parent="Center/Panel/Margin/Layout/Content/Details/Margin/Selected"]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_font_sizes/font_size = 12
-text = "Selected upgrade"
+text = "SHOP IMPROVEMENT"
 
-[node name="SelectedDescription" type="Label" parent="Center/Panel/Margin/Layout/Selected"]
+[node name="SelectedTitle" type="Label" parent="Center/Panel/Margin/Layout/Content/Details/Margin/Selected"]
 unique_name_in_owner = true
 layout_mode = 2
-theme_override_font_sizes/font_size = 8
+theme_override_font_sizes/font_size = 20
+text = "Selected improvement"
+
+[node name="SelectedDescription" type="Label" parent="Center/Panel/Margin/Layout/Content/Details/Margin/Selected"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_fonts/font = ExtResource("5_body_font")
+theme_override_font_sizes/font_size = 17
+autowrap_mode = 2
 text = "Description"
 
-[node name="SelectedLevel" type="Label" parent="Center/Panel/Margin/Layout/Selected"]
+[node name="SelectedLevel" type="Label" parent="Center/Panel/Margin/Layout/Content/Details/Margin/Selected"]
 unique_name_in_owner = true
 layout_mode = 2
-theme_override_font_sizes/font_size = 8
+theme_override_font_sizes/font_size = 14
 text = "LEVEL 0 / 1"
 
-[node name="SelectedEffects" type="Label" parent="Center/Panel/Margin/Layout/Selected"]
+[node name="SelectedEffects" type="Label" parent="Center/Panel/Margin/Layout/Content/Details/Margin/Selected"]
 unique_name_in_owner = true
 layout_mode = 2
-theme_override_font_sizes/font_size = 8
+theme_override_fonts/font = ExtResource("5_body_font")
+theme_override_font_sizes/font_size = 15
+autowrap_mode = 2
 text = "EFFECT"
 
-[node name="SelectedCost" type="Label" parent="Center/Panel/Margin/Layout/Selected"]
+[node name="SelectedCost" type="Label" parent="Center/Panel/Margin/Layout/Content/Details/Margin/Selected"]
 unique_name_in_owner = true
 layout_mode = 2
-theme_override_font_sizes/font_size = 8
+theme_override_font_sizes/font_size = 13
+autowrap_mode = 2
 text = "COST"
 
-[node name="PurchaseRow" type="HBoxContainer" parent="Center/Panel/Margin/Layout/Selected"]
+[node name="Spacer" type="Control" parent="Center/Panel/Margin/Layout/Content/Details/Margin/Selected"]
 layout_mode = 2
-theme_override_constants/separation = 5
+size_flags_vertical = 3
 
-[node name="PurchaseButton" type="Button" parent="Center/Panel/Margin/Layout/Selected/PurchaseRow"]
+[node name="PurchaseButton" type="Button" parent="Center/Panel/Margin/Layout/Content/Details/Margin/Selected"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(102, 20)
+custom_minimum_size = Vector2(0, 42)
 layout_mode = 2
-theme_override_font_sizes/font_size = 8
-text = "PURCHASE"
+theme_override_font_sizes/font_size = 15
+text = "BUY"
 
-[node name="PurchaseNotice" type="Label" parent="Center/Panel/Margin/Layout/Selected/PurchaseRow"]
+[node name="PurchaseNotice" type="Label" parent="Center/Panel/Margin/Layout/Content/Details/Margin/Selected"]
 unique_name_in_owner = true
 layout_mode = 2
-size_flags_horizontal = 3
-theme_override_font_sizes/font_size = 8
+theme_override_fonts/font = ExtResource("5_body_font")
+theme_override_font_sizes/font_size = 15
+autowrap_mode = 2
 text = "Ready to purchase."
+
+[node name="PurchaseSound" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("6_purchase_sound")
+bus = &"SFX"

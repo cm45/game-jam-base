@@ -31,7 +31,7 @@ From the repository root, run:
 The command checks these runnable concerns in order:
 
 - editor import and the configured main scene;
-- the compact shop and skill-tree layout;
+- the desktop-sized shop and skill-tree layout plus separate shop/skill rules;
 - settings/progression persistence and the shared save reset;
 - the reusable `RunContext` / `RunResult` transaction;
 - the full optional demo loop and the demo-free starter project;
@@ -42,8 +42,9 @@ Use `-SkipFreshClone` or `-SkipExport` only while iterating. Run the complete
 command with neither switch before sharing a jam build.
 
 The suite creates temporary copies under the system temp folder and a temporary
-`build/release-readiness` output. It removes both after the checks. Existing
-local save data is backed up and restored by the save-dependent smoke scenes.
+`build/release-readiness` output. It removes both after the checks. Save-related
+smoke scenes use isolated `user://game_jam_foundation_test_*.cfg` files and do
+not overwrite a developer's normal save.
 
 ## Verify the shared remote after promotion
 
@@ -100,7 +101,8 @@ sound. Before the weekend, run this route in the editor:
   `git lfs ls-files` lists the Ninja Adventure assets.
 - [ ] Open `project.godot`, wait for the first import, and press **F5**.
 - [ ] Read [the setup guide](SETUP.md), [the architecture](ARCHITECTURE.md),
-  and [the run contract](RUN_CONTRACT.md) before replacing starter scenes.
+  [the run contract](RUN_CONTRACT.md), and [the replacement guide](REPLACE_STARTER.md)
+  before replacing starter scenes or removing the demo.
 - [ ] Make a small first commit before changing the starter game.
 - [ ] If using AI, open [the AI guide](AI_GUIDE.md) and keep code and scene
   changes small enough to review and run.

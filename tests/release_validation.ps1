@@ -3,7 +3,9 @@ param(
     [Parameter(Mandatory = $true)]
     [string]$GodotPath,
     [switch]$SkipFreshClone,
-    [switch]$SkipExport
+    [switch]$SkipExport,
+    [ValidateRange(10, 300)]
+    [int]$TimeoutSeconds = 60
 )
 
 $ErrorActionPreference = "Stop"
@@ -32,10 +34,19 @@ function Invoke-GodotCheck {
     $stderrPath = Join-Path $temporaryRoot ($logStem + ".stderr")
     $quotedArguments = (($Arguments + @("--log-file", $logPath)) | ForEach-Object { '"' + $_.Replace('"', '\"') + '"' }) -join " "
     try {
-        $process = Start-Process -FilePath $GodotPath -ArgumentList $quotedArguments -Wait -PassThru -NoNewWindow -RedirectStandardOutput $stdoutPath -RedirectStandardError $stderrPath
+        $process = Start-Process -FilePath $GodotPath -ArgumentList $quotedArguments -PassThru -NoNewWindow -RedirectStandardOutput $stdoutPath -RedirectStandardError $stderrPath
+        if (-not $process.WaitForExit($TimeoutSeconds * 1000)) {
+            Stop-Process -Id $process.Id -Force
+            throw "$Name did not finish within $TimeoutSeconds seconds."
+        }
         $log = if (Test-Path -LiteralPath $logPath) { Get-Content -Raw -LiteralPath $logPath } else { "" }
+        $stdout = if (Test-Path -LiteralPath $stdoutPath) { Get-Content -Raw -LiteralPath $stdoutPath } else { "" }
+        $stderr = if (Test-Path -LiteralPath $stderrPath) { Get-Content -Raw -LiteralPath $stderrPath } else { "" }
         if ($process.ExitCode -ne 0) {
-            throw "$Name failed with exit code $($process.ExitCode).`n$log"
+            throw "$Name failed with exit code $($process.ExitCode).`n$log`n$stdout`n$stderr"
+        }
+        if (($log + $stdout + $stderr) -match "SCRIPT ERROR:") {
+            throw "$Name reported a script error.`n$log`n$stdout`n$stderr"
         }
         return $log
     }
@@ -66,12 +77,13 @@ Write-Output "main_startup: PASS"
 
 $sceneTests = @(
     @{ Name = "progression_layout_smoke"; Scene = "res://tests/progression_layout_smoke.tscn" },
+    @{ Name = "progression_mechanics_smoke"; Scene = "res://tests/progression_mechanics_smoke.tscn" },
     @{ Name = "save_reset_smoke"; Scene = "res://tests/save_reset_smoke.tscn" },
     @{ Name = "run_contract_smoke"; Scene = "res://tests/run_contract_smoke.tscn" },
     @{ Name = "demo_loop_smoke"; Scene = "res://tests/demo_loop_smoke.tscn" }
 )
 foreach ($test in $sceneTests) {
-    $log = Invoke-GodotCheck -Name $test.Name -Arguments @("--headless", "--path", $projectRoot, "--scene", $test.Scene)
+    $log = Invoke-GodotCheck -Name $test.Name -Arguments @("--headless", "--path", $projectRoot, $test.Scene)
     Assert-PassMarker -Log $log -Name $test.Name
     Write-Output ("{0}: PASS" -f $test.Name)
 }
@@ -79,7 +91,8 @@ foreach ($test in $sceneTests) {
 & (Join-Path $PSScriptRoot "demo_removal_smoke.ps1") -GodotPath $GodotPath
 
 if (-not $SkipFreshClone) {
-    & (Join-Path $PSScriptRoot "fresh_clone_smoke.ps1") -GodotPath $GodotPath -Repository $projectRoot
+    $freshCloneTimeoutSeconds = [Math]::Max($TimeoutSeconds, 120)
+    & (Join-Path $PSScriptRoot "fresh_clone_smoke.ps1") -GodotPath $GodotPath -Repository $projectRoot -TimeoutSeconds $freshCloneTimeoutSeconds
 }
 
 if (-not $SkipExport) {

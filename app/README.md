@@ -1,7 +1,7 @@
 # App shell
 
 This folder owns startup, persistent UI, and scene changes. `foundation_hub.tscn`
-is the current main scene. Its **Open Starter Game** button enters the
+is the current main scene. Its **Play Starter Camp** button enters the
 participant-owned walkable home in `game/`; it remains a landing page rather
 than a home scene itself.
 
@@ -19,9 +19,10 @@ second scene for testing that route before game scenes exist. See
 [`docs/APP_SHELL.md`](../docs/APP_SHELL.md) for the public API and review steps.
 
 `progression_lab.tscn` hosts the feature-owned progression interface for this
-project. It remains useful for inspecting wallet persistence, purchasing,
-prerequisites, effects, shop cards, and the skill tree in isolation. The demo
-home opens the same panel from its in-world Path Shrine without sandbox tools.
+project. It remains useful for inspecting wallet persistence, Gold shop
+purchases, Insight prerequisites, effects, shop cards, and the skill tree in
+isolation. The starter camp opens the same panel from its Merchant and Mentor
+stations without sandbox tools.
 
 `app/` deliberately has no `demo/` scene reference. The demo remains runnable
 with **F6**, while the main app starts the independent starter game.

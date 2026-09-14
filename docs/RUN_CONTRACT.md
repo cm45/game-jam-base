@@ -69,5 +69,5 @@ permanent wallet.
 `game/starter_home.tscn` and `game/starter_run.tscn` are a small working
 reference. Rename or replace them along with the constants in
 `game/starter_game.gd`; keep the same context/result exchange. The demo is not
-part of this route. Run `tests/demo_removal_smoke.ps1` after removing `demo/`
-to verify that the app and starter game still load without it.
+part of this route. Read [the replacement guide](REPLACE_STARTER.md) for a
+safe removal order, a tower-defense handoff, and the final demo-removal check.

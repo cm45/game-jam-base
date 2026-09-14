@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="ProgressionCatalog" load_steps=16 format=3]
+[gd_resource type="Resource" script_class="ProgressionCatalog" load_steps=31 format=3]
 
 [ext_resource type="Script" path="res://features/progression/progression_catalog.gd" id="1_catalog"]
 [ext_resource type="Script" path="res://features/progression/currency_definition.gd" id="2_currency"]
@@ -17,80 +17,207 @@ display_color = Color(0.95, 0.78, 0.25, 1)
 script = ExtResource("2_currency")
 id = &"insight"
 display_name = "Insight"
-description = "Rare knowledge that unlocks deeper improvements."
+description = "Rare knowledge earned after a successful run."
 display_color = Color(0.45, 0.8, 0.92, 1)
 
-[sub_resource type="Resource" id="Effect_reward"]
+[sub_resource type="Resource" id="Effect_satchel"]
 script = ExtResource("5_effect")
 stat_id = &"run_reward_multiplier"
 operation = 1
 value = 1.15
 
-[sub_resource type="Resource" id="Effect_health"]
+[sub_resource type="Resource" id="Effect_rations"]
+script = ExtResource("5_effect")
+stat_id = &"starting_health"
+value = 1.0
+
+[sub_resource type="Resource" id="Effect_pockets"]
+script = ExtResource("5_effect")
+stat_id = &"carry_capacity"
+value = 3.0
+
+[sub_resource type="Resource" id="Effect_map"]
+script = ExtResource("5_effect")
+stat_id = &"pickup_radius"
+value = 20.0
+
+[sub_resource type="Resource" id="Effect_tools"]
+script = ExtResource("5_effect")
+stat_id = &"starting_gold"
+value = 5.0
+
+[sub_resource type="Resource" id="Effect_boots"]
+script = ExtResource("5_effect")
+stat_id = &"run_speed"
+value = 4.0
+
+[sub_resource type="Resource" id="Effect_pathfinder"]
+script = ExtResource("5_effect")
+stat_id = &"run_speed"
+value = 8.0
+
+[sub_resource type="Resource" id="Effect_keen_eye"]
+script = ExtResource("5_effect")
+stat_id = &"run_reward_multiplier"
+operation = 1
+value = 1.08
+
+[sub_resource type="Resource" id="Effect_iron_will"]
 script = ExtResource("5_effect")
 stat_id = &"starting_health"
 value = 2.0
 
-[sub_resource type="Resource" id="Effect_capacity"]
+[sub_resource type="Resource" id="Effect_resourceful"]
+script = ExtResource("5_effect")
+stat_id = &"run_reward_multiplier"
+operation = 1
+value = 1.1
+
+[sub_resource type="Resource" id="Effect_pack_mule"]
 script = ExtResource("5_effect")
 stat_id = &"carry_capacity"
 value = 5.0
 
-[sub_resource type="Resource" id="Effect_speed"]
+[sub_resource type="Resource" id="Effect_trailblazer"]
 script = ExtResource("5_effect")
 stat_id = &"run_speed"
-value = 18.0
+value = 10.0
 
-[sub_resource type="Resource" id="Requirement_satchel"]
+[sub_resource type="Resource" id="Requirement_pathfinder"]
 script = ExtResource("4_requirement")
-upgrade_id = &"lucky_satchel"
+upgrade_id = &"pathfinder"
 
-[sub_resource type="Resource" id="Requirement_rations"]
+[sub_resource type="Resource" id="Requirement_keen_eye"]
 script = ExtResource("4_requirement")
-upgrade_id = &"trail_rations"
+upgrade_id = &"keen_eye"
 
-[sub_resource type="Resource" id="Upgrade_satchel"]
+[sub_resource type="Resource" id="Requirement_iron_will"]
+script = ExtResource("4_requirement")
+upgrade_id = &"iron_will"
+
+[sub_resource type="Resource" id="Requirement_resourceful"]
+script = ExtResource("4_requirement")
+upgrade_id = &"resourceful"
+
+[sub_resource type="Resource" id="Shop_satchel"]
 script = ExtResource("3_upgrade")
 id = &"lucky_satchel"
 display_name = "Lucky Satchel"
-description = "Bring home more from every future run."
+description = "Bring home a little more from every future run."
 costs = {"gold": 15}
-effects = Array[ExtResource("5_effect")]([SubResource("Effect_reward")])
-tree_position = Vector2(16, 52)
+max_level = 3
+cost_growth = 1.35
+effects = Array[ExtResource("5_effect")]([SubResource("Effect_satchel")])
 
-[sub_resource type="Resource" id="Upgrade_rations"]
+[sub_resource type="Resource" id="Shop_rations"]
 script = ExtResource("3_upgrade")
 id = &"trail_rations"
 display_name = "Trail Rations"
-description = "Begin each run with a little more health."
-costs = {"gold": 25, "insight": 1}
-prerequisites = Array[ExtResource("4_requirement")]([SubResource("Requirement_satchel")])
-effects = Array[ExtResource("5_effect")]([SubResource("Effect_health")])
-tree_position = Vector2(154, 10)
+description = "Start each run with more health."
+costs = {"gold": 20}
+max_level = 3
+cost_growth = 1.3
+effects = Array[ExtResource("5_effect")]([SubResource("Effect_rations")])
 
-[sub_resource type="Resource" id="Upgrade_pockets"]
+[sub_resource type="Resource" id="Shop_pockets"]
 script = ExtResource("3_upgrade")
 id = &"deep_pockets"
 display_name = "Deep Pockets"
-description = "Carry more resources per run."
-costs = {"gold": 20}
+description = "Carry more resources before returning home."
+costs = {"gold": 18}
 max_level = 3
-cost_growth = 1.4
-prerequisites = Array[ExtResource("4_requirement")]([SubResource("Requirement_satchel")])
-effects = Array[ExtResource("5_effect")]([SubResource("Effect_capacity")])
-tree_position = Vector2(154, 94)
+cost_growth = 1.35
+effects = Array[ExtResource("5_effect")]([SubResource("Effect_pockets")])
 
-[sub_resource type="Resource" id="Upgrade_pathfinder"]
+[sub_resource type="Resource" id="Shop_map"]
+script = ExtResource("3_upgrade")
+id = &"field_map"
+display_name = "Field Map"
+description = "Expand the radius used to collect nearby resources."
+costs = {"gold": 16}
+effects = Array[ExtResource("5_effect")]([SubResource("Effect_map")])
+
+[sub_resource type="Resource" id="Shop_tools"]
+script = ExtResource("3_upgrade")
+id = &"camp_tools"
+display_name = "Camp Tools"
+description = "Begin a run with a small stock of useful supplies."
+costs = {"gold": 22}
+max_level = 2
+cost_growth = 1.5
+effects = Array[ExtResource("5_effect")]([SubResource("Effect_tools")])
+
+[sub_resource type="Resource" id="Shop_boots"]
+script = ExtResource("3_upgrade")
+id = &"sturdy_boots"
+display_name = "Sturdy Boots"
+description = "Add a little movement speed to every run."
+costs = {"gold": 26}
+max_level = 3
+cost_growth = 1.3
+effects = Array[ExtResource("5_effect")]([SubResource("Effect_boots")])
+
+[sub_resource type="Resource" id="Skill_pathfinder"]
 script = ExtResource("3_upgrade")
 id = &"pathfinder"
 display_name = "Pathfinder"
-description = "Move faster through every future run."
-costs = {"gold": 45, "insight": 2}
-prerequisites = Array[ExtResource("4_requirement")]([SubResource("Requirement_rations")])
-effects = Array[ExtResource("5_effect")]([SubResource("Effect_speed")])
-tree_position = Vector2(292, 10)
+description = "Learn the routes that make every expedition faster."
+costs = {"insight": 2}
+effects = Array[ExtResource("5_effect")]([SubResource("Effect_pathfinder")])
+tree_position = Vector2(44, 184)
+
+[sub_resource type="Resource" id="Skill_keen_eye"]
+script = ExtResource("3_upgrade")
+id = &"keen_eye"
+display_name = "Keen Eye"
+description = "Spot the highest-value opportunities on a run."
+costs = {"insight": 3}
+prerequisites = Array[ExtResource("4_requirement")]([SubResource("Requirement_pathfinder")])
+effects = Array[ExtResource("5_effect")]([SubResource("Effect_keen_eye")])
+tree_position = Vector2(270, 72)
+
+[sub_resource type="Resource" id="Skill_iron_will"]
+script = ExtResource("3_upgrade")
+id = &"iron_will"
+display_name = "Iron Will"
+description = "Start tougher runs with more endurance."
+costs = {"insight": 3}
+prerequisites = Array[ExtResource("4_requirement")]([SubResource("Requirement_pathfinder")])
+effects = Array[ExtResource("5_effect")]([SubResource("Effect_iron_will")])
+tree_position = Vector2(270, 294)
+
+[sub_resource type="Resource" id="Skill_resourceful"]
+script = ExtResource("3_upgrade")
+id = &"resourceful"
+display_name = "Resourceful"
+description = "Turn a successful expedition into a richer return."
+costs = {"insight": 4}
+prerequisites = Array[ExtResource("4_requirement")]([SubResource("Requirement_keen_eye")])
+effects = Array[ExtResource("5_effect")]([SubResource("Effect_resourceful")])
+tree_position = Vector2(500, 72)
+
+[sub_resource type="Resource" id="Skill_pack_mule"]
+script = ExtResource("3_upgrade")
+id = &"pack_mule"
+display_name = "Pack Mule"
+description = "Make room for a much larger haul."
+costs = {"insight": 4}
+prerequisites = Array[ExtResource("4_requirement")]([SubResource("Requirement_iron_will")])
+effects = Array[ExtResource("5_effect")]([SubResource("Effect_pack_mule")])
+tree_position = Vector2(500, 294)
+
+[sub_resource type="Resource" id="Skill_trailblazer"]
+script = ExtResource("3_upgrade")
+id = &"trailblazer"
+display_name = "Trailblazer"
+description = "Unlock a final burst of expedition speed."
+costs = {"insight": 6}
+prerequisites = Array[ExtResource("4_requirement")]([SubResource("Requirement_resourceful")])
+effects = Array[ExtResource("5_effect")]([SubResource("Effect_trailblazer")])
+tree_position = Vector2(750, 184)
 
 [resource]
 script = ExtResource("1_catalog")
 currencies = Array[ExtResource("2_currency")]([SubResource("Currency_gold"), SubResource("Currency_insight")])
-upgrades = Array[ExtResource("3_upgrade")]([SubResource("Upgrade_satchel"), SubResource("Upgrade_rations"), SubResource("Upgrade_pockets"), SubResource("Upgrade_pathfinder")])
+shop_upgrades = Array[ExtResource("3_upgrade")]([SubResource("Shop_satchel"), SubResource("Shop_rations"), SubResource("Shop_pockets"), SubResource("Shop_map"), SubResource("Shop_tools"), SubResource("Shop_boots")])
+skill_nodes = Array[ExtResource("3_upgrade")]([SubResource("Skill_pathfinder"), SubResource("Skill_keen_eye"), SubResource("Skill_iron_will"), SubResource("Skill_resourceful"), SubResource("Skill_pack_mule"), SubResource("Skill_trailblazer")])

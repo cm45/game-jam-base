@@ -1,5 +1,5 @@
 class_name PauseMenu
-extends Control
+extends UIScreen
 ## Pause, settings, controls, and save-reset interface for the foundation.
 
 const MAIN_PAGE: StringName = &"main"
@@ -16,9 +16,11 @@ const CONTROLS_PAGE: StringName = &"controls"
 @onready var _sfx_slider: HSlider = %SfxSlider
 @onready var _binding_list: Label = %BindingList
 @onready var _reset_confirmation: Control = %ResetConfirmation
+@onready var _preview_sound: AudioStreamPlayer = %PreviewSound
 
 
 func _ready() -> void:
+	super()
 	hide()
 	_master_slider.value = AudioSettings.get_volume(AudioSettings.MASTER_BUS)
 	_music_slider.value = AudioSettings.get_volume(AudioSettings.MUSIC_BUS)
@@ -34,6 +36,7 @@ func _ready() -> void:
 	%ResetButton.pressed.connect(func() -> void: _reset_confirmation.show())
 	%CancelResetButton.pressed.connect(func() -> void: _reset_confirmation.hide())
 	%ConfirmResetButton.pressed.connect(_reset_save_data)
+	%PreviewSoundButton.pressed.connect(_play_preview_sound)
 	_master_slider.value_changed.connect(_set_master_volume)
 	_music_slider.value_changed.connect(_set_music_volume)
 	_sfx_slider.value_changed.connect(_set_sfx_volume)
@@ -99,6 +102,10 @@ func _reset_save_data() -> void:
 	_music_slider.value = AudioSettings.get_volume(AudioSettings.MUSIC_BUS)
 	_sfx_slider.value = AudioSettings.get_volume(AudioSettings.SFX_BUS)
 	_reset_confirmation.hide()
+
+
+func _play_preview_sound() -> void:
+	_preview_sound.play()
 
 
 func _return_to_hub() -> void:

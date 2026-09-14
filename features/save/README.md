@@ -11,7 +11,14 @@ SaveStore.set_progress(&"training_tokens", 5)
 var tokens := int(SaveStore.get_progress(&"training_tokens", 0))
 ```
 
-`get_setting()` and `get_progress()` return their fallback exactly, including a`r`n`null` fallback when a key has not been stored.`r`n`r`n`reset_all()` clears both sections and immediately writes the current save
+`get_setting()` and `get_progress()` return their fallback exactly, including a
+`null` fallback when a key has not been stored.
+
+`reset_all()` clears both sections and immediately writes the current save
 version. The shared pause menu exposes this with an explicit confirmation. Do
 not use this store for mid-run state in the foundation; that decision belongs to
-the run contract in a later milestone.
+the run contract.
+
+The automated smoke scenes temporarily switch this service to an isolated
+`user://game_jam_foundation_test_*.cfg` file. Game code should keep using the
+normal save and should not call `use_temporary_storage()`.

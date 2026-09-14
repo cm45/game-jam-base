@@ -8,11 +8,11 @@ The starter home is a walkable top-down 2D hub. The player moves through it to
 reach NPCs, shops, upgrade points, and the entrance to a run; menus are overlays
 opened by those world interactions rather than the home scene itself.
 
-Milestone 6 is ready. It includes the full Ninja Adventure asset pack,
-pixel-rendering defaults, a reusable UI theme, Windows/editor/AI onboarding,
-the app shell, a configurable meta-progression framework, and a complete
-starter home → run → reward → upgrade handoff. It also includes repeatable
-release checks, a Windows export preset, and a weekend checklist.
+The foundation is ready for the weekend. It includes the full Ninja Adventure
+asset pack, pixel-rendering defaults, a reusable desktop UI, Windows/editor/AI
+onboarding, the app shell, separate shop and skill-tree progression, an
+audible walkable camp → run → reward handoff, repeatable release checks, a
+Windows export preset, and a weekend checklist.
 
 ## Before you clone
 
@@ -126,9 +126,9 @@ receive compatibility entries in `.gemini/`, `.agents/`, and `.cline/`.
   documented reusable services that later game and demo scenes can use.
 - `features/progression/` provides editable currencies and upgrades, persistent
   wallet and level state, calculated effects, a shop, and a visual skill tree.
-- `game/starter_home.tscn` and `game/starter_run.tscn` are the minimal,
-  replaceable home and run. They demonstrate the `RunContext` / `RunResult`
-  contract through the `RunSession` feature.
+- `game/starter_home.tscn` and `game/starter_run.tscn` are the replaceable
+  camp and run. Merchant, Mentor, and Scout stations demonstrate the separate
+  shop, skill tree, and `RunContext` / `RunResult` handoff.
 - `demo/` retains the fuller collect-and-exit example with three residents,
   tents, a Path Shrine, and a six-pickup run. It is optional: open
   `demo/demo_home.tscn` and use **F6** to play it directly.
@@ -146,6 +146,7 @@ receive compatibility entries in `.gemini/`, `.agents/`, and `.cline/`.
 - [Meta-progression guide](docs/PROGRESSION.md)
 - [Playable demo loop](docs/DEMO_LOOP.md)
 - [RunContext and RunResult contract](docs/RUN_CONTRACT.md)
+- [Replace the starter or remove the demo](docs/REPLACE_STARTER.md)
 - [Extension recipes](docs/EXTENSION_RECIPES.md)
 - [AI and MCP guide](docs/AI_GUIDE.md)
 - [Optional local Godot MCP setup](docs/GODOT_MCP.md)

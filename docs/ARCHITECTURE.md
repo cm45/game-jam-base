@@ -57,8 +57,8 @@ while the demo home instances the same panel from its Path Shrine.
 
 ## Starter and demonstration ownership
 
-`game/starter_home.tscn` is a minimal actual 2D hub: it owns its grass clearing,
-player spawn, upgrade station, and run entrance. It creates a `RunContext`,
+`game/starter_home.tscn` is an actual 2D camp hub: it owns its player spawn,
+outdoor NPC stations, scenery, and run entrance. It creates a `RunContext`,
 then `game/starter_run.tscn` owns the pickup count and completion rule. The run
 returns a `RunResult`; `RunSession` commits its persistent rewards and the home
 shows the result. The longer `demo/` example remains separate and optional.
@@ -67,6 +67,8 @@ shows the result. The longer `demo/` example remains separate and optional.
 Those components do not know which scene receives a reward, opens a panel, or
 changes route. The starter scenes are the reusable contract reference; the
 demonstration's old display-only last-run message remains confined to `demo/`.
+The [replacement guide](REPLACE_STARTER.md) maps this contract to tower defense,
+roguelike, extraction, mining, and fully custom games.
 
 ## Choosing a location
 
