@@ -20,9 +20,10 @@ example; replace them in place as your jam game grows.
 5. Save with Ctrl+S. F5 shows exactly those saved cells: no script regenerates
    the ground or overwrites your edits.
 
-Tiles are 16×16 source pixels. Terrain is offset by (8, 8) to align the
-TileMap cell centers with the visible world grid, and draws below world props.
-The last grass row extends slightly below the 640×360 viewport to cover it.
+Tiles are 16×16 source pixels. Terrain starts at (0, 0), so its saved base
+grass covers the visible 640×360 world from the top-left corner; it draws below
+world props. The last grass row extends slightly below the viewport to provide
+an edit-safe lower edge.
 
 The source palette starts with two seamless tiles. To expose more art, edit
 `world/terrain_tileset.tres` in the TileSet editor and add atlas regions.

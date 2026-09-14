@@ -71,7 +71,7 @@ func _run() -> void:
 	var grass := camp.get_node("Terrain/Grass") as TileMapLayer
 	if not _require(grass.get_used_cells().size() == 920 and grass.get_script() == null, "Home ground must be saved editable tiles, not runtime drawing."):
 		return
-	if not _require(grass.tile_set.resource_path == "res://game/world/terrain_tileset.tres" and camp.get_node("Terrain").position == Vector2(8, 8), "Home must use the shared palette and aligned terrain grid."):
+	if not _require(grass.tile_set.resource_path == "res://game/world/terrain_tileset.tres" and camp.get_node("Terrain").position == Vector2.ZERO, "Home terrain must use the shared palette and cover the viewport from its top-left edge."):
 		return
 	var shop_window := camp.get_node("Interface/ShopWindow") as Control
 	var skill_window := camp.get_node("Interface/SkillTreeWindow") as Control
