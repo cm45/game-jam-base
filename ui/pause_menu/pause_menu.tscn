@@ -85,13 +85,6 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 16
 text = "KEYBINDS"
 
-[node name="HubButton" type="Button" parent="Center/Panel/Margin/Layout/MainPage"]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(0, 42)
-layout_mode = 2
-theme_override_font_sizes/font_size = 16
-text = "RETURN TO CAMP"
-
 [node name="QuitButton" type="Button" parent="Center/Panel/Margin/Layout/MainPage"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 42)

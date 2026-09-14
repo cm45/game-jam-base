@@ -31,7 +31,6 @@ func _ready() -> void:
 	%ControlsButton.pressed.connect(func() -> void: _show_page(CONTROLS_PAGE))
 	%SettingsBackButton.pressed.connect(func() -> void: _show_page(MAIN_PAGE))
 	%ControlsBackButton.pressed.connect(func() -> void: _show_page(MAIN_PAGE))
-	%HubButton.pressed.connect(_return_to_hub)
 	%QuitButton.pressed.connect(_quit_game)
 	%ResetButton.pressed.connect(func() -> void: _reset_confirmation.show())
 	%CancelResetButton.pressed.connect(func() -> void: _reset_confirmation.hide())
@@ -106,11 +105,6 @@ func _reset_save_data() -> void:
 
 func _play_preview_sound() -> void:
 	_preview_sound.play()
-
-
-func _return_to_hub() -> void:
-	close_menu()
-	SceneRouter.return_home()
 
 
 func _quit_game() -> void:

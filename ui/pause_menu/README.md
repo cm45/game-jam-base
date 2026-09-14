@@ -13,8 +13,9 @@ intent through the shared services:
   current Master and SFX mix before leaving the menu.
 - `SaveStore.reset_all()` clears persisted settings and the current progression
   wallet and upgrade levels.
-- `SceneRouter.return_home()` returns from a run without the menu
-  knowing anything about that run's implementation.
+
+The pause page offers Resume, Settings, Keybinds, and Quit. Resume closes the
+menu in the current scene; returning from a run is handled by its gameplay flow.
 
 Do not add genre-specific HUD or inventory controls here. Put shared menu
 pages beside this scene and participant-specific controls in their own feature.
