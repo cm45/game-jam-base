@@ -4,7 +4,7 @@ extends Node
 signal scene_change_started(scene_path: String)
 signal scene_changed(scene_path: String)
 
-const HOME_SCENE := "res://game/starter_home.tscn"
+const HOME_SCENE := "res://game/home.tscn"
 
 var _is_changing_scene := false
 

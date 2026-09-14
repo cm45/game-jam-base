@@ -1,21 +1,21 @@
-# Meta-progression guide
+# Progression
 
-Open `app/progression_lab.tscn` in the editor and press **F6** to use the
-optional developer sandbox. It is not exposed in the player menu.
+Press F5 and visit Merchant for the Gold shop or Mentor for Insight skills.
+The shop and skill windows are separate. Earn currency by completing gameplay;
+developer checks can grant isolated test currency without affecting your save.
 
-1. Add Gold and Insight.
-2. In **Shop**, purchase **Lucky Satchel** with Gold. Shop improvements are
-   independent and may have repeatable ranks with rising Gold prices.
-3. Open **Skill Tree**, unlock **Pathfinder** with Insight, then unlock one of
-   its branches. Prerequisite lines turn green when the earlier skill is known.
-4. Use zoom, fit, and middle-mouse panning to inspect the full tree.
-5. Close and reopen the lab to verify the wallet, shop ranks, and skill levels
-   persisted separately.
-6. Use the pause menu's reset option to clear progression, then confirm the
-   lab returns to zero balances and levels.
+The catalog is `features/progression/content/progression_catalog.tres`.
+Expand shop_upgrades or skill_nodes in the Inspector to change an item.
+Each definition has a stable ID, display name, description, costs, rank limit,
+and effects. Skills can also have prerequisites and a tree position.
 
-The lab demonstrates the framework in isolation; it is not a home scene. The
-starter camp opens the Shop from the Merchant and Skill Tree from the Mentor.
-Both turn off the panel's sandbox tools so progression comes only from a
-completed run. Keep the `Progression` API and catalog unchanged unless the
-whole project is intentionally changing its permanent-economy rules.
+Use the [feature README](../features/progression/README.md) for the public API.
+Use [the UI README](../features/progression/ui/README.md) for presentation changes.
+
+All sample effects are consumed by gameplay: movement, pickup reach, bonus
+Gold, reward multiplier, and Insight rewards. Movement also applies in home.
+GameDefinition snapshots them into the next RunContext.
+
+Purchase an upgrade, start another session, and check its effect. Fit shows
+the whole skill tree; zoom and middle-mouse drag explore it. Settings > Reset
+clears progression and settings after confirmation.

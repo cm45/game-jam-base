@@ -66,8 +66,7 @@ permanent wallet.
 
 ## Replace the starter safely
 
-`game/starter_home.tscn` and `game/starter_run.tscn` are a small working
+`game/home.tscn` and `game/gameplay.tscn` are a small working
 reference. Rename or replace them along with the constants in
-`game/starter_game.gd`; keep the same context/result exchange. The demo is not
-part of this route. Read [the replacement guide](REPLACE_STARTER.md) for a
-safe removal order, a tower-defense handoff, and the final demo-removal check.
+`game/game_definition.gd`; keep the same context/result exchange. There is one example implementation under game/. Read [the replacement guide](REPLACE_STARTER.md) for a
+safe removal order, a tower-defense handoff, and the final source-copy check.

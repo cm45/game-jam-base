@@ -12,6 +12,6 @@ components it needs.
 - `looping_music.gd` can be attached to an `AudioStreamPlayer` on the `Music`
   bus to loop a supplied stream without altering the vendored audio asset.
 
-The starter game and demo use all three. Duplicate them into a participant
+The home and gameplay example uses all three. Duplicate them into a participant
 scene when they fit the game; let the scene owner create a `RunResult` rather
 than teaching a component about permanent rewards or scene routing.

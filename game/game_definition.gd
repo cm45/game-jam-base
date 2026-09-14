@@ -1,9 +1,10 @@
-class_name StarterGame
+class_name GameDefinition
 extends RefCounted
-## One place to name the scenes and values used by the replaceable starter loop.
+## Scene paths and upgrade values for the home/gameplay example.
 
-const HOME_SCENE := "res://game/starter_home.tscn"
-const RUN_SCENE := "res://game/starter_run.tscn"
+const HOME_SCENE := "res://game/home.tscn"
+const RUN_SCENE := "res://game/gameplay.tscn"
+# Preserve this stable ID so renaming files does not change session identity.
 const RUN_ID: StringName = &"starter_expedition"
 const BASE_MOVE_SPEED := 72.0
 const BASE_REWARD_MULTIPLIER := 1.0
@@ -14,7 +15,7 @@ static func create_run_context() -> RunContext:
 		RUN_ID,
 		RUN_SCENE,
 		HOME_SCENE,
-		"Starter Expedition",
+		"Expedition",
 		{
 			&"pickup_radius": Progression.get_effective_stat(&"pickup_radius", 7.0),
 			&"bonus_gold": Progression.get_effective_stat(&"bonus_gold", 0.0),

@@ -34,7 +34,7 @@ The command checks these runnable concerns in order:
 - the desktop-sized shop and skill-tree layout plus separate shop/skill rules;
 - settings/progression persistence and the shared save reset;
 - the reusable `RunContext` / `RunResult` transaction;
-- the full optional demo loop and the demo-free starter project;
+- the upgraded gameplay loop and a clean source copy;
 - a fresh local clone of the current branch, including Git LFS assets; and
 - a release Windows x86_64 export, followed by a three-frame headless launch.
 
@@ -74,9 +74,8 @@ sound. Before the weekend, run this route in the editor:
    reset, return to hub, and quit.
 3. Change every volume slider, restart the project, then reset settings and
    progression. Confirm the values persist first and then return to defaults.
-4. Press **F6** from `demo/demo_home.tscn`, complete its six-shard loop, and
-   buy an upgrade. Confirm it changes the next run as described in
-   [the demo guide](DEMO_LOOP.md).
+4. Visit Merchant and Mentor, buy an upgrade, then verify its effect in the
+   next gameplay session.
 5. In the Export menu, select **Windows Desktop** and make one release build.
    Launch the generated `.exe` normally at least once to inspect window size,
    pixel art, menu layout, and audio on the intended display.
@@ -102,7 +101,7 @@ sound. Before the weekend, run this route in the editor:
 - [ ] Open `project.godot`, wait for the first import, and press **F5**.
 - [ ] Read [the setup guide](SETUP.md), [the architecture](ARCHITECTURE.md),
   [the run contract](RUN_CONTRACT.md), and [the replacement guide](REPLACE_STARTER.md)
-  before replacing starter scenes or removing the demo.
+  before replacing the home or gameplay scenes.
 - [ ] Make a small first commit before changing the starter game.
 - [ ] If using AI, open [the AI guide](AI_GUIDE.md) and keep code and scene
   changes small enough to review and run.

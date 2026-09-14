@@ -24,4 +24,4 @@ path. Starting a fresh context also abandons the old transient context, so a
 participant is never blocked by an interrupted prototype run.
 
 Read [the full run contract](../../docs/RUN_CONTRACT.md) before replacing the
-starter scenes.
+home and gameplay scenes.

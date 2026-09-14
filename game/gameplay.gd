@@ -25,7 +25,7 @@ var _completion_ready := false
 
 func _ready() -> void:
 	_context = _get_or_create_context()
-	_player.set_movement_speed(float(_context.get_starting_value(&"move_speed", StarterGame.BASE_MOVE_SPEED)))
+	_player.set_movement_speed(float(_context.get_starting_value(&"move_speed", GameDefinition.BASE_MOVE_SPEED)))
 	for pickup: ResourcePickup in _pickups.get_children():
 		pickup.picked_up.connect(_on_pickup_collected)
 		pickup.set_pickup_radius(float(_context.get_starting_value(&"pickup_radius", 7.0)))
@@ -96,22 +96,22 @@ func _refresh_hud() -> void:
 	_token_counter.text = "TOKENS  %d / %d" % [_collected_tokens, REQUIRED_TOKENS]
 	_run_stats.text = "SPD %d  x%.2f" % [
 		roundi(_player.movement_speed),
-		float(_context.get_starting_value(&"reward_multiplier", StarterGame.BASE_REWARD_MULTIPLIER)),
+		float(_context.get_starting_value(&"reward_multiplier", GameDefinition.BASE_REWARD_MULTIPLIER)),
 	]
 
 
 func _earned_gold() -> int:
 	return ceili((BASE_GOLD_REWARD + float(_context.get_starting_value(&"bonus_gold", 0.0))) * float(_context.get_starting_value(
 		&"reward_multiplier",
-		StarterGame.BASE_REWARD_MULTIPLIER,
+		GameDefinition.BASE_REWARD_MULTIPLIER,
 	)))
 
 
 func _get_or_create_context() -> RunContext:
 	var context := RunSession.get_active_context()
-	if context != null and context.run_id == StarterGame.RUN_ID:
+	if context != null and context.run_id == GameDefinition.RUN_ID:
 		return context
-	var fallback_context := StarterGame.create_run_context()
+	var fallback_context := GameDefinition.create_run_context()
 	RunSession.begin_run(fallback_context)
 	return fallback_context
 

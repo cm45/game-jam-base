@@ -63,10 +63,8 @@ Start with the shared theme. Make the panel consume a feature's public state
 and emit an intention, such as purchase_requested. Let the feature decide
 whether the request succeeds, then refresh the panel from the resulting state.
 
-## Replace the supplied demo
+## Replace the example
 
-Keep app/, features/, ui/, and game/ intact. The starter scenes already satisfy
-the documented RunContext and RunResult contract. Remove demo/ when it is no
-longer useful, then run `tests/demo_removal_smoke.ps1` to confirm no demo script
-is an implicit dependency. For a complete removal sequence and genre-specific
-examples, read [Replace the starter and remove the demo](REPLACE_STARTER.md).
+Keep the reusable services you need and adapt game/home and game/gameplay.
+Follow [the replacement guide](REPLACE_STARTER.md), then run
+`tests/project_copy_smoke.ps1` and play your new route from F5.

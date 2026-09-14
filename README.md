@@ -112,28 +112,31 @@ loads [Copilot instructions](.github/copilot-instructions.md), two focused
 agents, and reusable skills from `.github/`. Gemini CLI, Kilo Code, and Cline
 receive compatibility entries in `.gemini/`, `.agents/`, and `.cline/`.
 
+## Start editing
+
+Open **game/home.tscn** for the camp and **game/gameplay.tscn** for the
+resource-gathering area. Select **Terrain > Grass** or **Terrain > Paths**
+to paint the map directly. See [the editing guide](game/README.md).
+
 ## What is here now
 
 - `assets/ninja_adventure/source/` contains the complete original asset pack.
   Binary assets use Git LFS; its original license and README remain beside them.
 - `ui/theme/game_jam_theme.tres` is the shared wood UI theme built from the
   supplied UI textures and pixel font.
-- `game/starter_home.tscn` is the startup hub. Escape provides settings,
-  keybinds, reset, return to camp, and quit; there is no separate main menu.
-- `ui/pause_menu/` supplies pause, settings, keybinds, reset, return-to-hub,
+- `game/home.tscn` is the startup hub. Escape provides settings,
+  keybinds, reset, and quit; there is no separate main menu.
+- `ui/pause_menu/` supplies pause, settings, keybinds, reset,
   and quit controls from any scene.
 - `features/input/`, `features/audio/`, and `features/save/` contain the
-  documented reusable services that later game and demo scenes can use.
+  documented reusable services that game scenes can use.
 - `features/progression/` provides editable currencies and upgrades, persistent
   wallet and level state, calculated effects, a shop, and a visual skill tree.
-- `game/starter_home.tscn` and `game/starter_run.tscn` are the replaceable
+- `game/home.tscn` and `game/gameplay.tscn` are the replaceable
   camp and run. Merchant, Mentor, and Scout stations demonstrate the separate
   shop, skill tree, and `RunContext` / `RunResult` handoff.
-- `demo/` retains the fuller collect-and-exit example with three residents,
-  tents, a Path Shrine, and a six-pickup run. It is optional: open
-  `demo/demo_home.tscn` and use **F6** to play it directly.
 - `components/` contains optional movement, interaction, and pickup building
-  blocks used by the starter scenes and fuller demonstration.
+  blocks used by home and gameplay.
 - `addons/godot_mcp_toolkit/` contains the pinned editor add-on that lets a
   local MCP client inspect and, when enabled per developer, edit this project.
 
@@ -144,9 +147,9 @@ receive compatibility entries in `.gemini/`, `.agents/`, and `.cline/`.
 - [Architecture overview](docs/ARCHITECTURE.md)
 - [App shell and core services](docs/APP_SHELL.md)
 - [Meta-progression guide](docs/PROGRESSION.md)
-- [Playable demo loop](docs/DEMO_LOOP.md)
+- [Edit the maps and gameplay](game/README.md)
 - [RunContext and RunResult contract](docs/RUN_CONTRACT.md)
-- [Replace the starter or remove the demo](docs/REPLACE_STARTER.md)
+- [Replace the example with your game](docs/REPLACE_STARTER.md)
 - [Extension recipes](docs/EXTENSION_RECIPES.md)
 - [AI and MCP guide](docs/AI_GUIDE.md)
 - [Optional local Godot MCP setup](docs/GODOT_MCP.md)
@@ -160,7 +163,6 @@ receive compatibility entries in `.gemini/`, `.agents/`, and `.cline/`.
 | `app/` | Startup and persistent application shell. |
 | `assets/` | Original third-party assets and their attribution. |
 | `components/` | Optional reusable gameplay building blocks. |
-| `demo/` | The complete collect-and-exit example. |
 | `features/` | Reusable game services such as saving and progression. |
 | `game/` | Minimal scenes and configuration for a participant's own game. |
 | `ui/` | Shared theme and UI scenes. |

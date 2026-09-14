@@ -1,0 +1,11 @@
+[gd_resource type="TileSet" format=3]
+
+[ext_resource type="Texture2D" path="res://assets/ninja_adventure/source/Backgrounds/Tilesets/TilesetField.png" id="1_fk3vm"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_0ybif"]
+texture = ExtResource("1_fk3vm")
+1:4/0 = 0
+1:1/0 = 0
+
+[resource]
+sources/0 = SubResource("TileSetAtlasSource_0ybif")

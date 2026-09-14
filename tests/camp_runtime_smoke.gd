@@ -28,15 +28,19 @@ func _run() -> void:
 		assert(Progression.try_purchase_shop(upgrade.id).success)
 	for skill: UpgradeDefinition in Progression.CATALOG.skill_nodes:
 		assert(Progression.try_unlock_skill(skill.id).success)
-	var context := StarterGame.create_run_context()
+	var context := GameDefinition.create_run_context()
 	assert(context.get_starting_value(&"move_speed", 0.0) == 192.0)
 	assert(context.get_starting_value(&"pickup_radius", 0.0) == 51.0)
 	assert(context.get_starting_value(&"bonus_gold", 0.0) == 5.0)
 	assert(context.get_starting_value(&"insight_reward", 0.0) == 4.0)
 	RunSession.begin_run(context)
-	var run := (load("res://game/starter_run.tscn") as PackedScene).instantiate()
+	var run := (load("res://game/gameplay.tscn") as PackedScene).instantiate()
 	add_child(run)
 	await get_tree().process_frame
+	var terrain := run.get_node("Terrain/Grass") as TileMapLayer
+	assert(terrain.get_used_cells().size() == 920)
+	assert(terrain.get_script() == null)
+	assert((run.get_node("Terrain/Paths") as TileMapLayer).get_used_cells().size() > 0)
 	var player := run.get_node("Player") as TopDownPlayer
 	assert(player.movement_speed == 192.0)
 	for pickup: ResourcePickup in run.get_node("Pickups").get_children():

@@ -80,8 +80,7 @@ $sceneTests = @(
     @{ Name = "progression_layout_smoke"; Scene = "res://tests/progression_layout_smoke.tscn" },
     @{ Name = "progression_mechanics_smoke"; Scene = "res://tests/progression_mechanics_smoke.tscn" },
     @{ Name = "save_reset_smoke"; Scene = "res://tests/save_reset_smoke.tscn" },
-    @{ Name = "run_contract_smoke"; Scene = "res://tests/run_contract_smoke.tscn" },
-    @{ Name = "demo_loop_smoke"; Scene = "res://tests/demo_loop_smoke.tscn" }
+    @{ Name = "run_contract_smoke"; Scene = "res://tests/run_contract_smoke.tscn" }
 )
 foreach ($test in $sceneTests) {
     $log = Invoke-GodotCheck -Name $test.Name -Arguments @("--headless", "--path", $projectRoot, $test.Scene)
@@ -89,7 +88,7 @@ foreach ($test in $sceneTests) {
     Write-Output ("{0}: PASS" -f $test.Name)
 }
 
-& (Join-Path $PSScriptRoot "demo_removal_smoke.ps1") -GodotPath $GodotPath
+& (Join-Path $PSScriptRoot "project_copy_smoke.ps1") -GodotPath $GodotPath
 
 if (-not $SkipFreshClone) {
     $freshCloneTimeoutSeconds = [Math]::Max($TimeoutSeconds, 120)

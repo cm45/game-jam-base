@@ -65,9 +65,14 @@ func _run() -> void:
 			return
 		station.queue_free()
 		await get_tree().process_frame
-	var camp := (load("res://game/starter_home.tscn") as PackedScene).instantiate()
+	var camp := (load("res://game/home.tscn") as PackedScene).instantiate()
 	add_child(camp)
 	await get_tree().process_frame
+	var grass := camp.get_node("Terrain/Grass") as TileMapLayer
+	if not _require(grass.get_used_cells().size() == 920 and grass.get_script() == null, "Home ground must be saved editable tiles, not runtime drawing."):
+		return
+	if not _require(grass.tile_set.resource_path == "res://game/world/terrain_tileset.tres" and camp.get_node("Terrain").position == Vector2(8, 8), "Home must use the shared palette and aligned terrain grid."):
+		return
 	var shop_window := camp.get_node("Interface/ShopWindow") as Control
 	var skill_window := camp.get_node("Interface/SkillTreeWindow") as Control
 	camp.get_node("Merchant").activated.emit(null)

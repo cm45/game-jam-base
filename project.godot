@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Game Jam Foundation"
-run/main_scene="res://game/starter_home.tscn"
+run/main_scene="res://game/home.tscn"
 config/features=PackedStringArray("4.7", "GL Compatibility")
 config/icon="res://icon.svg"
 

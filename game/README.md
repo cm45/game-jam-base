@@ -1,44 +1,52 @@
-# Game starter
+# Build your game here
 
-This folder contains the minimal home and run scenes a participant adapts:
+Open **home.tscn** to edit the camp, or **gameplay.tscn** to edit the resource
+gathering area. Press F5 to play from home. These are the single playable
+example; replace them in place as your jam game grows.
 
-- `starter_home.tscn` is a freely walkable 2D camp with a Merchant Gold shop,
-  Mentor Insight skill tree, Scout run entrance, solid scenery, and Music-bus
-  ambience.
-- `starter_run.tscn` is a three-pickup collect-and-exit example. Replace its
-  rule with any genre while keeping its result handoff.
-- `starter_game.gd` owns only the starter scene paths, stable run ID, and the
-  permanent effects passed into a new run.
-- `starter_world_surface.gd` is a draw-only grass clearing. Replace it with a
-  TileMap, procedural world, or custom scene without changing the contract.
+- `home.gd`: Merchant, Mentor, Scout interactions and the permanent wallet HUD.
+- `gameplay.gd`: the current three-token objective and reward popup.
+- `game_definition.gd`: scene paths, base movement speed, and permanent
+  upgrade values passed into the next gameplay session.
+- `world/terrain_tileset.tres`: the shared paint palette for the two maps.
 
-The home is responsible for creating a `RunContext`, storing it with
-`RunSession.begin_run()`, and routing to the run. The run reads that context,
-owns its own completion rule, creates a `RunResult`, and calls
-`RunSession.complete_run()` before returning home. Read
-[the contract](../docs/RUN_CONTRACT.md) before renaming the starter files.
+## Paint the ground in Godot
 
-The demo remains separate and can be studied or removed safely. Nothing in
-`game/`, `app/`, `features/`, or `ui/` imports a demo scene or script. Read
-[the replacement guide](../docs/REPLACE_STARTER.md) before changing direction
-or removing the examples.
+1. Open `home.tscn` or `gameplay.tscn` in the 2D editor.
+2. Expand **Terrain** in the scene tree.
+3. Select **Grass** to paint the base field, or **Paths** to paint/erase paths.
+4. In the TileMap bottom panel, select the grass or dirt tile from the atlas.
+   Use the paint, rectangle, bucket, and eraser tools to change cells.
+5. Save with Ctrl+S. F5 shows exactly those saved cells: no script regenerates
+   the ground or overwrites your edits.
 
-## Manual review route
+Tiles are 16×16 source pixels. Terrain is offset by (8, 8) to align the
+TileMap cell centers with the visible world grid, and draws below world props.
+The last grass row extends slightly below the 640×360 viewport to cover it.
 
-1. Press **F5** to start directly in camp.
-2. Walk to the Merchant or Mentor and press **E** to compare the shop and
-   skill-tree systems. Walk into scenery to test its collisions.
-3. Walk to the Scout, press **E**, and collect the three yellow tokens.
-4. Use **RETURN**, then select **Claim and Return Home** on the result panel.
-5. Confirm Gold and Insight increased in the home HUD and the last-run message
-   appears. Revisit the Merchant or Mentor to confirm the feature UI remains an
-   in-world overlay.
+The source palette starts with two seamless tiles. To expose more art, edit
+`world/terrain_tileset.tres` in the TileSet editor and add atlas regions.
+Do not modify the original PNG in assets/ninja_adventure/source/.
 
-Scenery atlas regions: the round tree uses (0, 0, 32, 32) from TilesetNature;
-the complete first house uses (0, 0, 64, 48) from TilesetHouse. Include only
-the intended sprite, not pieces of adjacent atlas rows. Merchant and Mentor
-open independent, locked shop and skill windows without cross-navigation.
+Buildings, trees, NPCs, and their colliders are ordinary scene nodes.
+Move each parent node to move its sprite and collision together. Tree sprites
+use (0, 0, 32, 32), and the house uses (0, 0, 64, 48). Ground tiles are walkable;
+building and tree StaticBody2D nodes provide the solid obstacles.
 
-F5 starts in camp directly. Escape opens settings, controls, quit, and Return
-to Camp above station windows. Run completion freezes the local world while
-the reward interface stays interactive; closing pause does not unfreeze it.
+## Change the gameplay
+
+A **run** in the framework means one gameplay session: a wave-defense map,
+mining trip, dungeon, or anything else. It is not a genre requirement.
+Home creates RunContext; gameplay consumes it and returns RunResult once.
+See [the replacement guide](../docs/REPLACE_STARTER.md) for the tower-defense
+recipe and the [contract](../docs/RUN_CONTRACT.md) for the API.
+
+Movement lives in components/top_down_player, not in a foundation service.
+For a tower-defense game, remove the player, pickups, and exit from gameplay
+and implement waves and towers. Keep home and progression only where useful.
+
+## Quick play check
+
+Walk to Merchant (shop), Mentor (skills), and Scout (start gameplay), pressing E.
+Collect three tokens and claim the reward. Check that the next session uses
+your upgrades. Escape supplies Resume, Settings, Keybinds, and Quit.

@@ -1,7 +1,7 @@
-# Replace the starter and remove the demo
+# Replace the example with your game
 
-The starter camp and optional demo are reference implementations, not required
-parts of a jam game. Keep the foundation services that help your game; replace
+Home and gameplay are the single example implementation. The duplicate demo,
+preview, and lab have already been removed. Keep the foundation services that help your game; replace
 the scenes and components that do not fit your genre.
 
 ## Keep the small contract
@@ -22,8 +22,8 @@ exchange.
 
 ## Safe replacement order
 
-1. Duplicate `game/starter_home.tscn`, `game/starter_run.tscn`, and
-   `game/starter_game.gd` with names for your game. Change the three scene/ID
+1. Duplicate `game/home.tscn`, `game/gameplay.tscn`, and
+   `game/game_definition.gd` with names for your game. Change the three scene/ID
    constants in your copied game configuration.
 2. Confirm **F5** can start your copied home, begin your copied run, and return
    a completed `RunResult`. Do this before deleting the originals.
@@ -32,12 +32,11 @@ exchange.
 4. Remove the components you do not use. `top_down_player`,
    `interaction_target`, and `resource_pickup` are optional; no service imports
    them.
-5. Remove `demo/` whenever it stops being useful. Startup opens the camp
-   directly; the demo is not on the normal route.
-6. Remove preview entries, demo-only save keys, and documentation references
-   only after their replacement route works. `demo_last_run` is only used by
-   the old demo; it is safe to leave in existing local saves or ignore it.
-7. Run `tests/demo_removal_smoke.ps1` and then manually start your own home and
+5. Remove unused Terrain layers, scenery, pickups, and station nodes from your
+   copied scenes. No runtime terrain script needs removal.
+6. Existing old saves may contain `demo_last_run`; it is unused and can be
+   ignored. Reset clears it together with all other progress if desired.
+7. Run `tests/project_copy_smoke.ps1` and then manually start your own home and
    run using F5.
 
 Do not delete `app/`, `features/`, or `ui/` as a first step. Start with a
@@ -105,7 +104,7 @@ skill nodes. You may keep either, both, or neither.
 From the project root, run:
 
 ```powershell
-.\tests\demo_removal_smoke.ps1 -GodotPath "D:\Path\To\godot.exe"
+.\tests\project_copy_smoke.ps1 -GodotPath "D:\Path\To\godot.exe"
 ```
 
 Then press **F5**, enter your replacement home, start a round, finish it, and

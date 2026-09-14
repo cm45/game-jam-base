@@ -58,7 +58,7 @@ func _open_skill_tree(_actor: Node2D) -> void:
 
 
 func _start_run(_actor: Node2D) -> void:
-	var context := StarterGame.create_run_context()
+	var context := GameDefinition.create_run_context()
 	if RunSession.begin_run(context) != OK:
 		_show_message("The expedition could not start. Check the RunContext paths.")
 		return
@@ -68,14 +68,14 @@ func _start_run(_actor: Node2D) -> void:
 
 
 func _refresh_hud() -> void:
-	$Player.set_movement_speed(Progression.get_effective_stat(&"run_speed", StarterGame.BASE_MOVE_SPEED))
+	$Player.set_movement_speed(Progression.get_effective_stat(&"run_speed", GameDefinition.BASE_MOVE_SPEED))
 	_wallet.text = "GOLD %d  •  INSIGHT %d" % [
 		Progression.get_balance(&"gold"),
 		Progression.get_balance(&"insight"),
 	]
 	_run_preview.text = "NEXT RUN  SPD %d  ×%.2f" % [
-		roundi(Progression.get_effective_stat(&"run_speed", StarterGame.BASE_MOVE_SPEED)),
-		Progression.get_effective_stat(&"run_reward_multiplier", StarterGame.BASE_REWARD_MULTIPLIER),
+		roundi(Progression.get_effective_stat(&"run_speed", GameDefinition.BASE_MOVE_SPEED)),
+		Progression.get_effective_stat(&"run_reward_multiplier", GameDefinition.BASE_REWARD_MULTIPLIER),
 	]
 
 

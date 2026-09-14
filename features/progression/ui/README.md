@@ -32,6 +32,6 @@ not encode progression state into scene-node names or colors.
 Instance `shop_window.tscn` at a merchant and `skill_tree_window.tscn` at a
 mentor. Each locks its content and selection to that system and hides the tab
 bar. They share layout and purchase logic through `progression_panel.tscn`.
-The combined panel is an optional developer lab, opened directly with F6;
-it has no main-menu entry. The camp keeps separate window instances and
+The combined panel is a shared implementation exercised by automated tests;
+players use only the two station windows. The camp keeps separate window instances and
 closes the other window before opening a station.

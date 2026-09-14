@@ -1,7 +1,7 @@
 # Progression
 
 This feature supplies a configurable permanent wallet, Gold shop, and Insight
-skill tree. It is fully runnable in `app/progression_lab.tscn` before any
+skill tree. Visit Merchant or Mentor in `game/home.tscn` to use it before any
 genre-specific run or home scene exists.
 
 ## Public API

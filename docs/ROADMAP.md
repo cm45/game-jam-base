@@ -50,3 +50,6 @@ after the current one has been reviewed.
 
 - [x] Camp-first startup, normalized volume sliders, pause layering, working
   buffed upgrades, viewport-based tree fit, and frozen run-completion worlds.
+
+- [x] Beginner cleanup: one home/gameplay example, editable terrain layers,
+  GameDefinition, removed obsolete demo/preview/lab, updated validation/docs.

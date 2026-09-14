@@ -13,7 +13,7 @@ func _run() -> void:
 	Progression.load_progress()
 	RunSession.abandon_active_run()
 
-	var context := StarterGame.create_run_context()
+	var context := GameDefinition.create_run_context()
 	if not _require(context.is_valid(), "Starter context should name two existing scenes."):
 		return
 	if not _require(RunSession.begin_run(context) == OK, "RunSession should accept a valid context."):
@@ -39,9 +39,9 @@ func _run() -> void:
 	if not _require(RunSession.get_last_result() == completed_result, "Home scenes should receive the latest result."):
 		return
 
-	if not _require(RunSession.begin_run(StarterGame.create_run_context()) == OK, "A fresh context should start a later run."):
+	if not _require(RunSession.begin_run(GameDefinition.create_run_context()) == OK, "A fresh context should start a later run."):
 		return
-	var abandoned_result := RunResult.new(StarterGame.RUN_ID, false, {}, "Run abandoned")
+	var abandoned_result := RunResult.new(GameDefinition.RUN_ID, false, {}, "Run abandoned")
 	if not _require(RunSession.complete_run(abandoned_result) == OK, "A no-reward incomplete result should be valid."):
 		return
 	if not _require(Progression.get_balance(&"gold") == 8, "Incomplete runs must not grant permanent rewards."):
