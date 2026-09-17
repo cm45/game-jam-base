@@ -1,6 +1,6 @@
 # Game Jam Foundation
 
-An approachable, pixel-art Godot 4.7.2 starting point for a weekend game jam.
+An approachable (even for developers with zero programming or game-dev experience), pixel-art Godot 4.7.2 starting point for a weekend game jam.
 Every participant starts from this repository, works in their own copy, and can
 extend a common home → run → reward → upgrade loop in their own direction.
 
@@ -8,7 +8,7 @@ The starter home is a walkable top-down 2D hub. The player moves through it to
 reach NPCs, shops, upgrade points, and the entrance to a run; menus are overlays
 opened by those world interactions rather than the home scene itself.
 
-The foundation is ready for the weekend. It includes the full Ninja Adventure
+This repo includes the full Ninja Adventure
 asset pack, pixel-rendering defaults, a reusable desktop UI, Windows/editor/AI
 onboarding, the app shell, separate shop and skill-tree progression, an
 audible walkable camp → run → reward handoff, repeatable release checks, a
