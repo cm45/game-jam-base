@@ -2,6 +2,7 @@
     "recommendations": [
         "geequlim.godot-tools",
         "alfish.godot-files",
+        "Google.gemini-cli-vscode-ide-companion",
         "openai.chatgpt",
         "GitHub.copilot"
     ]
