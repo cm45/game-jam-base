@@ -11,11 +11,9 @@ which would also prevent pull-request merges. The pull-request rule therefore
 provides the useful meaning of read-only here: no direct updates to `main`,
 while reviewed pull requests can still merge.
 
-GitHub currently reports that this private, personal repository's protection
-rules will not be enforced on its plan. Enforcement requires a public
-repository on GitHub Free or a supported paid/organization plan. Do not assume
-that a rule shown in Settings is active; verify the plan and the rule status
-after changing repository ownership or visibility.
+Because this repository is public, GitHub Free can enforce its branch-protection
+rules. Configure and verify the rule in **Settings > Branches** after changing
+the repository's visibility or ownership.
 
 ## Understand the three copies
 
