@@ -1,10 +1,11 @@
 # Game Jam Foundation
 
 Game Jam Foundation is a beginner-friendly Godot 4.7.2 starting point for a
-weekend game jam. It provides a small, playable pixel-art loop: explore a home
-area, start a run, collect rewards, and buy upgrades. Teams can replace the
-example game while keeping the reusable save, audio, input, progression, UI,
-and scene-flow systems.
+weekend game jam, including developers with zero programming or game-development
+experience. It includes the full Ninja Adventure asset pack and a small,
+playable pixel-art loop: explore a home area, start a run, collect rewards, and
+buy upgrades. Teams can replace the example game while keeping the reusable
+save, audio, input, progression, UI, and scene-flow systems.
 
 This guide assumes Windows and explains every required step. Experienced
 developers can use the headings as a checklist; first-time developers can
