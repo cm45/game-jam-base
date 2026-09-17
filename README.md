@@ -27,25 +27,25 @@ Install these tools before downloading the project:
    - Extract it to a permanent folder and open Godot once.
 2. [Git for Windows](https://git-scm.com/download/win)
    - The default installer choices are suitable.
-   - Allow Git to be used from PowerShell when the installer asks.
+   - Allow Git to be used from the command line when the installer asks.
 3. [Git LFS](https://git-lfs.com/)
    - LFS downloads the project's large images and audio correctly.
 4. [Visual Studio Code](https://code.visualstudio.com/download)
    - The Windows User Installer is the simplest choice.
-   - Reopen PowerShell after installation so the `code` command is available.
+   - Reopen your terminal after installation so the `code` command is available.
 5. [Node.js 22 LTS or newer](https://nodejs.org/)
    - Node runs the included local Godot MCP bridge used by AI tools.
 
-Open a **new PowerShell window** and check the installations:
+Open a **new terminal window** and check the installations:
 
-```powershell
+```shell
 git --version
 git lfs version
 code --version
 node --version
 ```
 
-If PowerShell says a command is unknown, restart PowerShell first. If it is
+If the terminal says a command is unknown, restart the terminal first. If it is
 still unknown, reinstall that tool and keep its option to add the command to
 `PATH` enabled.
 
@@ -68,12 +68,12 @@ freely while still receiving improvements from this original project.
 1. Open <https://github.com/cm45/game-jam-base> and select **Fork**.
 2. Keep the suggested repository name and create the fork.
 3. On your fork, select **Code > HTTPS** and copy its URL.
-4. Open PowerShell. Use `cd` followed by a folder path to choose where the
+4. Open a terminal. Use `cd` followed by a folder path to choose where the
    project will be stored, for example `cd C:\Users\YOUR_WINDOWS_NAME\Documents`.
 5. Run the following commands. Replace `YOUR_GITHUB_NAME` with your GitHub
    username.
 
-```powershell
+```shell
 git lfs install
 git clone https://github.com/YOUR_GITHUB_NAME/game-jam-base.git
 cd game-jam-base
@@ -84,12 +84,14 @@ code .
 `git clone` creates a local working copy. `git lfs pull` makes sure the real
 asset files are present instead of small text placeholders.
 
-If you only need a throwaway local copy and will never push changes, you may
-clone the original repository instead. For teamwork, use a fork.
+For a game jam, start with a fork even when you are working alone: it gives your
+game its own home and keeps a clean path for receiving later foundation updates.
+Only use a direct clone when you want a temporary, read-only copy and will
+never keep or publish changes.
 
 The first time you later push a branch, Git may open a browser and ask you to
 sign in to GitHub. Complete that prompt; do not put a GitHub password into a
-PowerShell command.
+terminal command.
 
 ### 4. Add the original repository as `upstream`
 
@@ -99,7 +101,7 @@ future foundation improvements into your game without replacing your work.
 
 Run these commands from the cloned `game-jam-base` folder:
 
-```powershell
+```shell
 git remote add upstream https://github.com/cm45/game-jam-base.git
 git remote -v
 ```
@@ -120,15 +122,19 @@ Recommended extensions:
 | --- | --- |
 | **Godot Tools** (`geequlim.godot-tools`) | GDScript completion, navigation, errors, and debugging. Required. |
 | **Godot Files** (`alfish.godot-files`) | Easier-to-read Godot scene, resource, and shader files. |
-| **Gemini CLI Companion** (`Google.gemini-cli-vscode-ide-companion`) | Recommended free-first AI integration for editor context and diff review. |
+| **GitHub Pull Requests and Issues** (`GitHub.vscode-pull-request-github`) | Create, review, and check pull requests without leaving VS Code. |
+| **Error Lens** (`usernamehw.errorlens`) | Shows errors and warnings directly beside the relevant line. |
+| **Gemini CLI Companion** (`Google.gemini-cli-vscode-ide-companion`) | Optional VS Code companion for Gemini CLI; it shares editor context and diffs after Gemini CLI is installed. |
 | **Codex** (`openai.chatgpt`) | Optional AI agent for eligible ChatGPT accounts. |
 | **GitHub Copilot** (`GitHub.copilot`) | Optional inline assistance and repository-aware chat. |
 
-You can also install the recommendations from PowerShell:
+You can also install the core recommendations from a terminal:
 
-```powershell
+```shell
 code --install-extension geequlim.godot-tools
 code --install-extension alfish.godot-files
+code --install-extension GitHub.vscode-pull-request-github
+code --install-extension usernamehw.errorlens
 code --install-extension Google.gemini-cli-vscode-ide-companion
 ```
 
@@ -136,12 +142,15 @@ The repository includes shared launch, extension, and MCP configuration in
 `.vscode/`. Your personal `.vscode/settings.json` is intentionally ignored by
 Git because it can contain a path specific to your computer.
 
-### 6. Import and configure the Godot project
+### 6. Open and configure the Godot project
 
-1. Open Godot's **Project Manager**.
-2. Select **Import** and choose this repository's `project.godot` file.
-3. Open the project and wait for the first asset import to finish.
-4. Press **F5** or select the play button. The game should open in the camp.
+You do not need to start in Godot's Project Manager. Open the repository in VS
+Code first. Godot Tools will connect to an already open editor; if it cannot
+find one, use its prompt to open this repository's `project.godot` in Godot.
+
+If that prompt does not appear, open Godot's **Project Manager**, select
+**Import**, choose `project.godot`, and wait for the first asset import to
+finish. Keep Godot open while working with GDScript or Godot MCP.
 
 Tell Godot to open scripts in VS Code:
 
@@ -165,15 +174,18 @@ explains the beginner-friendly entry points.
 ### 7. Set up AI integration (optional)
 
 AI tools are optional; the project runs without them. The recommended free-first
-choice is Gemini CLI with its VS Code Companion:
+choice is **Gemini CLI with the Gemini CLI Companion extension**. The CLI runs
+in a terminal; the Companion is the VS Code extension listed above. Install
+both only if you choose Gemini:
 
-```powershell
+```shell
 npm install -g @google/gemini-cli
 gemini
 ```
 
-Sign in with a personal Google account. In Gemini, run `/ide install` if the
-Companion was not already installed, then `/ide enable` and `/skills list`.
+Sign in with a personal Google account. The recommended-extension installation
+adds the VS Code Companion; if it is missing, run `/ide install` inside Gemini.
+Then run `/ide enable` and `/skills list`.
 The repository also supports Kilo Code, Cline, GitHub Copilot, and Codex.
 
 Read the [AI guide](docs/AI_GUIDE.md) before choosing a provider. It explains
@@ -206,7 +218,7 @@ the option to disable MCP write tools.
 
 After the one-time setup, use this short checklist:
 
-1. Open PowerShell in the project folder.
+1. Open a terminal in the project folder.
 2. Fetch foundation updates with `git fetch upstream`.
 3. If you want those updates, merge them using the safe steps in the
    [development workflow](docs/DEVELOPMENT_WORKFLOW.md).
@@ -256,3 +268,11 @@ was created by Pixel-boy and AAA and is released under CC0. Attribution is not
 required, but is retained here in appreciation. See the
 [asset notes](docs/ASSETS.md) and the original
 `assets/ninja_adventure/source/LICENSE.txt`.
+
+## License and reuse
+
+The project code is available under the [MIT License](LICENSE). You may use,
+modify, distribute, and sell it, including as part of a commercial game. The
+Ninja Adventure asset pack is CC0 and retains its original attribution and
+license files; see [asset notes](docs/ASSETS.md). Other vendored dependencies
+keep their own notices and licenses.

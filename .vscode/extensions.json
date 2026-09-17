@@ -2,6 +2,8 @@
     "recommendations": [
         "geequlim.godot-tools",
         "alfish.godot-files",
+        "GitHub.vscode-pull-request-github",
+        "usernamehw.errorlens",
         "Google.gemini-cli-vscode-ide-companion",
         "openai.chatgpt",
         "GitHub.copilot"
