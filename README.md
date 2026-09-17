@@ -1,152 +1,227 @@
 # Game Jam Foundation
 
-An approachable, pixel-art Godot 4.7.2 starting point for a weekend game jam.
-Every participant starts from this repository, works in their own copy, and can
-extend a common home → run → reward → upgrade loop in their own direction.
+Game Jam Foundation is a beginner-friendly Godot 4.7.2 starting point for a
+weekend game jam. It provides a small, playable pixel-art loop: explore a home
+area, start a run, collect rewards, and buy upgrades. Teams can replace the
+example game while keeping the reusable save, audio, input, progression, UI,
+and scene-flow systems.
 
-The starter home is a walkable top-down 2D hub. The player moves through it to
-reach NPCs, shops, upgrade points, and the entrance to a run; menus are overlays
-opened by those world interactions rather than the home scene itself.
+This guide assumes Windows and explains every required step. Experienced
+developers can use the headings as a checklist; first-time developers can
+follow the steps in order.
 
-The foundation is ready for the weekend. It includes the full Ninja Adventure
-asset pack, pixel-rendering defaults, a reusable desktop UI, Windows/editor/AI
-onboarding, the app shell, separate shop and skill-tree progression, an
-audible walkable camp → run → reward handoff, repeatable release checks, a
-Windows export preset, and a weekend checklist.
+## Initial setup
 
-## Before you clone
+### 1. Create a GitHub account
 
-Install these tools on Windows:
+Create a free [GitHub account](https://github.com/signup) if you do not have
+one. GitHub hosts the project, your personal copy, and pull requests.
 
-1. [Godot 4.7.2 Standard](https://godotengine.org/download/archive/4.7.2-stable/).
-   Download the Windows x86_64 **Standard** build, extract it somewhere stable,
-   and start it once. Do not use the .NET build for this GDScript foundation.
-2. [Git for Windows](https://git-scm.com/download/win). During setup, allow Git
-   to be used from PowerShell.
-3. [Git LFS](https://git-lfs.com/). The Ninja Adventure images and audio use
-   LFS, so this is required before cloning.
-4. [Visual Studio Code](https://code.visualstudio.com/download). The Windows
-   User installer is the simplest option and makes the `code` command available
-   after reopening PowerShell.
-5. [Node.js 22 LTS or newer](https://nodejs.org/). The included local Godot MCP
-   bridge uses it; verify the installation in a new PowerShell window with
-   `node --version`.
+### 2. Install the prerequisites
 
-## Clone and run
+Install these tools before downloading the project:
 
-Open a new PowerShell window and run:
+1. [Godot 4.7.2 Standard](https://godotengine.org/download/archive/4.7.2-stable/)
+   - Download the Windows x86_64 **Standard** build, not the .NET build.
+   - Extract it to a permanent folder and open Godot once.
+2. [Git for Windows](https://git-scm.com/download/win)
+   - The default installer choices are suitable.
+   - Allow Git to be used from PowerShell when the installer asks.
+3. [Git LFS](https://git-lfs.com/)
+   - LFS downloads the project's large images and audio correctly.
+4. [Visual Studio Code](https://code.visualstudio.com/download)
+   - The Windows User Installer is the simplest choice.
+   - Reopen PowerShell after installation so the `code` command is available.
+5. [Node.js 22 LTS or newer](https://nodejs.org/)
+   - Node runs the included local Godot MCP bridge used by AI tools.
+
+Open a **new PowerShell window** and check the installations:
+
+```powershell
+git --version
+git lfs version
+code --version
+node --version
+```
+
+If PowerShell says a command is unknown, restart PowerShell first. If it is
+still unknown, reinstall that tool and keep its option to add the command to
+`PATH` enabled.
+
+Tell Git which name to record on your commits. Run these once, replacing the
+example values with your name and the email used by your GitHub account:
+
+```powershell
+git config --global user.name "Your Name"
+git config --global user.email "you@example.com"
+```
+
+GitHub also offers a private `noreply` email in **GitHub > Settings > Emails**
+if you do not want your normal email stored in public commits.
+
+### 3. Fork and clone the repository
+
+A **fork** is your own GitHub copy of this repository. You can change your fork
+freely while still receiving improvements from this original project.
+
+1. Open <https://github.com/cm45/game-jam-base> and select **Fork**.
+2. Keep the suggested repository name and create the fork.
+3. On your fork, select **Code > HTTPS** and copy its URL.
+4. Open PowerShell. Use `cd` followed by a folder path to choose where the
+   project will be stored, for example `cd C:\Users\YOUR_WINDOWS_NAME\Documents`.
+5. Run the following commands. Replace `YOUR_GITHUB_NAME` with your GitHub
+   username.
 
 ```powershell
 git lfs install
-git clone https://github.com/cm45/game-jam-base.git
+git clone https://github.com/YOUR_GITHUB_NAME/game-jam-base.git
 cd game-jam-base
-git lfs ls-files
+git lfs pull
 code .
 ```
 
-Git LFS downloads the asset files as part of cloning. If files under
-`assets/ninja_adventure/source/` look like small text pointer files instead of
-images or audio, run `git lfs pull` from the repository root and try again.
+`git clone` creates a local working copy. `git lfs pull` makes sure the real
+asset files are present instead of small text placeholders.
 
-In the Godot Project Manager, choose **Import**, select this repository's
-`project.godot`, and open it. The first import may take a moment. Press **F5**
-or use the play button to enter the camp directly.
+If you only need a throwaway local copy and will never push changes, you may
+clone the original repository instead. For teamwork, use a fork.
 
-## Configure VS Code for Godot
+The first time you later push a branch, Git may open a browser and ask you to
+sign in to GitHub. Complete that prompt; do not put a GitHub password into a
+PowerShell command.
 
-When VS Code opens this folder, install its workspace recommendations:
+### 4. Add the original repository as `upstream`
 
-- **Godot Tools** (`geequlim.godot-tools`) — required for GDScript language
-  support and debugging.
-- **Godot Files** (`alfish.godot-files`) — recommended for `.tscn`, `.tres`,
-  and shader-file readability.
-- **Gemini CLI Companion** — recommended free-first AI companion. Install
-  Gemini CLI through the guide below, then let its `/ide install` command add
-  this extension.
-- **Kilo Code** or **Cline** — optional free-first agents installed from the
-  Extensions view; each discovers the workflow files included in this project.
-- **Codex** (`openai.chatgpt`) and **GitHub Copilot** (`GitHub.copilot`) —
-  optional account-based agents.
+Git calls online repositories **remotes**. By convention, `origin` is your
+fork and `upstream` is the original project. Adding `upstream` lets you merge
+future foundation improvements into your game without replacing your work.
 
-You can install the first two from the Extensions view (`Ctrl+Shift+X`) or run:
+Run these commands from the cloned `game-jam-base` folder:
+
+```powershell
+git remote add upstream https://github.com/cm45/game-jam-base.git
+git remote -v
+```
+
+You should see both `origin` and `upstream`. This is a one-time setup. See the
+[development workflow](docs/DEVELOPMENT_WORKFLOW.md) for syncing safely,
+working on branches, and opening pull requests.
+
+### 5. Configure VS Code
+
+When VS Code opens the folder, select **Install** in the recommended extensions
+notification. If it does not appear, open **Extensions** with `Ctrl+Shift+X`,
+type `@recommended`, and install the workspace recommendations.
+
+Recommended extensions:
+
+| Extension | Why it is included |
+| --- | --- |
+| **Godot Tools** (`geequlim.godot-tools`) | GDScript completion, navigation, errors, and debugging. Required. |
+| **Godot Files** (`alfish.godot-files`) | Easier-to-read Godot scene, resource, and shader files. |
+| **Gemini CLI Companion** (`Google.gemini-cli-vscode-ide-companion`) | Recommended free-first AI integration for editor context and diff review. |
+| **Codex** (`openai.chatgpt`) | Optional AI agent for eligible ChatGPT accounts. |
+| **GitHub Copilot** (`GitHub.copilot`) | Optional inline assistance and repository-aware chat. |
+
+You can also install the recommendations from PowerShell:
 
 ```powershell
 code --install-extension geequlim.godot-tools
 code --install-extension alfish.godot-files
+code --install-extension Google.gemini-cli-vscode-ide-companion
 ```
+
+The repository includes shared launch, extension, and MCP configuration in
+`.vscode/`. Your personal `.vscode/settings.json` is intentionally ignored by
+Git because it can contain a path specific to your computer.
+
+### 6. Import and configure the Godot project
+
+1. Open Godot's **Project Manager**.
+2. Select **Import** and choose this repository's `project.godot` file.
+3. Open the project and wait for the first asset import to finish.
+4. Press **F5** or select the play button. The game should open in the camp.
 
 Tell Godot to open scripts in VS Code:
 
-1. In Godot, open **Editor > Editor Settings > Text Editor > External**.
+1. Open **Editor > Editor Settings > Text Editor > External**.
 2. Enable **Use External Editor**.
-3. Set **Exec Path** to VS Code's Windows command launcher, normally
-   `%LOCALAPPDATA%\Programs\Microsoft VS Code\bin\code.cmd` for the User installer.
-   Use the file picker to select the actual file; do not enter the environment
-   variable literally. Godot's [external editor guide](https://docs.godotengine.org/en/stable/tutorials/editor/external_editor.html)
-   specifies `code.cmd` on Windows. If scripts stay in Godot with `Code.exe`
-   configured, change this path in the running editor's settings.
+3. Set **Exec Path** to `code.cmd`. For the normal VS Code User installation,
+   it is usually under
+   `%LOCALAPPDATA%\Programs\Microsoft VS Code\bin\code.cmd`. Use the file
+   picker to select the real file; do not type `%LOCALAPPDATA%` literally.
 4. Set **Exec Flags** to `{project} --goto {file}:{line}:{col}`.
-5. Also enable **Text Editor > Behavior > Files > Auto Reload Scripts on
-   External Change**, **Interface > Editor > Save on Focus Loss**, and
-   **Interface > Editor > Import Resources When Unfocused**.
+5. Enable **Text Editor > Behavior > Files > Auto Reload Scripts on External
+   Change**.
+6. Enable **Interface > Editor > Save on Focus Loss** and **Interface > Editor
+   > Import Resources When Unfocused**.
 
-Keep the Godot editor open while editing. Godot Tools connects to Godot's
-language server; once it is open, VS Code supplies navigation, completion, and
-F5 debugging through the included `.vscode/launch.json`.
+Keep Godot open while editing GDScript so Godot Tools can connect to its
+language server. Open `game/home.tscn` to edit the camp or
+`game/gameplay.tscn` to edit the run; the [game editing guide](game/README.md)
+explains the beginner-friendly entry points.
 
-## AI and MCP in the editor
+### 7. Set up AI integration (optional)
 
-AI is optional. Start with [the AI guide](docs/AI_GUIDE.md), which gives a
-complete free-first setup for Gemini CLI in VS Code, Kilo Code, and Cline; it
-also covers prompt examples, this repository's agents and skills, and trusted
-MCP connections.
+AI tools are optional; the project runs without them. The recommended free-first
+choice is Gemini CLI with its VS Code Companion:
 
-This repository includes an enabled, pinned Godot MCP Toolkit add-on and
-client entries for it alongside the OpenAI Developer Docs MCP. Open
-the project in Godot, then in VS Code run **MCP: List Servers** and start
-`godotMcpToolkit`. The first connection downloads the pinned local bridge via
-`npx`; no API key or machine-specific path is committed. Follow the
-[Godot MCP guide](docs/GODOT_MCP.md) for the first probe, Gemini/Cline/Kilo and
-Codex setup, or enabling write tools after review. For Codex in VS Code, install
-the **Codex** extension, sign in, then use the Codex icon or run **Codex: Open
-Codex Sidebar**.
+```powershell
+npm install -g @google/gemini-cli
+gemini
+```
 
-Project-wide instructions live in [AGENTS.md](AGENTS.md). VS Code additionally
-loads [Copilot instructions](.github/copilot-instructions.md), two focused
-agents, and reusable skills from `.github/`. Gemini CLI, Kilo Code, and Cline
-receive compatibility entries in `.gemini/`, `.agents/`, and `.cline/`.
+Sign in with a personal Google account. In Gemini, run `/ide install` if the
+Companion was not already installed, then `/ide enable` and `/skills list`.
+The repository also supports Kilo Code, Cline, GitHub Copilot, and Codex.
 
-## Start editing
+Read the [AI guide](docs/AI_GUIDE.md) before choosing a provider. It explains
+free options, repository instructions, safe prompts, and how to review AI
+changes. Never commit an API key or paste a secret into an AI prompt.
 
-Open **game/home.tscn** for the camp and **game/gameplay.tscn** for the
-resource-gathering area. Select **Terrain > Grass** or **Terrain > Paths**
-to paint the map directly. See [the editing guide](game/README.md).
+### 8. Start the MCP connections (optional)
 
-## What is here now
+MCP lets a compatible AI inspect documentation and the locally running Godot
+editor. The repository already contains the server configurations and the
+Godot add-on; do not reinstall the add-on or generate replacement config files.
 
-- `assets/ninja_adventure/source/` contains the complete original asset pack.
-  Binary assets use Git LFS; its original license and README remain beside them.
-- `ui/theme/game_jam_theme.tres` is the shared wood UI theme built from the
-  supplied UI textures and pixel font.
-- `game/home.tscn` is the startup hub. Escape provides settings,
-  keybinds, reset, and quit; there is no separate main menu.
-- `ui/pause_menu/` supplies pause, settings, keybinds, reset,
-  and quit controls from any scene.
-- `features/input/`, `features/audio/`, and `features/save/` contain the
-  documented reusable services that game scenes can use.
-- `features/progression/` provides editable currencies and upgrades, persistent
-  wallet and level state, calculated effects, a shop, and a visual skill tree.
-- `game/home.tscn` and `game/gameplay.tscn` are the replaceable
-  camp and run. Merchant, Mentor, and Scout stations demonstrate the separate
-  shop, skill tree, and `RunContext` / `RunResult` handoff.
-- `components/` contains optional movement, interaction, and pickup building
-  blocks used by home and gameplay.
-- `addons/godot_mcp_toolkit/` contains the pinned editor add-on that lets a
-  local MCP client inspect and, when enabled per developer, edit this project.
+For VS Code:
 
-## Learn the foundation
+1. Keep this Godot project open. Confirm that an **MCP** dock appears in
+   Godot's bottom panel.
+2. In VS Code, open the Command Palette with `Ctrl+Shift+P`.
+3. Run **MCP: List Servers**.
+4. Start `openaiDeveloperDocs` and `godotMcpToolkit`.
+5. Allow extra time on the first start while `npx` downloads the pinned local
+   bridge.
+6. Ask the AI to use only read-only tools for its first inspection.
 
-- [Setup details](docs/SETUP.md)
+Gemini CLI users can run `/mcp` from the repository root. Cline, Kilo, and
+Codex need a small client-specific step described in the
+[Godot MCP guide](docs/GODOT_MCP.md), which also contains troubleshooting and
+the option to disable MCP write tools.
+
+## Every time you return to the project
+
+After the one-time setup, use this short checklist:
+
+1. Open PowerShell in the project folder.
+2. Fetch foundation updates with `git fetch upstream`.
+3. If you want those updates, merge them using the safe steps in the
+   [development workflow](docs/DEVELOPMENT_WORKFLOW.md).
+4. Open the folder with `code .`.
+5. Open the project in Godot and wait for any imports to finish.
+6. Create or switch to a feature branch before editing.
+7. Press **F5** once before working to confirm the project still runs.
+8. If using Godot MCP, keep Godot open and reconnect the server in your AI
+   client.
+9. Before stopping, review `git status`, run the changed scene, and commit work
+   you want to keep.
+
+## Learn and extend the foundation
+
+- [Development workflow: upstream, branches, and pull requests](docs/DEVELOPMENT_WORKFLOW.md)
+- [Setup details and project defaults](docs/SETUP.md)
 - [GDScript starter exercises](docs/GDSCRIPT_BASICS.md)
 - [Architecture overview](docs/ARCHITECTURE.md)
 - [App shell and core services](docs/APP_SHELL.md)
@@ -156,7 +231,7 @@ to paint the map directly. See [the editing guide](game/README.md).
 - [Replace the example with your game](docs/REPLACE_STARTER.md)
 - [Extension recipes](docs/EXTENSION_RECIPES.md)
 - [AI and MCP guide](docs/AI_GUIDE.md)
-- [Optional local Godot MCP setup](docs/GODOT_MCP.md)
+- [Godot MCP setup and troubleshooting](docs/GODOT_MCP.md)
 - [Release readiness and weekend checklist](docs/RELEASE.md)
 - [Incremental roadmap](docs/ROADMAP.md)
 
@@ -164,17 +239,19 @@ to paint the map directly. See [the editing guide](game/README.md).
 
 | Path | Purpose |
 | --- | --- |
-| `app/` | Startup and persistent application shell. |
-| `assets/` | Original third-party assets and their attribution. |
+| `app/` | Startup and persistent application flow. |
+| `assets/` | Third-party and project-specific art and audio. |
 | `components/` | Optional reusable gameplay building blocks. |
-| `features/` | Reusable game services such as saving and progression. |
-| `game/` | Minimal scenes and configuration for a participant's own game. |
-| `ui/` | Shared theme and UI scenes. |
-| `docs/` | Setup, architecture, extension, and AI guides. |
+| `features/` | Reusable services such as saving and progression. |
+| `game/` | The participant's maps, gameplay, and game configuration. |
+| `ui/` | Shared theme and interface scenes. |
+| `tests/` | Automated validation and smoke tests. |
+| `docs/` | Architecture, extension, AI, and release guides. |
 
 ## Asset credit
 
 The [Ninja Adventure Asset Pack](https://pixel-boy.itch.io/ninja-adventure-asset-pack)
 was created by Pixel-boy and AAA and is released under CC0. Attribution is not
-required, but retained here in appreciation. See [asset notes](docs/ASSETS.md)
-and the original `assets/ninja_adventure/source/LICENSE.txt`.
+required, but is retained here in appreciation. See the
+[asset notes](docs/ASSETS.md) and the original
+`assets/ninja_adventure/source/LICENSE.txt`.
