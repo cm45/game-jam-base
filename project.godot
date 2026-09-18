@@ -15,6 +15,10 @@ run/main_scene="res://game/home.tscn"
 config/features=PackedStringArray("4.7", "GL Compatibility")
 config/icon="res://icon.svg"
 
+[audio]
+
+default_bus_layout="res://features/audio/default_bus_layout.tres"
+
 [autoload]
 
 InputActions="*res://features/input/input_actions.gd"
@@ -33,11 +37,6 @@ window/size/viewport_height=360
 window/size/window_width_override=1920
 window/size/window_height_override=1080
 window/stretch/mode="canvas_items"
-window/stretch/aspect="keep"
-
-[audio]
-
-default_bus_layout="res://features/audio/default_bus_layout.tres"
 
 [editor_plugins]
 

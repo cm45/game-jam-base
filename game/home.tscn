@@ -231,7 +231,6 @@ volume_db = -9.0
 script = ExtResource("17_music")
 
 [node name="Interface" type="CanvasLayer" parent="." unique_id=1417660482]
-visible = false
 
 [node name="HUD" type="Control" parent="Interface" unique_id=779734412]
 layout_mode = 3
@@ -319,9 +318,7 @@ vertical_alignment = 1
 [node name="ShopWindow" parent="Interface" unique_id=790483972 instance=ExtResource("5_progression")]
 unique_name_in_owner = true
 visible = false
-theme = ExtResource("6_theme")
 
 [node name="SkillTreeWindow" parent="Interface" unique_id=288048830 instance=ExtResource("19_skills")]
 unique_name_in_owner = true
 visible = false
-theme = ExtResource("6_theme")
