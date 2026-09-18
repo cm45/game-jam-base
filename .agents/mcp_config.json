@@ -1,7 +1,8 @@
 {
   "mcpServers": {
     "openaiDeveloperDocs": {
-      "httpUrl": "https://developers.openai.com/mcp"
+      "type": "http",
+      "url": "https://developers.openai.com/mcp"
     },
     "godot-mcp-toolkit": {
       "command": "cmd",

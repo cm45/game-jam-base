@@ -124,7 +124,7 @@ Recommended extensions:
 | **Godot Files** (`alfish.godot-files`) | Easier-to-read Godot scene, resource, and shader files. |
 | **GitHub Pull Requests and Issues** (`GitHub.vscode-pull-request-github`) | Create, review, and check pull requests without leaving VS Code. |
 | **Error Lens** (`usernamehw.errorlens`) | Shows errors and warnings directly beside the relevant line. |
-| **Gemini CLI Companion** (`Google.gemini-cli-vscode-ide-companion`) | Optional VS Code companion for Gemini CLI; it shares editor context and diffs after Gemini CLI is installed. |
+| **Antigravity** (`Google.google-antigravity`) | Optional agentic VS Code extension for plans, supervised edits, MCP, and verification. |
 | **Codex** (`openai.chatgpt`) | Optional AI agent for eligible ChatGPT accounts. |
 | **GitHub Copilot** (`GitHub.copilot`) | Optional inline assistance and repository-aware chat. |
 
@@ -135,7 +135,7 @@ code --install-extension geequlim.godot-tools
 code --install-extension alfish.godot-files
 code --install-extension GitHub.vscode-pull-request-github
 code --install-extension usernamehw.errorlens
-code --install-extension Google.gemini-cli-vscode-ide-companion
+code --install-extension Google.google-antigravity
 ```
 
 The repository includes shared launch, extension, and MCP configuration in
@@ -173,20 +173,15 @@ explains the beginner-friendly entry points.
 
 ### 7. Set up AI integration (optional)
 
-AI tools are optional; the project runs without them. The recommended free-first
-choice is **Gemini CLI with the Gemini CLI Companion extension**. The CLI runs
-in a terminal; the Companion is the VS Code extension listed above. Install
-both only if you choose Gemini:
+AI tools are optional; the project runs without them. The recommended
+agent-first workflow is **Google Antigravity**. Install the official VS Code
+extension, open its Agent panel, and sign in with a personal Google account.
+Antigravity can use this repository's `.agents/skills/` workflows and local MCP
+configuration.
 
-```shell
-npm install -g @google/gemini-cli
-gemini
-```
-
-Sign in with a personal Google account. The recommended-extension installation
-adds the VS Code Companion; if it is missing, run `/ide install` inside Gemini.
-Then run `/ide enable` and `/skills list`.
-The repository also supports Kilo Code, Cline, GitHub Copilot, and Codex.
+The repository also supports Kilo Code, Cline, GitHub Copilot, and Codex. Read
+the [AI guide](docs/AI_GUIDE.md) before choosing a provider; it explains safe
+prompts, MCP, and how to review AI changes.
 
 Read the [AI guide](docs/AI_GUIDE.md) before choosing a provider. It explains
 free options, repository instructions, safe prompts, and how to review AI
@@ -209,8 +204,8 @@ For VS Code:
    bridge.
 6. Ask the AI to use only read-only tools for its first inspection.
 
-Gemini CLI users can run `/mcp` from the repository root. Cline, Kilo, and
-Codex need a small client-specific step described in the
+Antigravity users can load `.agents/mcp_config.json` from the repository's MCP
+settings. Cline, Kilo, and Codex need a small client-specific step described in the
 [Godot MCP guide](docs/GODOT_MCP.md), which also contains troubleshooting and
 the option to disable MCP write tools.
 

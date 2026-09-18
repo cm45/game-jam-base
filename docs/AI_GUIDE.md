@@ -12,48 +12,40 @@ models change often, so open the linked provider page before the jam.
 
 | Option | Free starting point | Best use in this jam |
 | --- | --- | --- |
-| [Gemini CLI](https://github.com/google-gemini/gemini-cli) + VS Code Companion | Personal Google account: 60 requests per minute and 1,000 requests per day | Recommended free-first agent: large context, MCP, project instructions, and `SKILL.md` support. |
+| [Google Antigravity](https://antigravity.google/docs/ide/overview) | Personal Google account with an Antigravity plan, including a free tier | Recommended agent-first workflow: plans, supervised edits, MCP, and `.agents/skills/` support. |
 | [Kilo Code](https://kilo.ai/docs/getting-started/using-kilo-for-free) | Free platform access; choose `Auto Free` or an available free model | Editor-first agent with Agent Skills. Free-model availability and rate limits vary. |
 | [Cline](https://docs.cline.bot/getting-started/authorizing-with-cline) | Its provider offers models tagged `FREE` for learning and experimentation | A flexible VS Code agent with workspace skills and MCP support. |
 | [GitHub Copilot Free](https://docs.github.com/en/copilot/get-started/plans) | Free GitHub plan with a limited monthly allowance | Inline help and short VS Code questions; it understands this repository's native `.github/` customizations. |
 | [Codex extension](https://marketplace.visualstudio.com/items?itemName=openai.chatgpt) | Requires an eligible ChatGPT plan | Larger code tasks, review, and documentation-aware work. |
 
-The first three work well for a no-cost weekend of experimentation. Treat their
-free models as shared services: if one is busy or rate-limited, switch to
-another option rather than adding money by mistake. None of the setup steps in
-this guide require an API key in the repository. Do not paste a provider API
-key into this repository.
+The free tiers and quotas change often. Treat hosted models as shared services:
+if one is busy or rate-limited, switch to another option rather than adding
+money by mistake. None of the setup steps in this guide require an API key in
+the repository. Do not paste a provider API key into this repository.
 
-## Recommended: Gemini CLI in VS Code
+## Recommended: Antigravity in VS Code
 
-Gemini CLI is a terminal agent with a VS Code companion extension. It supports
-MCP and the open `SKILL.md` Agent Skills format, and its personal-account free
-tier is documented as 60 requests per minute and 1,000 per day.
+Google Antigravity is an agent-first development environment available as a VS
+Code extension. It supports supervised plans and diffs, MCP, and the open
+`SKILL.md` Agent Skills format and is the supported Google agent workflow for
+this repository.
 
-1. Install [Node.js LTS](https://nodejs.org/) if `node --version` does not work
-   in PowerShell.
-2. From the VS Code integrated terminal, install and start the CLI:
+1. Open VS Code and install [Google Antigravity](https://marketplace.visualstudio.com/items?itemName=Google.google-antigravity)
+   from the Extensions view.
+2. Open the Antigravity activity-bar panel and sign in with a personal Google
+   account. Antigravity's free tier and plan quotas are shown by the product.
+3. Open this repository as the workspace. Antigravity discovers the checked-in
+   workflows in `.agents/skills/`.
+4. In Antigravity's MCP settings, load the local
+   `.agents/mcp_config.json`, then keep Godot open before connecting the local
+   Godot MCP bridge.
+5. Ask for a plan first, review the proposed files and commands, and require a
+   focused Godot check before accepting changes.
 
-   ```powershell
-   npm install -g @google/gemini-cli
-   gemini
-   ```
-
-3. Choose the personal Google-account sign-in when prompted.
-4. When Gemini offers to connect to VS Code, accept it. If that prompt was
-   dismissed, run `/ide install` inside Gemini, restart the VS Code terminal,
-   and run `/ide enable`. This installs **Gemini CLI Companion**, which shares
-   open-file context and presents proposed changes in VS Code's diff editor.
-5. Run `/skills list` once. This project provides its two workflows through
-   `.gemini/skills/`; they direct Gemini to the shared source files in
-   `.github/skills/`.
-6. The checked-in `.gemini/settings.json` connects the read-only OpenAI
-   Developer Docs MCP server. Start a new Gemini session, then use `/mcp` to
-   inspect its status before asking Gemini to use it.
-
-The [Gemini CLI IDE integration guide](https://github.com/google-gemini/gemini-cli/blob/main/docs/ide-integration/index.md)
-documents the companion commands. Its [Agent Skills guide](https://geminicli.com/docs/cli/tutorials/skills-getting-started/)
-explains the `SKILL.md` format and discovery.
+See Antigravity's [IDE overview](https://antigravity.google/docs/ide/overview),
+[VS Code setup](https://antigravity.google/docs/ide/extensions/vscode), and
+[Agent Skills guide](https://www.antigravity.google/docs/skills) for the
+current product workflow.
 
 ## Editor-first alternative: Kilo Code
 
@@ -77,7 +69,7 @@ and its [Agent Skills compatibility notes](https://github.com/Kilo-Org/kilocode/
 ## Flexible alternative: Cline
 
 Cline is a VS Code agent that supports workspace `SKILL.md` files, MCP, and a
-model picker. It is useful when Gemini CLI or Kilo reaches a quota.
+model picker. It is useful when Antigravity or Kilo reaches a quota.
 
 1. In VS Code, search Extensions for **Cline** and install it.
 2. Open the Cline panel, choose the **Cline** provider, and sign in.
@@ -133,10 +125,9 @@ its instructions. Change the source file when improving a workflow.
 | `.github/instructions/` | Rules applied when GDScript files are involved. |
 | `.github/agents/` | Planner and implementer roles available in VS Code chat. |
 | `.github/skills/` | Source workflows for foundation work and verification. |
-| `.gemini/skills/` | Gemini CLI discovery entries for the source workflows. |
-| `.agents/skills/` | Kilo Code discovery entries for the source workflows. |
+| `.agents/skills/` | Antigravity and compatible-agent discovery entries for the source workflows. |
 | `.cline/skills/` | Cline discovery entries for the source workflows. |
-| `GEMINI.md` | Gemini CLI project instructions that direct it to `AGENTS.md`. |
+| `AGENTS.md` | Shared project instructions for agents that read repository guidance. |
 
 In VS Code, run **Chat: Open Customizations** to inspect the native GitHub
 Copilot files. The Planner is for a reviewable plan without edits. The
@@ -152,7 +143,7 @@ tools enabled. Both are included in these configurations:
 | --- | --- | --- |
 | VS Code chat / GitHub Copilot | `.vscode/mcp.json` | Run **MCP: List Servers**. |
 | VS Code Agent Host and compatible agents | `.mcp.json` | Use that agent's MCP/server view. |
-| Gemini CLI | `.gemini/settings.json` | Start `gemini`, then run `/mcp`. |
+| Antigravity | `.agents/mcp_config.json` | Open Antigravity MCP settings and load the checked-in local configuration. |
 
 The Developer Docs server definition is public and contains no credential:
 

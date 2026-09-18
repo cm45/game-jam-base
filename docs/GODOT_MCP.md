@@ -16,7 +16,7 @@ scene before keeping it.
 | Godot editor add-on | `addons/godot_mcp_toolkit/` | Starts a local MCP endpoint when Godot opens the project. |
 | VS Code server entries | `.vscode/mcp.json` | Makes the bridge available to VS Code chat and Copilot. |
 | Generic client entry | `.mcp.json` | Supplies the `mcpServers` form for compatible project-aware clients. |
-| Gemini CLI entry | `.gemini/settings.json` | Makes the same bridge available from Gemini CLI. |
+| Antigravity entry | `.agents/mcp_config.json` | Makes the same bridge available from Antigravity and compatible clients. |
 | Usage and safety notes | This document | Explains the first connection and how to enable writes deliberately. |
 
 The add-on is enabled in `project.godot`. Do not install it again through
@@ -30,8 +30,8 @@ connects. No API key, port, token, or absolute machine path belongs in Git.
 shape that the Godot add-on and many MCP clients recognize. `/.vscode/mcp.json`
 is the VS Code workspace configuration and uses VS Code's `servers` shape.
 They intentionally define the same pinned bridge because each client discovers
-only its own configuration location. Gemini uses its separate
-`.gemini/settings.json` file.
+only its own configuration location. Antigravity uses the local
+`.agents/mcp_config.json` file.
 
 ## First connection in VS Code
 
@@ -62,10 +62,10 @@ If Godot opens an onboarding dialog, use it to inspect the connection status.
 Do **not** ask it to write a replacement `.mcp.json`; this repository already
 keeps both its documentation and Godot server entries.
 
-## Gemini CLI, Cline, Kilo, and Codex
+## Antigravity, Cline, Kilo, and Codex
 
-- **Gemini CLI:** the checked-in `.gemini/settings.json` is ready. Start
-  `gemini` from the repository root and run `/mcp`; keep Godot open while using
+- **Antigravity:** open the MCP settings in the Antigravity VS Code panel and
+  load the checked-in `.agents/mcp_config.json`; keep Godot open while using
   the tools.
 - **Cline or Kilo Code:** if the extension does not discover `.mcp.json`, open
   its MCP server configuration and copy the `godot-mcp-toolkit` object from the
