@@ -13,6 +13,7 @@ extends CharacterBody2D
 var _facing_row := 0
 var _walk_frame := 0
 var _walk_timer := 0.0
+var _facing_col := 0
 
 
 func set_movement_speed(new_speed: float) -> void:
@@ -39,17 +40,18 @@ func _physics_process(delta: float) -> void:
 		_walk_timer += delta
 		if _walk_timer >= 0.12:
 			_walk_timer = 0.0
-			_walk_frame = (_walk_frame + 1) % 4
+			_walk_frame = (_walk_frame + 4) % 16
 	else:
 		_walk_timer = 0.0
 		_walk_frame = 0
-	_sprite.frame = _facing_row * 4 + _walk_frame
+	_sprite.frame = _facing_col + _walk_frame
 
 
 func _update_sprite(movement: Vector2) -> void:
 	if movement.is_zero_approx():
+		_facing_col = 0
 		return
 	if absf(movement.x) > absf(movement.y):
-		_facing_row = 1 if movement.x > 0.0 else 3
+		_facing_col = 3 if movement.x > 0.0 else 2
 	else:
-		_facing_row = 2 if movement.y < 0.0 else 0
+		_facing_col = 1 if movement.y < 0.0 else 0
